@@ -37,7 +37,7 @@ public class BillCheckGUI extends javax.swing.JFrame {
        String[][] rowData = new String[ExistingBill.getExistingBills().length][4];
        for(int i=0;i<ExistingBill.totalBillCount();i++)
        {
-           BillData[] billDataSet = ExistingBill.getExistingBills();
+           Bill[] billDataSet = ExistingBill.getExistingBills();
            //BillData record = billDataSet[i];
            rowData[i][0]=billDataSet[i].getTime();
            rowData[i][1]=billDataSet[i].getPeople();
@@ -277,7 +277,7 @@ public class BillCheckGUI extends javax.swing.JFrame {
         String editedPeople = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 1));
         String editedAmount = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 2));
         String editedDescr = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 3));
-        BillData editedBill = new BillData(editedTime,editedPeople,editedAmount,editedDescr);
+        Bill editedBill = new Bill(editedTime,editedPeople,editedAmount,editedDescr);
         Object[] tmp = editedBill.getBillDataValue();
         editBillGUI.setValue((int)tmp[0], (int)tmp[1], (int)tmp[2], (int)tmp[3], tmp[4].toString(), tmp[5].toString());
         EditBillGUI.setIndex(displayTable.getSelectedRow());
@@ -348,11 +348,11 @@ public class BillCheckGUI extends javax.swing.JFrame {
         int monthNow = c.get(Calendar.MONTH)+1; 
         int dateNow = c.get(Calendar.DATE); 
         String timeNow = Integer.toString(monthNow)+"/"+Integer.toString(dateNow)+"/"+Integer.toString(yearNow);
-         BillData[] tmps = ExistingBill.getExistingBills();
+         Bill[] tmps = ExistingBill.getExistingBills();
            
         for(int existingBillIndex=0;existingBillIndex<ExistingBill.totalBillCount();existingBillIndex++)
         {
-            BillData tmp = tmps[existingBillIndex];
+            Bill tmp = tmps[existingBillIndex];
             if(tmp.getTime().equals(timeNow))
             {
                 selected[selectedBillIndex]=existingBillIndex;
@@ -387,10 +387,10 @@ public class BillCheckGUI extends javax.swing.JFrame {
         int yearNow = c.get(Calendar.YEAR); 
         int monthNow = c.get(Calendar.MONTH)+1; 
         int dateNow = c.get(Calendar.DATE); 
-         BillData[] tmps = ExistingBill.getExistingBills();
+         Bill[] tmps = ExistingBill.getExistingBills();
          for(int existingBillIndex=0;existingBillIndex<ExistingBill.totalBillCount();existingBillIndex++)
         {
-            BillData tmp = tmps[existingBillIndex];
+            Bill tmp = tmps[existingBillIndex];
             String[] tmpTime = tmp.getTime().split("/");
             if(tmpTime[0].equals(Integer.toString(monthNow))&&tmpTime[2].equals(Integer.toString(yearNow)))
             {

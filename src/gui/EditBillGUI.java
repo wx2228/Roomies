@@ -6,7 +6,7 @@
 package gui;
 import javax.swing.*;
 
-import functionality.BillData;
+import functionality.Bill;
 import functionality.ExistingBill;
 /**
  *
@@ -171,7 +171,7 @@ static public int getIndex()
             peopleIndex=peopleIndex+2;
         if(roommate3Label.isSelected())
             peopleIndex=peopleIndex+1;  
-        BillData editedBill = new BillData(monthComboBox.getSelectedIndex()+1,dayComboBox.getSelectedIndex()+1,yearComboBox.getSelectedIndex()+2000,peopleIndex,amountText.getText(),descriptionText.getText());
+        Bill editedBill = new Bill(monthComboBox.getSelectedIndex()+1,dayComboBox.getSelectedIndex()+1,yearComboBox.getSelectedIndex()+2000,peopleIndex,amountText.getText(),descriptionText.getText());
         ExistingBill.editBill(editedBill, selectedEditedIndex);
         BillCheckGUI billGUI = new BillCheckGUI();
         billGUI.billLoading();

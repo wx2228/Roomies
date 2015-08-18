@@ -259,7 +259,7 @@ public class AddBillGUI extends javax.swing.JFrame {
         
         if(DescriptionText.getText().equals("Type description here")&&DescriptionText.getForeground()!=Color.black)
         {DescriptionText.setText("");}
-        BillData newBill = new BillData(monthComboBox.getSelectedIndex()+1,dayComboBox.getSelectedIndex()+1,yearComboBox.getSelectedIndex()+2000,selectedRoommateIndex,amountText.getText(),DescriptionText.getText());
+        Bill newBill = new Bill(monthComboBox.getSelectedIndex()+1,dayComboBox.getSelectedIndex()+1,yearComboBox.getSelectedIndex()+2000,selectedRoommateIndex,amountText.getText(),DescriptionText.getText());
         ExistingBill.addBill(newBill);
         BillCheckGUI billGUI = new BillCheckGUI();
         billGUI.billLoading();
