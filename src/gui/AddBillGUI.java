@@ -197,20 +197,7 @@ public class AddBillGUI extends javax.swing.JFrame {
             DescriptionText.setForeground(new Color(204,204,255));
             
         }
-        if (descriptionComboBox.getSelectedIndex()==1)
-            DescriptionText.setText("Cable");
-        if (descriptionComboBox.getSelectedIndex()==2)
-            DescriptionText.setText("Electricity");
-        if (descriptionComboBox.getSelectedIndex()==3)
-            DescriptionText.setText("Food");
-        if (descriptionComboBox.getSelectedIndex()==4)
-            DescriptionText.setText("Gas");
-        if (descriptionComboBox.getSelectedIndex()==5)
-            DescriptionText.setText("Internet");
-        if (descriptionComboBox.getSelectedIndex()==6)
-            DescriptionText.setText("Rent");
-        if (descriptionComboBox.getSelectedIndex()==7)
-            DescriptionText.setText("Water");
+        DescriptionText.setText(descriptionComboBox.getSelectedItem().toString());
         
     }//GEN-LAST:event_descriptionComboBoxActionPerformed
 
@@ -223,9 +210,9 @@ public class AddBillGUI extends javax.swing.JFrame {
     	this.userInputCheck();
     	Bill billToBeAdded = this.loadingNewBill();
         ExistingBill.addBill(billToBeAdded);
-        BillCheckGUI billGUI = new BillCheckGUI();
-        billGUI.billLoading();
-        billGUI.setVisible(true);
+        BillCheckGUI totalBillGUI = new BillCheckGUI();
+        totalBillGUI.billLoading();
+        totalBillGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addBillButtonActionPerformed
 
@@ -266,7 +253,7 @@ public class AddBillGUI extends javax.swing.JFrame {
     private Bill loadingNewBill() {
 		Date newDate = this.getDate();
 		double newAmount = this.getAmount();
-		ArrayList<String> newNames = this.getNames();
+		NameList newNames = this.getNames();
 		String newDesc = this.getDesc();
 		return new Bill(newDate, newAmount, newNames, newDesc);
 	}
@@ -282,8 +269,8 @@ public class AddBillGUI extends javax.swing.JFrame {
     	double amount = Double.parseDouble(s);
     	return amount;
     }
-    private ArrayList<String> getNames(){
-    	ArrayList<String> names = new ArrayList<String>();
+    private NameList getNames(){
+    	NameList names = new NameList();
     	 if(roommate1Label.isSelected())
              names.add(roommate1Label.getText());
          if(roommate2Label.isSelected())

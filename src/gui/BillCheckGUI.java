@@ -37,12 +37,12 @@ public class BillCheckGUI extends javax.swing.JFrame {
        String[][] rowData = new String[ExistingBill.getExistingBills().length][4];
        for(int i=0;i<ExistingBill.totalBillCount();i++)
        {
-           Bill[] billDataSet = ExistingBill.getExistingBills();
+           Bill[] allBills = ExistingBill.getExistingBills();
            //BillData record = billDataSet[i];
-           rowData[i][0]=billDataSet[i].getTime();
-           rowData[i][1]=billDataSet[i].getPeople();
-           rowData[i][2]=billDataSet[i].getAmount();
-           rowData[i][3]=billDataSet[i].getDescr();
+           rowData[i][0]=allBills[i].getDate().toString();
+           rowData[i][1]=allBills[i].getNames().toString();
+           rowData[i][2]=Double.toString(allBills[i].getAmount());
+           rowData[i][3]=allBills[i].getDesc();
            model=(DefaultTableModel)displayTable.getModel();
            model.insertRow(model.getRowCount(), rowData[i]);
        }
@@ -265,7 +265,7 @@ public class BillCheckGUI extends javax.swing.JFrame {
         a=displayTable.getSelectedRows();
         if(a.length>1)
         {
-            WrongPopup multidelete = new WrongPopup("Once at a time,please");
+            WrongPopup multidelete = new WrongPopup("One at a time,please");
             multidelete.setVisible(true);
             multidelete.setAlwaysOnTop(true);
             

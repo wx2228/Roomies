@@ -5,25 +5,37 @@
  */
 package functionality;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Hang Xu
  */
 public class Bill {
-	Date date;
-	double amout;
-	ArrayList<String> names;
-	String desc;
+	private Date date;
+	private double amout;
+	private NameList names;
+	private String desc;
 
-    public Bill(Date date, double amount, ArrayList<String> names, String desc) {
+    public Bill(Date date, double amount, NameList names, String desc) {
         this.date = date;
         this.amout = amount;
         this.names = names;
         this.desc = desc;
     }
-
     
+    public Date getDate(){
+    	return this.date;
+    }
+    
+    public double getAmount(){
+    	return this.amout;
+    }
+    
+    public NameList getNames(){
+    	return this.names;
+    }
+    
+    public String getDesc(){
+    	return this.desc;
+    }
 
 }
