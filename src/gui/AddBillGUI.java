@@ -6,6 +6,7 @@
 package gui;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import functionality.*;
@@ -218,18 +219,30 @@ public class AddBillGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_monthComboBoxActionPerformed
 
     private void addBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBillButtonActionPerformed
+    	
+    	this.userInputCheck();
+    	Bill billToBeAdded = this.loadingNewBill();
+        ExistingBill.addBill(billToBeAdded);
+        BillCheckGUI billGUI = new BillCheckGUI();
+        billGUI.billLoading();
+        billGUI.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_addBillButtonActionPerformed
 
-        if(roommate1Label.isSelected()||roommate2Label.isSelected()||roommate3Label.isSelected())
-        {}
-        else 
-        {
-             WrongPopup noPersonSelected = new WrongPopup("At lease one person,please");
-             noPersonSelected.setVisible(true);
-             return;
-        }
-        String inputString = amountText.getText();
+    private void userInputCheck(){
+    	this.nonSelectedCheck();
+    	this.digitCheck();
+    }
+    private void nonSelectedCheck(){
+    	if(!(roommate1Label.isSelected()||roommate2Label.isSelected()||roommate3Label.isSelected())){
+    		WrongPopup noPersonSelected = new WrongPopup("At lease one person,please");
+            noPersonSelected.setVisible(true);
+            return;
+    	}
+    }
+    private void digitCheck(){
+    	String inputString = amountText.getText();
         int decimalPointCount =0;
-      
         for(int stringIndex=inputString.length();--stringIndex>=0;)
         {
             if(Character.isDigit(inputString.charAt(stringIndex))) 
@@ -249,24 +262,44 @@ public class AddBillGUI extends javax.swing.JFrame {
                
             }
         }
-        int selectedRoommateIndex=0; // totally 3 roommates, use binary number to represent whom is selected.
-        if(roommate1Label.isSelected())
-            selectedRoommateIndex=selectedRoommateIndex+4;
-        if(roommate2Label.isSelected())
-            selectedRoommateIndex=selectedRoommateIndex+2;
-        if(roommate3Label.isSelected())
-            selectedRoommateIndex=selectedRoommateIndex+1;
-        
-        if(DescriptionText.getText().equals("Type description here")&&DescriptionText.getForeground()!=Color.black)
-        {DescriptionText.setText("");}
-        Bill newBill = new Bill(monthComboBox.getSelectedIndex()+1,dayComboBox.getSelectedIndex()+1,yearComboBox.getSelectedIndex()+2000,selectedRoommateIndex,amountText.getText(),DescriptionText.getText());
-        ExistingBill.addBill(newBill);
-        BillCheckGUI billGUI = new BillCheckGUI();
-        billGUI.billLoading();
-        billGUI.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_addBillButtonActionPerformed
+    }
+    private Bill loadingNewBill() {
+		Date newDate = this.getDate();
+		double newAmount = this.getAmount();
+		ArrayList<String> newNames = this.getNames();
+		String newDesc = this.getDesc();
+		return new Bill(newDate, newAmount, newNames, newDesc);
+	}
 
+    private Date getDate(){
+    	int year = yearComboBox.getSelectedIndex() + 2000;
+    	int month = monthComboBox.getSelectedIndex() + 1;
+    	int day = dayComboBox.getSelectedIndex() + 1;
+    	return new Date(year, month, day);
+    }
+    private double getAmount(){
+    	String s = amountText.getText();
+    	double amount = Double.parseDouble(s);
+    	return amount;
+    }
+    private ArrayList<String> getNames(){
+    	ArrayList<String> names = new ArrayList<String>();
+    	 if(roommate1Label.isSelected())
+             names.add(roommate1Label.getText());
+         if(roommate2Label.isSelected())
+        	 names.add(roommate2Label.getText());
+         if(roommate3Label.isSelected())
+        	 names.add(roommate3Label.getText());
+         return names;
+    }
+    private String getDesc(){
+    	if(DescriptionText.getText().equals("Type description here")&&DescriptionText.getForeground()!=Color.black){
+    		DescriptionText.setText("");
+    		}
+    	return DescriptionText.getText();
+    }
+    
+    
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         BillCheckGUI billGUI = new BillCheckGUI();
@@ -330,6 +363,7 @@ public class AddBillGUI extends javax.swing.JFrame {
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea DescriptionText;
