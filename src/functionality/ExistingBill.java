@@ -11,9 +11,9 @@ package functionality;
  */
 public class ExistingBill {
   
-   static Bill[] existingBills =new Bill[100];
+   static BillData[] existingBills =new BillData[100];
 
-   public static void addBill(Bill bill)
+   public static void addBill(BillData bill)
    {  
       for(int existingBillIndex=0;existingBillIndex<existingBills.length;existingBillIndex++)
       {
@@ -28,7 +28,7 @@ public class ExistingBill {
        
    }
    
-   public static void editBill(Bill bill,int i)
+   public static void editBill(BillData bill,int i)
    {
        existingBills[i]=bill;
    }
@@ -41,7 +41,7 @@ public class ExistingBill {
        }
    }
    
-   public static Bill[] getExistingBills()
+   public static BillData[] getExistingBills()
    {
        return existingBills;
    }
@@ -59,13 +59,13 @@ public class ExistingBill {
     
    public static double[] split(int[] selectedBillIndexs)
    {   double[] individualAmount=new double[3];
-       Bill[] tmps =ExistingBill.getExistingBills();
+       BillData[] tmps =ExistingBill.getExistingBills();
        
        for(int index=0;index<selectedBillIndexs.length;index++)
        {
            if (selectedBillIndexs[index]>=0)
            {
-               Bill tmp = tmps[selectedBillIndexs[index]];
+               BillData tmp = tmps[selectedBillIndexs[index]];
           
            switch(tmp.nameToRoommateIndex(tmp.getPeople()))
            {

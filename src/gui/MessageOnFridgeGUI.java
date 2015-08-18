@@ -10,7 +10,7 @@ import java.awt.Font;
 
 import javax.swing.text.*;
 
-import functionality.CurrentUser;
+import functionality.CurrentUUID;
 import functionality.MessageOnFridge;
 
 /**
@@ -126,7 +126,7 @@ public class MessageOnFridgeGUI extends javax.swing.JFrame {
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         // TODO add your handling code here:
         fridgeText.setEditable(true);
-        String f = CurrentUser.getName()+" says:"+noteText.getText()+"\n";
+        String f = CurrentUUID.getName()+" says:"+noteText.getText()+"\n";
         MessageOnFridge.addMessage(f);
         fridgeText.setText(MessageOnFridge.getMOF());
         fridgeText.setEditable(false);

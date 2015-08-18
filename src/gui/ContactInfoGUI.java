@@ -5,6 +5,8 @@
  */
 package gui;
 
+import functionality.CurrentUUID;
+
 /**
  *
  * @author Hang Xu
@@ -21,7 +23,7 @@ public class ContactInfoGUI extends javax.swing.JFrame {
 
     public void setTedInfo()
     {
-        PicLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Roomies/Resource/Ted_Mosby.jpg")));
+        PicLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/roomies/GUI/Ted_Mosby.jpg")));
         nameText.setText("Ted Mosby");
         sexComboBox.setSelectedIndex(0);
         dayComboBox.setSelectedIndex(24);
@@ -33,7 +35,7 @@ public class ContactInfoGUI extends javax.swing.JFrame {
     
        public void setMarshallInfo()
     {
-        PicLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Roomies/Resource/Marshall_Eriksen.jpg")));
+        PicLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/roomies/GUI/Marshall_Eriksen.jpg")));
         nameText.setText("Marshall Eriksen");
         sexComboBox.setSelectedIndex(0);
         dayComboBox.setSelectedIndex(26);
@@ -45,7 +47,7 @@ public class ContactInfoGUI extends javax.swing.JFrame {
        
           public void setLilyInfo()
     {
-        PicLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Roomies/Resource/Lily_Aldrin.jpg")));
+        PicLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/roomies/GUI/Lily_Aldrin.jpg")));
         nameText.setText("Lily Aldrin");
         sexComboBox.setSelectedIndex(1);
         dayComboBox.setSelectedIndex(2);

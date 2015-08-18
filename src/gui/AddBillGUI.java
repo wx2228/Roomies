@@ -6,9 +6,7 @@
 package gui;
 import java.awt.Color;
 import java.awt.Font;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import functionality.*;
 /**
@@ -24,8 +22,7 @@ public class AddBillGUI extends javax.swing.JFrame {
 	private static final long serialVersionUID = -2807506173109458916L;
 	public AddBillGUI() {
         initComponents();
-        Bill newBill;
-        Calendar c = Calendar.getInstance();
+          Calendar c = Calendar.getInstance();
         int yearNow = c.get(Calendar.YEAR); 
         int monthNow = c.get(Calendar.MONTH)+1; 
         int dateNow = c.get(Calendar.DATE); 
@@ -48,12 +45,12 @@ public class AddBillGUI extends javax.swing.JFrame {
 
         monthComboBox = new javax.swing.JComboBox();
         dayComboBox = new javax.swing.JComboBox();
-        yearComboBox = new javax.swing.JComboBox();
-        roommate1Label = new javax.swing.JCheckBox();
         roommate2Label = new javax.swing.JCheckBox();
+        roommate1Label = new javax.swing.JCheckBox();
         roommate3Label = new javax.swing.JCheckBox();
         amountText = new javax.swing.JTextField();
-        descriptionComboBox = new javax.swing.JComboBox(); 
+        descriptionComboBox = new javax.swing.JComboBox();
+        yearComboBox = new javax.swing.JComboBox();
         addBillButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -199,21 +196,20 @@ public class AddBillGUI extends javax.swing.JFrame {
             DescriptionText.setForeground(new Color(204,204,255));
             
         }
-//        if (descriptionComboBox.getSelectedIndex()==1)
-//            DescriptionText.setText("Cable");
-//        if (descriptionComboBox.getSelectedIndex()==2)
-//            DescriptionText.setText("Electricity");
-//        if (descriptionComboBox.getSelectedIndex()==3)
-//            DescriptionText.setText("Food");
-//        if (descriptionComboBox.getSelectedIndex()==4)
-//            DescriptionText.setText("Gas");
-//        if (descriptionComboBox.getSelectedIndex()==5)
-//            DescriptionText.setText("Internet");
-//        if (descriptionComboBox.getSelectedIndex()==6)
-//            DescriptionText.setText("Rent");
-//        if (descriptionComboBox.getSelectedIndex()==7)
-//            DescriptionText.setText("Water");
-        DescriptionText.setText(descriptionComboBox.getSelectedItem().toString());
+        if (descriptionComboBox.getSelectedIndex()==1)
+            DescriptionText.setText("Cable");
+        if (descriptionComboBox.getSelectedIndex()==2)
+            DescriptionText.setText("Electricity");
+        if (descriptionComboBox.getSelectedIndex()==3)
+            DescriptionText.setText("Food");
+        if (descriptionComboBox.getSelectedIndex()==4)
+            DescriptionText.setText("Gas");
+        if (descriptionComboBox.getSelectedIndex()==5)
+            DescriptionText.setText("Internet");
+        if (descriptionComboBox.getSelectedIndex()==6)
+            DescriptionText.setText("Rent");
+        if (descriptionComboBox.getSelectedIndex()==7)
+            DescriptionText.setText("Water");
         
     }//GEN-LAST:event_descriptionComboBoxActionPerformed
 
@@ -222,11 +218,51 @@ public class AddBillGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_monthComboBoxActionPerformed
 
     private void addBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBillButtonActionPerformed
-        userInputErrorCheck(); // to check if there is any error that caused by user input
-        Bill newBill = generateNewBill();
+
+        if(roommate1Label.isSelected()||roommate2Label.isSelected()||roommate3Label.isSelected())
+        {}
+        else 
+        {
+             WrongPopup noPersonSelected = new WrongPopup("At lease one person,please");
+             noPersonSelected.setVisible(true);
+             return;
+        }
+        String inputString = amountText.getText();
+        int decimalPointCount =0;
+      
+        for(int stringIndex=inputString.length();--stringIndex>=0;)
+        {
+            if(Character.isDigit(inputString.charAt(stringIndex))) 
+            {} 
+            else  
+            {    String toBeCheckedChar = ""+inputString.charAt(stringIndex);
+                if(decimalPointCount<2&&toBeCheckedChar.equals(".")&&stringIndex>=1&&stringIndex<inputString.length()-1)
+                {
+                        decimalPointCount++;
+                }
+                else // if the input contains more than 1 decimal dot or it is not a digit
+                {
+                     WrongPopup wrongFormat = new WrongPopup("Digit only, please");
+                     wrongFormat.setVisible(true);
+                     return;
+                }
+               
+            }
+        }
+        int selectedRoommateIndex=0; // totally 3 roommates, use binary number to represent whom is selected.
+        if(roommate1Label.isSelected())
+            selectedRoommateIndex=selectedRoommateIndex+4;
+        if(roommate2Label.isSelected())
+            selectedRoommateIndex=selectedRoommateIndex+2;
+        if(roommate3Label.isSelected())
+            selectedRoommateIndex=selectedRoommateIndex+1;
+        
+        if(DescriptionText.getText().equals("Type description here")&&DescriptionText.getForeground()!=Color.black)
+        {DescriptionText.setText("");}
+        BillData newBill = new BillData(monthComboBox.getSelectedIndex()+1,dayComboBox.getSelectedIndex()+1,yearComboBox.getSelectedIndex()+2000,selectedRoommateIndex,amountText.getText(),DescriptionText.getText());
         ExistingBill.addBill(newBill);
         BillCheckGUI billGUI = new BillCheckGUI();
-        billGUI.allBillLoading();
+        billGUI.billLoading();
         billGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addBillButtonActionPerformed
@@ -234,7 +270,7 @@ public class AddBillGUI extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         BillCheckGUI billGUI = new BillCheckGUI();
-        billGUI.allBillLoading();
+        billGUI.billLoading();
         billGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
@@ -294,80 +330,7 @@ public class AddBillGUI extends javax.swing.JFrame {
             }
         });
     }
-    // to see if the input in the amount only includes digit
-    private void digitOnlyCheck(){
-        String inputString = amountText.getText();
-    	int decimalPointCount =0;
-        for(int stringIndex=inputString.length();--stringIndex>=0;)
-        {
-            if(Character.isDigit(inputString.charAt(stringIndex))) 
-            {} 
-            else  
-            {    String toBeCheckedChar = ""+inputString.charAt(stringIndex);
-                if(decimalPointCount<2&&toBeCheckedChar.equals(".")&&stringIndex>=1&&stringIndex<inputString.length()-1)
-                {
-                        decimalPointCount++;
-                }
-                else // if the input contains more than 1 decimal dot or it is not a digit
-                {
-                     WrongPopup wrongFormat = new WrongPopup("Digit only, please");
-                     wrongFormat.setVisible(true);
-                     return;
-                }
-               
-            }
-        }
-        
-    }
-   // to see if no roommates are checked
-    private void nonSelectedCheck(){
-    	if(!(roommate1Label.isSelected()||roommate2Label.isSelected()||roommate3Label.isSelected())){// at lease one user should be selected
-        	WrongPopup noPersonSelected = new WrongPopup("At lease one person,please");
-            noPersonSelected.setVisible(true);
-            return;
-        }
-    }
-   // to check the input error before generating the new bill
-    private void userInputErrorCheck(){
-    	this.digitOnlyCheck();
-    	this.nonSelectedCheck();
-    }
-    
-    // generate the new bill
-    private Bill generateNewBill(){
-    	Date date = this.getDate();
-    	ArrayList<String> names = this.getNames();
-    	double amount = this.getAmount();
-        String description = this.getDesc();
-        return new Bill(date, amount, names, description);
-    }
-     //get the date information from user input
-    private Date getDate(){
-    	int day = Integer.parseInt(dayComboBox.getSelectedItem().toString());
-    	int month = Integer.parseInt(monthComboBox.getSelectedItem().toString());
-    	int year = Integer.parseInt(yearComboBox.getSelectedItem().toString());
-    	return new Date(year,month,day);
-    }
-    // get the name information from user input 
-    private ArrayList<String> getNames(){
-    	ArrayList<String> names = new ArrayList<String>();
-        if(roommate1Label.isSelected())
-            names.add(roommate1Label.getText());
-        if(roommate2Label.isSelected())
-        	names.add(roommate2Label.getText());
-        if(roommate3Label.isSelected())
-        	names.add(roommate3Label.getText());
-        return names;
-    	
-    }
-    // get the bill amount from the user input
-    private double getAmount(){
-    	return Double.parseDouble(amountText.getText());
-    }
-    // get the description from the user input
-    private String getDesc(){
-    	return DescriptionText.getText();
-    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea DescriptionText;
     private javax.swing.JButton addBillButton;

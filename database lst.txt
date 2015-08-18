@@ -1,6 +1,0 @@
-Database list:
-1. a database for all users username, userID, password, 
-2. a database for bill
-3. a database for message
-4. about the legal files, 
-5. a database for contacts 

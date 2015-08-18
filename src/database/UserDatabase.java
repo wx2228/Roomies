@@ -2,7 +2,7 @@ package database;
 
 import java.util.Hashtable;
 
-import functionality.CurrentUser;
+import functionality.CurrentUUID;
 
 public class UserDatabase {
 	//use hashtable to store user login info, key is the username, use value in the hastable to store User object
@@ -33,7 +33,7 @@ public class UserDatabase {
 	public static boolean userAuthentication (String username, String password){
 		if(UserDatabase.userExist(username)){
 			if( user.get(username).getPassword().equals(password)){
-				CurrentUser.setID(user.get(username).getUUID());
+				CurrentUUID.setID(user.get(username).getUUID());
 				return true;
 			}
 			else
