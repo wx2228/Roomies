@@ -5,7 +5,7 @@
  */
 package gui;
 
-import functionality.CurrentUUID;
+import functionality.CurrentUser;
 
 /**
  *

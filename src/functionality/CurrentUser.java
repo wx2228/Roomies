@@ -11,19 +11,16 @@ import java.util.UUID;
  *
  * @author Hang Xu
  */
-public  class  CurrentUUID {
+public  class  CurrentUser {
     private static  UUID currentUUID;
-    
-
     
      public static UUID getID()
     {   
         return currentUUID;
     }
-     
-     
+   
     public static void setID(UUID aUUID)
     {
-        CurrentUUID.currentUUID=aUUID;
+        CurrentUser.currentUUID=aUUID;
     }
 }
