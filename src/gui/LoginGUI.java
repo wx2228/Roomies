@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import database.UserDatabase;
-import functionality.CurrentUUID;
+import functionality.CurrentUser;
 
 /**
  *

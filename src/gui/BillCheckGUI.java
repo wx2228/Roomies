@@ -6,10 +6,7 @@
 package gui;
 import javax.swing.table.*;
 import javax.swing.*;
-
 import functionality.*;
-
-import java.util.Date; 
 import java.util.Calendar; 
 import java.text.SimpleDateFormat; 
 
@@ -32,15 +29,14 @@ public class BillCheckGUI extends javax.swing.JFrame {
        displayTable.getColumn("Amount").setCellRenderer(render);
        displayTable.getColumn("Description").setCellRenderer(render);
     }
-   public void billLoading()
+   public void allBillLoading()
     {   
-       String[][] rowData = new String[ExistingBill.getExistingBills().length][4];
+       Object[][] rowData = new Object[ExistingBill.getExistingBills().length][4];
        for(int i=0;i<ExistingBill.totalBillCount();i++)
        {
-           BillData[] billDataSet = ExistingBill.getExistingBills();
-           //BillData record = billDataSet[i];
-           rowData[i][0]=billDataSet[i].getTime();
-           rowData[i][1]=billDataSet[i].getPeople();
+           Bill[] billDataSet = ExistingBill.getExistingBills(); //should be changed to SQL
+           rowData[i][0]=billDataSet[i].getDate();
+           rowData[i][1]=billDataSet[i].getNames();
            rowData[i][2]=billDataSet[i].getAmount();
            rowData[i][3]=billDataSet[i].getDescr();
            model=(DefaultTableModel)displayTable.getModel();
@@ -48,7 +44,7 @@ public class BillCheckGUI extends javax.swing.JFrame {
        }
        
        
-      // DefaultTableModel tableModel = new DefaultTableModel(rowData,userTitle);
+ 
        
     }
     
@@ -277,10 +273,8 @@ public class BillCheckGUI extends javax.swing.JFrame {
         String editedPeople = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 1));
         String editedAmount = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 2));
         String editedDescr = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 3));
-        BillData editedBill = new BillData(editedTime,editedPeople,editedAmount,editedDescr);
-        Object[] tmp = editedBill.getBillDataValue();
-        editBillGUI.setValue((int)tmp[0], (int)tmp[1], (int)tmp[2], (int)tmp[3], tmp[4].toString(), tmp[5].toString());
-        EditBillGUI.setIndex(displayTable.getSelectedRow());
+        Bill edittingBill = this.getSelectedBill();
+        editBillGUI.loading(edittingBill);
         editBillGUI.setVisible(true);
         this.dispose();}
     }//GEN-LAST:event_editButtonActionPerformed
@@ -348,11 +342,11 @@ public class BillCheckGUI extends javax.swing.JFrame {
         int monthNow = c.get(Calendar.MONTH)+1; 
         int dateNow = c.get(Calendar.DATE); 
         String timeNow = Integer.toString(monthNow)+"/"+Integer.toString(dateNow)+"/"+Integer.toString(yearNow);
-         BillData[] tmps = ExistingBill.getExistingBills();
+         Bill[] tmps = ExistingBill.getExistingBills();
            
         for(int existingBillIndex=0;existingBillIndex<ExistingBill.totalBillCount();existingBillIndex++)
         {
-            BillData tmp = tmps[existingBillIndex];
+            Bill tmp = tmps[existingBillIndex];
             if(tmp.getTime().equals(timeNow))
             {
                 selected[selectedBillIndex]=existingBillIndex;
@@ -387,10 +381,10 @@ public class BillCheckGUI extends javax.swing.JFrame {
         int yearNow = c.get(Calendar.YEAR); 
         int monthNow = c.get(Calendar.MONTH)+1; 
         int dateNow = c.get(Calendar.DATE); 
-         BillData[] tmps = ExistingBill.getExistingBills();
+         Bill[] tmps = ExistingBill.getExistingBills();
          for(int existingBillIndex=0;existingBillIndex<ExistingBill.totalBillCount();existingBillIndex++)
         {
-            BillData tmp = tmps[existingBillIndex];
+            Bill tmp = tmps[existingBillIndex];
             String[] tmpTime = tmp.getTime().split("/");
             if(tmpTime[0].equals(Integer.toString(monthNow))&&tmpTime[2].equals(Integer.toString(yearNow)))
             {
@@ -410,6 +404,17 @@ public class BillCheckGUI extends javax.swing.JFrame {
         LilyAmount.setText(String.valueOf(calculatedAmounts[2]));
     }//GEN-LAST:event_thisMonthButtonActionPerformed
 
+    private Bill getSelectedBill(){
+    	   String time = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 0));
+           String names = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 1));
+           System.out.println(time);
+           System.out.println(names);
+           double amount = 1.0;//Long.parseLong(String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 2));)
+           String desc = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 3));
+           Date date = new Date(1,1,1);
+           Bill selectedBill = new Bill(date, amount, null, desc);
+           return selectedBill;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LilyAmount;
     private javax.swing.JLabel MarshallAmount;

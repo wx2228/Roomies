@@ -90,7 +90,7 @@ static public int getIndex()
         // TODO add your handling code here:
         ExistingBill.deleteBill(selectedDeletedIndex);
         BillCheckGUI billGUI = new BillCheckGUI();
-        billGUI.billLoading();
+        billGUI.allBillLoading();
         billGUI.setVisible(true);
         this.dispose();
 

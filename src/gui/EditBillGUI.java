@@ -4,10 +4,9 @@
  * and open the template in the editor.
  */
 package gui;
-import javax.swing.*;
-
-import functionality.BillData;
-import functionality.ExistingBill;
+import functionality.Date;
+import java.util.ArrayList;
+import functionality.Bill;
 /**
  *
  * @author Hang Xu
@@ -17,19 +16,11 @@ public class EditBillGUI extends javax.swing.JFrame {
     /**
      * Creates new form EditBillGUI
      */
-   static int selectedEditedIndex;
     public EditBillGUI() {
         initComponents();
        
     }
-static public void setIndex(int i)
-{
-    selectedEditedIndex =i;
-}
-static public int getIndex()
-{
-    return selectedEditedIndex;
-}
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,21 +155,21 @@ static public int getIndex()
     }// </editor-fold>//GEN-END:initComponents
 
     private void editBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBillButtonActionPerformed
-         int peopleIndex=0;
-        if(roommate1Label.isSelected())
-            peopleIndex=peopleIndex+4;
-        if(roommate2Label.isSelected())
-            peopleIndex=peopleIndex+2;
-        if(roommate3Label.isSelected())
-            peopleIndex=peopleIndex+1;  
-        BillData editedBill = new BillData(monthComboBox.getSelectedIndex()+1,dayComboBox.getSelectedIndex()+1,yearComboBox.getSelectedIndex()+2000,peopleIndex,amountText.getText(),descriptionText.getText());
-        ExistingBill.editBill(editedBill, selectedEditedIndex);
-        BillCheckGUI billGUI = new BillCheckGUI();
-        billGUI.billLoading();
-        billGUI.setVisible(true);
-        this.dispose();
-        
        
+         Date newDate;
+         long newAmount;
+         ArrayList<String> newNames = new ArrayList<String>();
+         String newDescr;
+         newDate = this.getDate();
+         newAmount = this.getAmount();
+         newNames = this.getSelectedNames();
+         newDescr = this.getDesc();       
+         Bill editedBill = new Bill(newDate, newAmount, newNames,newDescr);
+        // ExistingBill.editBill(editedBill, selectedEditedIndex); put SQL command to save the edited bill        
+         BillCheckGUI billGUI = new BillCheckGUI();
+         billGUI.allBillLoading();
+         billGUI.setVisible(true);
+         this.dispose();  
     }//GEN-LAST:event_editBillButtonActionPerformed
 
     private void currencyComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currencyComboBoxActionPerformed
@@ -196,7 +187,7 @@ static public int getIndex()
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
           BillCheckGUI billGUI = new BillCheckGUI();
-        billGUI.billLoading();
+        billGUI.allBillLoading();
         billGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
@@ -236,23 +227,59 @@ static public int getIndex()
         });
     }
 
-    public void setValue(int month, int day, int year, int index, String amount, String descr)
+    public void loading(Bill bill)
     {
-        monthComboBox.setSelectedIndex(month-1);
-        dayComboBox.setSelectedIndex(day-1);
-        yearComboBox.setSelectedIndex(year-2000);
-        switch (index)
-        {
-            case 1: roommate3Label.setSelected(true);break;
-            case 2: roommate2Label.setSelected(true);break;
-            case 3: roommate2Label.setSelected(true);roommate3Label.setSelected(true);break;
-            case 4: roommate1Label.setSelected(true);break;
-            case 5: roommate1Label.setSelected(true);roommate3Label.setSelected(true);break;
-            case 6: roommate1Label.setSelected(true);roommate2Label.setSelected(true);break;
-            case 7: roommate1Label.setSelected(true);roommate2Label.setSelected(true);roommate3Label.setSelected(true);break;
-        }
-        amountText.setText(amount);
-        descriptionText.setText(descr);
+        this.setDate(bill.getDate());
+        this.setAmount(bill.getAmount());
+        this.setSelectedNames(bill.getNames());
+        this.setDesc(bill.getDescr());
+        
+    }
+    private void setDate(Date date){
+    	dayComboBox.setSelectedIndex(date.getDay() - 1);
+    	monthComboBox.setSelectedIndex(date.getMonth() - 1);
+    	yearComboBox.setSelectedIndex(date.getYear());
+    }
+    private void setAmount(double amount){
+    	amountText.setText(Double.toString(amount));
+    }
+    private void setSelectedNames(ArrayList<String> names){
+    	int r1Flag = names.indexOf(roommate1Label.getText());
+    	int r2Flag = names.indexOf(roommate2Label.getText());
+    	int r3Flag = names.indexOf(roommate3Label.getText());
+    	if (r1Flag != -1)
+    		roommate1Label.setSelected(true);
+    	if (r2Flag != -1)
+    		roommate2Label.setSelected(true);
+    	if (r3Flag != -1)
+    		roommate3Label.setSelected(true);
+    }
+    private void setDesc(String desc){
+    	descriptionText.setText(desc);
+    }
+    
+    private ArrayList<String> getSelectedNames(){
+    	ArrayList<String> nameArray = new ArrayList<String>();
+        if(roommate1Label.isSelected())
+        	nameArray.add(roommate1Label.getText());
+        if(roommate2Label.isSelected())
+        	nameArray.add(roommate2Label.getText());
+        if(roommate3Label.isSelected())
+        	nameArray.add(roommate3Label.getText()); 
+        return nameArray;
+    } 
+    private long getAmount(){
+    	return Long.parseLong(amountText.getText());
+    }
+    private Date getDate(){
+    	  int newMonth = monthComboBox.getSelectedIndex()+1;
+          int newDay = dayComboBox.getSelectedIndex()+1;
+          int newYear = yearComboBox.getSelectedIndex()+2000;
+          Date date =new Date(newYear, newMonth, newDay);
+          return date;
+    }
+    private String getDesc(){
+    	return descriptionText.getText();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField amountText;
