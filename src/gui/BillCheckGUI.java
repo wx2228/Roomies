@@ -9,6 +9,8 @@ import javax.swing.*;
 
 import functionality.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date; 
 import java.util.Calendar; 
 import java.text.SimpleDateFormat; 
@@ -18,7 +20,6 @@ import java.text.SimpleDateFormat;
  * @author Hang Xu
  */
 public class BillCheckGUI extends javax.swing.JFrame {
-	Bill[] allBills = ExistingBill.getExistingBills();
 
     /**
      * Creates new form BillCheckGUI
@@ -36,14 +37,14 @@ public class BillCheckGUI extends javax.swing.JFrame {
     }
    public void billLoading()
     {    
-       String[][] rowData = new String[ExistingBill.getExistingBills().length][4];
-       for(int i=0;i<ExistingBill.totalBillCount();i++)
+       String[][] rowData = new String[ExistingBill.getSize()][4];
+       for(int i=0;i<ExistingBill.getSize();i++)
        {
-           //BillData record = billDataSet[i];
-           rowData[i][0]=allBills[i].getDate().toString();
-           rowData[i][1]=allBills[i].getNames().toString();
-           rowData[i][2]=Double.toString(allBills[i].getAmount());
-           rowData[i][3]=allBills[i].getDesc();
+    	   Bill currentBill = ExistingBill.getBill(i);
+           rowData[i][0]=currentBill.getDate().toString();
+           rowData[i][1]=currentBill.getNames().toString();
+           rowData[i][2]=Double.toString(currentBill.getAmount());
+           rowData[i][3]=currentBill.getDesc();
            model=(DefaultTableModel)displayTable.getModel();
            model.insertRow(model.getRowCount(), rowData[i]);
        }
@@ -259,14 +260,6 @@ public class BillCheckGUI extends javax.swing.JFrame {
         if(this.selectedRowCheck()){
         EditBillGUI editBillGUI = new EditBillGUI();
         editBillGUI.loading(this.getSelectedBill(),displayTable.getSelectedRow());
-//        String editedTime = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 0));
-//        String editedPeople = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 1));
-//        String editedAmount = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 2));
-//        String editedDescr = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 3));
-//        Bill editedBill = new Bill(editedTime,editedPeople,editedAmount,editedDescr);
-//        Object[] tmp = editedBill.getBillDataValue();
-//        editBillGUI.setValue((int)tmp[0], (int)tmp[1], (int)tmp[2], (int)tmp[3], tmp[4].toString(), tmp[5].toString());
-//        EditBillGUI.setIndex(displayTable.getSelectedRow());
         editBillGUI.setVisible(true);
         this.dispose();}
     }//GEN-LAST:event_editButtonActionPerformed
@@ -290,7 +283,7 @@ public class BillCheckGUI extends javax.swing.JFrame {
 
     private Bill getSelectedBill(){
     	int selectedRowIndex = displayTable.getSelectedRow();
-    	return allBills[selectedRowIndex];
+    	return ExistingBill.getBill(selectedRowIndex);
     }
     
     private void displayTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayTableMouseClicked
@@ -327,96 +320,48 @@ public class BillCheckGUI extends javax.swing.JFrame {
 
     private void splitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_splitButtonActionPerformed
         // TODO add your handling code here:
-           if(displayTable.getSelectedRow()<0)
-         {
-             WrongPopup noSelected = new WrongPopup("Choose a bill first");
-             noSelected.setVisible(true);
-             return;
-         }
-        int[] selectedIndexs = displayTable.getSelectedRows();
-        double[] calculatedAmounts = ExistingBill.split(selectedIndexs);
-        TedAmount.setText(String.valueOf(calculatedAmounts[0]));
-        MarshallAmount.setText(String.valueOf(calculatedAmounts[1]));
-        LilyAmount.setText(String.valueOf(calculatedAmounts[2]));
+//           if(displayTable.getSelectedRow()<0)
+//         {
+//             WrongPopup noSelected = new WrongPopup("Choose a bill first");
+//             noSelected.setVisible(true);
+//             return;
+//         }
+//        int[] selectedIndexs = displayTable.getSelectedRows();
+        double[] billForEveryone = ExistingBill.split(getSelctedRowIndex());
+        showFinalResult(billForEveryone);
         
     }//GEN-LAST:event_splitButtonActionPerformed
 
     private void todayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todayButtonActionPerformed
         // TODO add your handling code here:
-        
-        int[] selected = new int[ExistingBill.totalBillCount()];  //initialize the selected bill array, this array save the index of today's bill
-        for(int index=0;index<ExistingBill.totalBillCount();index++)
-        {
-            selected[index]=-1;
-        }
-        
-        int selectedBillIndex=0;
-        Calendar c = Calendar.getInstance();
-        int yearNow = c.get(Calendar.YEAR); 
-        int monthNow = c.get(Calendar.MONTH)+1; 
-        int dateNow = c.get(Calendar.DATE); 
-        String timeNow = Integer.toString(monthNow)+"/"+Integer.toString(dateNow)+"/"+Integer.toString(yearNow);
-         Bill[] tmps = ExistingBill.getExistingBills();
-           
-        for(int existingBillIndex=0;existingBillIndex<ExistingBill.totalBillCount();existingBillIndex++)
-        {
-            Bill tmp = tmps[existingBillIndex];
-            if(tmp.getTime().equals(timeNow))
-            {
-                selected[selectedBillIndex]=existingBillIndex;
-                selectedBillIndex=selectedBillIndex+1;
-            }
-            
-        }
-        if (selectedBillIndex==0)
-        {
-             WrongPopup noBillToday = new WrongPopup("no bill for today");
-             noBillToday.setVisible(true);
-             return;
-        }
-        double[] calculatedAmounts = ExistingBill.split(selected);
-        TedAmount.setText(String.valueOf(calculatedAmounts[0]));
-        MarshallAmount.setText(String.valueOf(calculatedAmounts[1]));
-        LilyAmount.setText(String.valueOf(calculatedAmounts[2]));
-        
+    	double[] billForEveryone = ExistingBill.split("today");
+    	showFinalResult(billForEveryone);
         
     }//GEN-LAST:event_todayButtonActionPerformed
 
     private void thisMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thisMonthButtonActionPerformed
-
-        int[] selected = new int[ExistingBill.totalBillCount()];
-        for(int index=0;index<ExistingBill.totalBillCount();index++)
-        {
-            selected[index]=-1;
-        }
-        
-        int selectedBillIndex=0;
-         Calendar c = Calendar.getInstance();
-        int yearNow = c.get(Calendar.YEAR); 
-        int monthNow = c.get(Calendar.MONTH)+1; 
-        int dateNow = c.get(Calendar.DATE); 
-         Bill[] tmps = ExistingBill.getExistingBills();
-         for(int existingBillIndex=0;existingBillIndex<ExistingBill.totalBillCount();existingBillIndex++)
-        {
-            Bill tmp = tmps[existingBillIndex];
-            String[] tmpTime = tmp.getTime().split("/");
-            if(tmpTime[0].equals(Integer.toString(monthNow))&&tmpTime[2].equals(Integer.toString(yearNow)))
-            {
-                selected[selectedBillIndex]=existingBillIndex;
-                selectedBillIndex=selectedBillIndex+1;
-            }  
-        }
-          if (selectedBillIndex==0)
-        {
-             WrongPopup noBillThisMonth = new WrongPopup("no bill for this month");
-             noBillThisMonth.setVisible(true);
-             return;
-        }
-        double[] calculatedAmounts = ExistingBill.split(selected);
-        TedAmount.setText(String.valueOf(calculatedAmounts[0]));
-        MarshallAmount.setText(String.valueOf(calculatedAmounts[1]));
-        LilyAmount.setText(String.valueOf(calculatedAmounts[2]));
+    	double[] billForEveryone = ExistingBill.split("thismonth");
+    	showFinalResult(billForEveryone);
     }//GEN-LAST:event_thisMonthButtonActionPerformed
+    private ArrayList<Integer> getSelctedRowIndex(){
+    	
+    	if(displayTable.getSelectedRow()<0)
+        {
+            WrongPopup noSelected = new WrongPopup("Choose a bill first");
+            noSelected.setVisible(true);
+        }
+      int[] s = displayTable.getSelectedRows();
+      ArrayList<Integer> selectedIndexs = new ArrayList<Integer>();
+      for(int i = 0; i < s.length; i ++){
+    	  selectedIndexs.add(s[i]);
+      }
+      return selectedIndexs;
+    }
+    private void showFinalResult(double[] finalResult){
+        TedAmount.setText(String.valueOf(finalResult[0]));
+        MarshallAmount.setText(String.valueOf(finalResult[1]));
+        LilyAmount.setText(String.valueOf(finalResult[2]));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LilyAmount;

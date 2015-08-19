@@ -168,7 +168,7 @@ public class EditBillGUI extends javax.swing.JFrame {
 //            peopleIndex=peopleIndex+1;  
 //        Bill editedBill = new Bill(monthComboBox.getSelectedIndex()+1,dayComboBox.getSelectedIndex()+1,yearComboBox.getSelectedIndex()+2000,peopleIndex,amountText.getText(),descriptionText.getText()); 
     	Bill  editedBill = this.generateBill();
-    	ExistingBill.editBill(editedBill, selectedEditedIndex);
+    	ExistingBill.edit(editedBill, selectedEditedIndex);
         BillCheckGUI billGUI = new BillCheckGUI();
         billGUI.billLoading();
         billGUI.setVisible(true);

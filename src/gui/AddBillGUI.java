@@ -209,7 +209,7 @@ public class AddBillGUI extends javax.swing.JFrame {
     	
     	this.userInputCheck();
     	Bill billToBeAdded = this.loadingNewBill();
-        ExistingBill.addBill(billToBeAdded);
+        ExistingBill.add(billToBeAdded);
         BillCheckGUI totalBillGUI = new BillCheckGUI();
         totalBillGUI.billLoading();
         totalBillGUI.setVisible(true);

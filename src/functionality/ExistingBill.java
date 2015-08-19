@@ -5,94 +5,89 @@
  */
 package functionality;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 /**
  *
  * @author Hang Xu
  */
 public class ExistingBill {
   
-   static Bill[] existingBills =new Bill[100];
-
-   public static void addBill(Bill bill)
-   {  
-      for(int existingBillIndex=0;existingBillIndex<existingBills.length;existingBillIndex++)
-      {
-          if (existingBills[existingBillIndex]==null)
-          {
-              existingBills[existingBillIndex]=bill;
-             
-              break;
-          }
-         
-      }
-       
+   private static ArrayList<Bill> existingBills =new ArrayList<Bill>();
+   final static String TODAY = "today";
+   final static String THISMONTH = "thismonth";
+//   private static Hashtable<String, Double> splitTable;
+   
+   public static void add(Bill bill){
+	   existingBills.add(bill);
+   }
+  
+   public static void edit(Bill bill,int i){
+       existingBills.set(i, bill);
    }
    
-   public static void editBill(Bill bill,int i)
-   {
-       existingBills[i]=bill;
+   public static void delete(int toBeDeletedIndex){
+       existingBills.remove(toBeDeletedIndex);
    }
    
-   public static void deleteBill(int toBeDeletedIndex)
-   {
-       for (int existingBillIndex=toBeDeletedIndex;existingBillIndex<ExistingBill.existingBills.length-1;existingBillIndex++)
-       {
-           existingBills[existingBillIndex]=existingBills[existingBillIndex+1];
-       }
+   public static Bill getBill(int index){
+	   return existingBills.get(index);
    }
    
-   public static Bill[] getExistingBills()
-   {
-       return existingBills;
+   public static int getSize(){
+	   return existingBills.size();
    }
    
-   public static int totalBillCount()
-   {   int count=0;
-       for(int existingBillIndex=0;existingBillIndex<existingBills.length;existingBillIndex++)
-       {
-           if (existingBills[existingBillIndex]==null)
-           { count=existingBillIndex;
-               break;}
-       }
-       return count;
-   }
     
-   public static double[] split(int[] selectedBillIndexs)
-   {   double[] individualAmount=new double[3];
-       Bill[] tmps =ExistingBill.getExistingBills();
-       
-       for(int index=0;index<selectedBillIndexs.length;index++)
-       {
-           if (selectedBillIndexs[index]>=0)
-           {
-               Bill tmp = tmps[selectedBillIndexs[index]];
-          
-           switch(tmp.nameToRoommateIndex(tmp.getPeople()))
-           {
-            case 1: individualAmount[2]=individualAmount[2]+tmp.getAmountNumber();
-                break;
-            case 2: individualAmount[1]=individualAmount[1]+tmp.getAmountNumber();
-                break;
-            case 3: individualAmount[1]=individualAmount[1]+0.5*tmp.getAmountNumber();
-                        individualAmount[2]=individualAmount[2]+0.5*tmp.getAmountNumber();
-                break;
-            case 4: individualAmount[0]=individualAmount[0]+tmp.getAmountNumber();
-                break;
-            case 5: individualAmount[0]=individualAmount[0]+0.5*tmp.getAmountNumber();
-                        individualAmount[2]=individualAmount[2]+0.5*tmp.getAmountNumber();
-                break;
-            case 6: individualAmount[0]=individualAmount[0]+0.5*tmp.getAmountNumber();
-                        individualAmount[1]=individualAmount[1]+0.5*tmp.getAmountNumber();
-                break;
-            case 7: individualAmount[0]=individualAmount[0]+tmp.getAmountNumber()/3;
-                        individualAmount[1]=individualAmount[1]+tmp.getAmountNumber()/3;
-                        individualAmount[2]=individualAmount[2]+tmp.getAmountNumber()/3;
-                break;
-           }
-           }
-           else break;
-           
-       }
-       return individualAmount;
+   public static double[] split(ArrayList<Integer> selectedBillIndexs){   
+	   Hashtable<String, Double> splitTable = new Hashtable<String, Double>();
+	   double[] result = new double[3];
+	   splitTable.put("Ted Mosby", 0.0);
+	   splitTable.put("Marshall Eriksen", 0.0);
+	   splitTable.put("Lily Aldrin", 0.0);
+	   int l = selectedBillIndexs.size();
+	   for(int i = 0; i < l; i ++){
+		   split(selectedBillIndexs.get(i),splitTable);
+	   }
+	   
+	   result[0] = splitTable.get("Ted Mosby");
+	   result[1] = splitTable.get("Marshall Eriksen");
+	   result[2] = splitTable.get("Lily Aldrin");
+	   return result;
+   }
+   
+   private static void split(int billIndex,Hashtable<String, Double> splitTable){
+	   Bill bill = ExistingBill.getBill(billIndex); 
+	   double totalAmount = bill.getAmount();
+	   NameList names = bill.getNames();
+	   int numberOfPerson = names.size();
+	   double perAmount = totalAmount / numberOfPerson;
+	   for(int i = 0; i < numberOfPerson; i ++){	   
+		   double originalAmount = splitTable.get(names.get(i));		   
+		   double updatedAmount = originalAmount + perAmount;	   
+		   splitTable.replace(names.get(i), updatedAmount);
+	   }
+	   
+   } 
+
+
+   
+   public static double[] split(String rules){
+	   ArrayList<Integer> billIndex = new ArrayList<Integer>();
+	   int allBillSize = ExistingBill.getSize();
+	   if (rules == TODAY){
+		   for(int i = 0; i <allBillSize; i ++ ){
+		       	if(ExistingBill.getBill(i).getDate().isToday())
+		       		billIndex.add(i);	
+		       }	   
+	   }
+	   if(rules == THISMONTH){
+		   for(int i = 0; i <allBillSize; i ++ ){
+		       	if(ExistingBill.getBill(i).getDate().isThisMonth())
+		       		billIndex.add(i);	
+		       }
+	   }
+       return ExistingBill.split(billIndex);
    }
 }
