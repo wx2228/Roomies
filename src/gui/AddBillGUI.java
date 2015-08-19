@@ -55,7 +55,7 @@ public class AddBillGUI extends javax.swing.JFrame {
         addBillButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        DescriptionText = new javax.swing.JTextArea();
+        descriptionText = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -112,17 +112,17 @@ public class AddBillGUI extends javax.swing.JFrame {
             }
         });
 
-        DescriptionText.setColumns(20);
-        DescriptionText.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
-        DescriptionText.setForeground(new java.awt.Color(204, 204, 255));
-        DescriptionText.setRows(5);
-        DescriptionText.setText("Type description here");
-        DescriptionText.addFocusListener(new java.awt.event.FocusAdapter() {
+        descriptionText.setColumns(20);
+        descriptionText.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
+        descriptionText.setForeground(new java.awt.Color(204, 204, 255));
+        descriptionText.setRows(5);
+        descriptionText.setText("Type description here");
+        descriptionText.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 DescriptionTextFocusGained(evt);
             }
         });
-        jScrollPane1.setViewportView(DescriptionText);
+        jScrollPane1.setViewportView(descriptionText);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,15 +189,15 @@ public class AddBillGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(descriptionComboBox.getSelectedIndex()!=0)
         {
-            DescriptionText.setFont(new Font("Tahoma",Font.ITALIC,24));
-            DescriptionText.setForeground(Color.black);
+            descriptionText.setFont(new Font("Tahoma",Font.ITALIC,24));
+            descriptionText.setForeground(Color.black);
         }
         else{
-            DescriptionText.setText("Type description here");
-            DescriptionText.setForeground(new Color(204,204,255));
+            descriptionText.setText("Type description here");
+            descriptionText.setForeground(new Color(204,204,255));
             
         }
-        DescriptionText.setText(descriptionComboBox.getSelectedItem().toString());
+        descriptionText.setText(descriptionComboBox.getSelectedItem().toString());
         
     }//GEN-LAST:event_descriptionComboBoxActionPerformed
 
@@ -280,10 +280,10 @@ public class AddBillGUI extends javax.swing.JFrame {
          return names;
     }
     private String getDesc(){
-    	if(DescriptionText.getText().equals("Type description here")&&DescriptionText.getForeground()!=Color.black){
-    		DescriptionText.setText("");
+    	if(descriptionText.getText().equals("Type description here")&&descriptionText.getForeground()!=Color.black){
+    		descriptionText.setText("");
     		}
-    	return DescriptionText.getText();
+    	return descriptionText.getText();
     }
     
     
@@ -307,11 +307,11 @@ public class AddBillGUI extends javax.swing.JFrame {
 
     private void DescriptionTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DescriptionTextFocusGained
         // TODO add your handling code here:
-         if(DescriptionText.getText().equals("Type description here"))
+         if(descriptionText.getText().equals("Type description here"))
         {
-            DescriptionText.setText(null);
-            DescriptionText.setFont(new Font("Tahoma",Font.ITALIC,24));
-            DescriptionText.setForeground(Color.black);
+            descriptionText.setText(null);
+            descriptionText.setFont(new Font("Tahoma",Font.ITALIC,24));
+            descriptionText.setForeground(Color.black);
         }
     }//GEN-LAST:event_DescriptionTextFocusGained
 
@@ -353,7 +353,7 @@ public class AddBillGUI extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea DescriptionText;
+    private javax.swing.JTextArea descriptionText;
     private javax.swing.JButton addBillButton;
     private javax.swing.JTextField amountText;
     private javax.swing.JButton cancelButton;

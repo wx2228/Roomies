@@ -5,6 +5,7 @@
  */
 package gui;
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.*;
 
@@ -35,9 +36,9 @@ public class EditBillGUI extends javax.swing.JFrame {
 
         editBillButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        currencyComboBox = new javax.swing.JComboBox();
+        descriptionComboBox = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Description = new javax.swing.JTextArea();
+        descriptionText = new javax.swing.JTextArea();
         amountText = new javax.swing.JTextField();
         roommate2Label = new javax.swing.JCheckBox();
         roommate1Label = new javax.swing.JCheckBox();
@@ -63,17 +64,17 @@ public class EditBillGUI extends javax.swing.JFrame {
             }
         });
 
-        currencyComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        currencyComboBox.addActionListener(new java.awt.event.ActionListener() {
+        descriptionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"Other", "Cable", "Electricity", "Food ", "Gas", "Internet", "Rent", "Water" }));
+        descriptionComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                currencyComboBoxActionPerformed(evt);
+                descriptionComboBoxActionPerformed(evt);
             }
         });
 
-        Description.setColumns(20);
-        Description.setRows(5);
-        Description.setText("Description");
-        jScrollPane1.setViewportView(Description);
+        descriptionText.setColumns(20);
+        descriptionText.setRows(5);
+        descriptionText.setText("Description");
+        jScrollPane1.setViewportView(descriptionText);
 
         amountText.setText("Amount");
 
@@ -121,7 +122,7 @@ public class EditBillGUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(roommate3Label, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                                 .addGap(8, 8, 8))
-                            .addComponent(currencyComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(descriptionComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(yearComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1))
                 .addGap(0, 0, 0)
@@ -149,7 +150,7 @@ public class EditBillGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(amountText)
-                    .addComponent(currencyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(descriptionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
         );
@@ -176,8 +177,19 @@ public class EditBillGUI extends javax.swing.JFrame {
        
     }//GEN-LAST:event_editBillButtonActionPerformed
 
-    private void currencyComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currencyComboBoxActionPerformed
+    private void descriptionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currencyComboBoxActionPerformed
         // TODO add your handling code here:
+    	 if(descriptionComboBox.getSelectedIndex()!=0)
+         {
+             descriptionText.setFont(new Font("Tahoma",Font.ITALIC,24));
+             descriptionText.setForeground(Color.black);
+         }
+         else{
+             descriptionText.setText("Type description here");
+             descriptionText.setForeground(new Color(204,204,255));
+             
+         }
+         descriptionText.setText(descriptionComboBox.getSelectedItem().toString());
     }//GEN-LAST:event_currencyComboBoxActionPerformed
 
     private void roommate2LabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roommate2LabelActionPerformed
@@ -231,24 +243,6 @@ public class EditBillGUI extends javax.swing.JFrame {
         });
     }
 
-//    public void setValue(int month, int day, int year, int index, String amount, String descr)
-//    {
-//        monthComboBox.setSelectedIndex(month-1);
-//        dayComboBox.setSelectedIndex(day-1);
-//        yearComboBox.setSelectedIndex(year-2000);
-//        switch (index)
-//        {
-//            case 1: roommate3Label.setSelected(true);break;
-//            case 2: roommate2Label.setSelected(true);break;
-//            case 3: roommate2Label.setSelected(true);roommate3Label.setSelected(true);break;
-//            case 4: roommate1Label.setSelected(true);break;
-//            case 5: roommate1Label.setSelected(true);roommate3Label.setSelected(true);break;
-//            case 6: roommate1Label.setSelected(true);roommate2Label.setSelected(true);break;
-//            case 7: roommate1Label.setSelected(true);roommate2Label.setSelected(true);roommate3Label.setSelected(true);break;
-//        }
-//        amountText.setText(amount);
-//        descriptionText.setText(descr);
-//    }
     
     private Bill generateBill() {
 		Date newDate = this.getDate();
@@ -280,17 +274,17 @@ public class EditBillGUI extends javax.swing.JFrame {
          return names;
     }
     private String getDesc(){
-    	if(Description.getText().equals("Type description here")&&Description.getForeground()!=Color.black){
-    		Description.setText("");
+    	if(descriptionText.getText().equals("Type description here")&&descriptionText.getForeground()!=Color.black){
+    		descriptionText.setText("");
     		}
-    	return Description.getText();
+    	return descriptionText.getText();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField amountText;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JComboBox currencyComboBox;
+    private javax.swing.JComboBox descriptionComboBox;
     private javax.swing.JComboBox dayComboBox;
-    private javax.swing.JTextArea Description;
+    private javax.swing.JTextArea descriptionText;
     private javax.swing.JButton editBillButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox monthComboBox;
@@ -300,21 +294,21 @@ public class EditBillGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox yearComboBox;
     // End of variables declaration//GEN-END:variables
 	public void loading(Bill bill, int selectedRow) {
-		this.setBillIndex(selectedRow);
+		EditBillGUI.setBillIndex(selectedRow);
 		this.setDate(bill);
 		this.setAmount(bill);
 		this.setNames(bill);
 		this.setDesc(bill);
 	}
 	private void setDesc(Bill bill){
-		Description.setText(bill.getDesc());
+		descriptionText.setText(bill.getDesc());
 	}
 	private void setNames(Bill bill) {
 		NameList names = bill.getNames();
 		JCheckBox[] nameLabels = {roommate1Label,roommate2Label,roommate3Label};
 		int l = nameLabels.length;
 		for(int i = 0; i < l; i ++){
-			if(names.contains(nameLabels[i])){
+			if(names.contains(nameLabels[i].getText())){
 				nameLabels[i].setSelected(true);
 			}
 		}
