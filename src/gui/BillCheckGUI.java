@@ -18,12 +18,14 @@ import java.text.SimpleDateFormat;
  * @author Hang Xu
  */
 public class BillCheckGUI extends javax.swing.JFrame {
+	Bill[] allBills = ExistingBill.getExistingBills();
 
     /**
      * Creates new form BillCheckGUI
      */
   DefaultTableModel model;
     public BillCheckGUI() {
+       
         initComponents();
         DefaultTableCellRenderer render = new DefaultTableCellRenderer();
         render.setHorizontalAlignment(SwingConstants.LEADING);
@@ -33,11 +35,10 @@ public class BillCheckGUI extends javax.swing.JFrame {
        displayTable.getColumn("Description").setCellRenderer(render);
     }
    public void billLoading()
-    {   
+    {    
        String[][] rowData = new String[ExistingBill.getExistingBills().length][4];
        for(int i=0;i<ExistingBill.totalBillCount();i++)
        {
-           Bill[] allBills = ExistingBill.getExistingBills();
            //BillData record = billDataSet[i];
            rowData[i][0]=allBills[i].getDate().toString();
            rowData[i][1]=allBills[i].getNames().toString();
@@ -255,36 +256,43 @@ public class BillCheckGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-         if(displayTable.getSelectedRow()<0)
-         {
-             WrongPopup noSelected = new WrongPopup("Choose a bill first");
-             noSelected.setVisible(true);
-             return;
-         }
-          int[] a ;
-        a=displayTable.getSelectedRows();
-        if(a.length>1)
-        {
-            WrongPopup multidelete = new WrongPopup("One at a time,please");
-            multidelete.setVisible(true);
-            multidelete.setAlwaysOnTop(true);
-            
-            
-        }
-        else {
+        if(this.selectedRowCheck()){
         EditBillGUI editBillGUI = new EditBillGUI();
-        String editedTime = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 0));
-        String editedPeople = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 1));
-        String editedAmount = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 2));
-        String editedDescr = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 3));
-        Bill editedBill = new Bill(editedTime,editedPeople,editedAmount,editedDescr);
-        Object[] tmp = editedBill.getBillDataValue();
-        editBillGUI.setValue((int)tmp[0], (int)tmp[1], (int)tmp[2], (int)tmp[3], tmp[4].toString(), tmp[5].toString());
-        EditBillGUI.setIndex(displayTable.getSelectedRow());
+        editBillGUI.loading(this.getSelectedBill(),displayTable.getSelectedRow());
+//        String editedTime = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 0));
+//        String editedPeople = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 1));
+//        String editedAmount = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 2));
+//        String editedDescr = String.valueOf(model.getValueAt(displayTable.getSelectedRow(), 3));
+//        Bill editedBill = new Bill(editedTime,editedPeople,editedAmount,editedDescr);
+//        Object[] tmp = editedBill.getBillDataValue();
+//        editBillGUI.setValue((int)tmp[0], (int)tmp[1], (int)tmp[2], (int)tmp[3], tmp[4].toString(), tmp[5].toString());
+//        EditBillGUI.setIndex(displayTable.getSelectedRow());
         editBillGUI.setVisible(true);
         this.dispose();}
     }//GEN-LAST:event_editButtonActionPerformed
+    
+    private boolean selectedRowCheck(){
+        int[] selectedRows=displayTable.getSelectedRows(); 
+    	if(displayTable.getSelectedRow()<0){
+            WrongPopup nonSelected = new WrongPopup("Choose a bill first");
+            nonSelected.setVisible(true);
+            nonSelected.setAlwaysOnTop(true);
+            return false;
+        }
+       if(selectedRows.length>1){
+           WrongPopup multDeletes = new WrongPopup("One at a time,please");
+           multDeletes.setVisible(true);
+           multDeletes.setAlwaysOnTop(true);
+           return false;
+       }
+       return true;
+    }
 
+    private Bill getSelectedBill(){
+    	int selectedRowIndex = displayTable.getSelectedRow();
+    	return allBills[selectedRowIndex];
+    }
+    
     private void displayTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayTableMouseClicked
         
         

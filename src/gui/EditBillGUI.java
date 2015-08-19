@@ -4,32 +4,26 @@
  * and open the template in the editor.
  */
 package gui;
+import java.awt.Color;
+
 import javax.swing.*;
 
 import functionality.Bill;
+import functionality.Date;
 import functionality.ExistingBill;
+import functionality.NameList;
 /**
  *
  * @author Hang Xu
  */
 public class EditBillGUI extends javax.swing.JFrame {
-
+	static int selectedEditedIndex;
     /**
      * Creates new form EditBillGUI
      */
-   static int selectedEditedIndex;
     public EditBillGUI() {
-        initComponents();
-       
+        initComponents();       
     }
-static public void setIndex(int i)
-{
-    selectedEditedIndex =i;
-}
-static public int getIndex()
-{
-    return selectedEditedIndex;
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,7 +37,7 @@ static public int getIndex()
         cancelButton = new javax.swing.JButton();
         currencyComboBox = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        descriptionText = new javax.swing.JTextArea();
+        Description = new javax.swing.JTextArea();
         amountText = new javax.swing.JTextField();
         roommate2Label = new javax.swing.JCheckBox();
         roommate1Label = new javax.swing.JCheckBox();
@@ -76,10 +70,10 @@ static public int getIndex()
             }
         });
 
-        descriptionText.setColumns(20);
-        descriptionText.setRows(5);
-        descriptionText.setText("Description");
-        jScrollPane1.setViewportView(descriptionText);
+        Description.setColumns(20);
+        Description.setRows(5);
+        Description.setText("Description");
+        jScrollPane1.setViewportView(Description);
 
         amountText.setText("Amount");
 
@@ -164,15 +158,16 @@ static public int getIndex()
     }// </editor-fold>//GEN-END:initComponents
 
     private void editBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBillButtonActionPerformed
-         int peopleIndex=0;
-        if(roommate1Label.isSelected())
-            peopleIndex=peopleIndex+4;
-        if(roommate2Label.isSelected())
-            peopleIndex=peopleIndex+2;
-        if(roommate3Label.isSelected())
-            peopleIndex=peopleIndex+1;  
-        Bill editedBill = new Bill(monthComboBox.getSelectedIndex()+1,dayComboBox.getSelectedIndex()+1,yearComboBox.getSelectedIndex()+2000,peopleIndex,amountText.getText(),descriptionText.getText());
-        ExistingBill.editBill(editedBill, selectedEditedIndex);
+//         int peopleIndex=0;
+//        if(roommate1Label.isSelected())
+//            peopleIndex=peopleIndex+4;
+//        if(roommate2Label.isSelected())
+//            peopleIndex=peopleIndex+2;
+//        if(roommate3Label.isSelected())
+//            peopleIndex=peopleIndex+1;  
+//        Bill editedBill = new Bill(monthComboBox.getSelectedIndex()+1,dayComboBox.getSelectedIndex()+1,yearComboBox.getSelectedIndex()+2000,peopleIndex,amountText.getText(),descriptionText.getText()); 
+    	Bill  editedBill = this.generateBill();
+    	ExistingBill.editBill(editedBill, selectedEditedIndex);
         BillCheckGUI billGUI = new BillCheckGUI();
         billGUI.billLoading();
         billGUI.setVisible(true);
@@ -236,30 +231,66 @@ static public int getIndex()
         });
     }
 
-    public void setValue(int month, int day, int year, int index, String amount, String descr)
-    {
-        monthComboBox.setSelectedIndex(month-1);
-        dayComboBox.setSelectedIndex(day-1);
-        yearComboBox.setSelectedIndex(year-2000);
-        switch (index)
-        {
-            case 1: roommate3Label.setSelected(true);break;
-            case 2: roommate2Label.setSelected(true);break;
-            case 3: roommate2Label.setSelected(true);roommate3Label.setSelected(true);break;
-            case 4: roommate1Label.setSelected(true);break;
-            case 5: roommate1Label.setSelected(true);roommate3Label.setSelected(true);break;
-            case 6: roommate1Label.setSelected(true);roommate2Label.setSelected(true);break;
-            case 7: roommate1Label.setSelected(true);roommate2Label.setSelected(true);roommate3Label.setSelected(true);break;
-        }
-        amountText.setText(amount);
-        descriptionText.setText(descr);
+//    public void setValue(int month, int day, int year, int index, String amount, String descr)
+//    {
+//        monthComboBox.setSelectedIndex(month-1);
+//        dayComboBox.setSelectedIndex(day-1);
+//        yearComboBox.setSelectedIndex(year-2000);
+//        switch (index)
+//        {
+//            case 1: roommate3Label.setSelected(true);break;
+//            case 2: roommate2Label.setSelected(true);break;
+//            case 3: roommate2Label.setSelected(true);roommate3Label.setSelected(true);break;
+//            case 4: roommate1Label.setSelected(true);break;
+//            case 5: roommate1Label.setSelected(true);roommate3Label.setSelected(true);break;
+//            case 6: roommate1Label.setSelected(true);roommate2Label.setSelected(true);break;
+//            case 7: roommate1Label.setSelected(true);roommate2Label.setSelected(true);roommate3Label.setSelected(true);break;
+//        }
+//        amountText.setText(amount);
+//        descriptionText.setText(descr);
+//    }
+    
+    private Bill generateBill() {
+		Date newDate = this.getDate();
+		double newAmount = this.getAmount();
+		NameList newNames = this.getNames();
+		String newDesc = this.getDesc();
+		return new Bill(newDate, newAmount, newNames, newDesc);
+	}
+
+    private Date getDate(){
+    	int year = yearComboBox.getSelectedIndex() + 2000;
+    	int month = monthComboBox.getSelectedIndex() + 1;
+    	int day = dayComboBox.getSelectedIndex() + 1;
+    	return new Date(year, month, day);
+    }
+    private double getAmount(){
+    	String s = amountText.getText();
+    	double amount = Double.parseDouble(s);
+    	return amount;
+    }
+    private NameList getNames(){
+    	NameList names = new NameList();
+    	 if(roommate1Label.isSelected())
+             names.add(roommate1Label.getText());
+         if(roommate2Label.isSelected())
+        	 names.add(roommate2Label.getText());
+         if(roommate3Label.isSelected())
+        	 names.add(roommate3Label.getText());
+         return names;
+    }
+    private String getDesc(){
+    	if(Description.getText().equals("Type description here")&&Description.getForeground()!=Color.black){
+    		Description.setText("");
+    		}
+    	return Description.getText();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField amountText;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox currencyComboBox;
     private javax.swing.JComboBox dayComboBox;
-    private javax.swing.JTextArea descriptionText;
+    private javax.swing.JTextArea Description;
     private javax.swing.JButton editBillButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox monthComboBox;
@@ -268,4 +299,43 @@ static public int getIndex()
     private javax.swing.JCheckBox roommate3Label;
     private javax.swing.JComboBox yearComboBox;
     // End of variables declaration//GEN-END:variables
+	public void loading(Bill bill, int selectedRow) {
+		this.setBillIndex(selectedRow);
+		this.setDate(bill);
+		this.setAmount(bill);
+		this.setNames(bill);
+		this.setDesc(bill);
+	}
+	private void setDesc(Bill bill){
+		Description.setText(bill.getDesc());
+	}
+	private void setNames(Bill bill) {
+		NameList names = bill.getNames();
+		JCheckBox[] nameLabels = {roommate1Label,roommate2Label,roommate3Label};
+		int l = nameLabels.length;
+		for(int i = 0; i < l; i ++){
+			if(names.contains(nameLabels[i])){
+				nameLabels[i].setSelected(true);
+			}
+		}
+	
+		
+		
+	}
+	private void setAmount(Bill bill) {
+		this.amountText.setText(Double.toString(bill.getAmount()));	
+	}
+	private void setDate(Bill bill) {
+		this.dayComboBox.setSelectedIndex(bill.getDate().day - 1);
+		this.monthComboBox.setSelectedIndex(bill.getDate().month -1);
+		this.yearComboBox.setSelectedIndex(bill.getDate().year - 2000);
+	}
+	static private void setBillIndex(int i)
+	{
+	    selectedEditedIndex =i;
+	}
+	static public int getIndex()
+	{
+	    return selectedEditedIndex;
+	}
 }

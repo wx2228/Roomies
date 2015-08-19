@@ -7,11 +7,14 @@ public class NameList extends ArrayList<String> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	ArrayList<String> nameArray;
 	
 	public String toString(){
-		String s = nameArray.toString();
-		s = s.substring(1, nameArray.size() - 2);
+		int size = this.size();
+		String s = "";
+		for (int i = 0; i < size -1; i ++){
+			s = s + this.get(i)+",";
+		}
+		s = s + this.get(size - 1);
 		return s;
 	}
 
