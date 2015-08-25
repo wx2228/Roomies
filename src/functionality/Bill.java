@@ -5,6 +5,8 @@
  */
 package functionality;
 
+import java.util.UUID;
+
 /**
  *
  * @author Hang Xu
@@ -14,6 +16,8 @@ public class Bill {
 	private double amout;
 	private NameList names;
 	private String desc;
+	private UUID billID;
+	private UUID propertyID;
 
     public Bill(Date date, double amount, NameList names, String desc) {
         this.date = date;

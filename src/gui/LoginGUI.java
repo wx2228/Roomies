@@ -10,6 +10,7 @@ import java.awt.event.*;
 
 import database.UserDatabase;
 import functionality.CurrentUser;
+import functionality.UserAuthenticator;
 
 /**
  *
@@ -43,13 +44,16 @@ public class LoginGUI extends javax.swing.JFrame {
         passWordText = new javax.swing.JPasswordField();
         inButton = new javax.swing.JButton();
         outButton = new javax.swing.JButton();
+        register = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         userNameText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         userNameText.setForeground(new java.awt.Color(204, 204, 255));
         userNameText.setText("Username");
+        userNameText.setAutoscrolls(false);
         userNameText.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 userNameTextFocusGained(evt);
@@ -85,6 +89,7 @@ public class LoginGUI extends javax.swing.JFrame {
         passWordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 24)); // NOI18N
         passWordText.setForeground(new java.awt.Color(204, 204, 255));
         passWordText.setText("Password");
+        passWordText.setAutoscrolls(false);
         passWordText.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passWordTextFocusGained(evt);
@@ -115,32 +120,52 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
+        register.setText("Register");
+        register.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registerMouseClicked(evt);
+            }
+        });
+        register.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(passWordText)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(userNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(logoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(inButton, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(outButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(inButton, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(outButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(userNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passWordText, javax.swing.GroupLayout.PREFERRED_SIZE, 875, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                    .addComponent(userNameText))
+                    .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(passWordText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inButton, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                    .addComponent(outButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(inButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(outButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
@@ -150,7 +175,8 @@ public class LoginGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     	String inputusn = userNameText.getText().toLowerCase();
     	String inputpwd = passWordText.getText();
-        if(UserDatabase.userAuthentication(inputusn, inputpwd)) // if successfully log in, remove the login GUI, show the main GUI.
+    	UserAuthenticator uA = new UserAuthenticator(inputusn, inputpwd);
+        if(uA.authenticate()) // if successfully log in, remove the login GUI, show the main GUI.
         {
             MainGUI mainGUI = new MainGUI();     
             mainGUI.setVisible(true);
@@ -193,8 +219,11 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void userNameTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userNameTextMouseClicked
         // TODO add your handling code here:
+        if(!userNameText.getBackground().equals(Color.black)){
              userNameText.setText(null);
              userNameText.setForeground(Color.black);
+        }
+             
              
     }//GEN-LAST:event_userNameTextMouseClicked
 // dealing with shortcut: press enter instead of clicking "in" button.
@@ -204,7 +233,8 @@ public class LoginGUI extends javax.swing.JFrame {
         {
         	String inputusn = userNameText.getText().toLowerCase();
         	String inputpwd = passWordText.getText();
-            if(UserDatabase.userAuthentication(inputusn, inputpwd)) // if successfully log in, remove the login GUI, show the main GUI.
+        	UserAuthenticator uA = new UserAuthenticator(inputusn, inputpwd);
+            if(uA.authenticate()) // if successfully log in, remove the login GUI, show the main GUI.
             {
                 MainGUI mainGUI = new MainGUI();     
                 mainGUI.setVisible(true);
@@ -226,12 +256,25 @@ public class LoginGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_userNameTextKeyPressed
 
+    private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        RegisterChoiceGUI registerChoiceGUI = new RegisterChoiceGUI();
+        registerChoiceGUI.setVisible(true);
+    }//GEN-LAST:event_registerActionPerformed
+
+    private void registerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerMouseClicked
+        // TODO add your handling code here:
+        System.out.println("aaaa");
+    }//GEN-LAST:event_registerMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton inButton;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JButton outButton;
     private javax.swing.JPasswordField passWordText;
+    private javax.swing.JButton register;
     private javax.swing.JTextField userNameText;
     // End of variables declaration//GEN-END:variables
 }

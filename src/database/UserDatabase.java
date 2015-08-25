@@ -1,5 +1,9 @@
 package database;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Hashtable;
 
 import functionality.CurrentUser;
@@ -29,19 +33,8 @@ public class UserDatabase {
 	public static boolean userExist(String username){
 		return user.containsKey(username);
 	}
-	//authenticate a user, if success, set the current UUID for future use.
-	public static boolean userAuthentication (String username, String password){
-		if(UserDatabase.userExist(username)){
-			if( user.get(username).getPassword().equals(password)){
-				CurrentUser.setID(user.get(username).getUUID());
-				return true;
-			}
-			else
-				return false;
-		}
-		else
-			return false;	
-	}
+
+
 	
 
 }

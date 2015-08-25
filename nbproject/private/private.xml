@@ -3,21 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
+            <file>file:/E:/workspace/Roomies/src/gui/LoginGUI.java</file>
+            <file>file:/E:/workspace/Roomies/src/gui/RegisterNewUserGUI.java</file>
             <file>file:/E:/workspace/Roomies/src/gui/LeaseGUI.java</file>
-=======
-            <file>file:/E:/Roomies/src/roomies/GUI/Wrong.java</file>
-            <file>file:/E:/Roomies/src/roomies/GUI/LoginGUI.java</file>
-            <file>file:/E:/Roomies/src/roomies/GUI/EditBillGUI.java</file>
-            <file>file:/E:/Roomies/src/roomies/GUI/BillCheckGUI.java</file>
-            <file>file:/E:/Roomies/src/roomies/GUI/MainGUI.java</file>
-            <file>file:/E:/Roomies/src/roomies/GUI/MessageOnFirdgeGUI.java</file>
-            <file>file:/E:/Roomies/src/roomies/data/MOF.java</file>
-            <file>file:/E:/Roomies/src/roomies/Simulation/LoginCheck.java</file>
-            <file>file:/E:/Roomies/src/roomies/GUI/ContactInfoGUI.java</file>
-            <file>file:/E:/Roomies/src/roomies/GUI/AddBillGUI.java</file>
-            <file>file:/E:/Roomies/src/roomies/data/ID.java</file>
->>>>>>> 11dc9a0bf24771eb3262863b9a8e313e8156b69b
+            <file>file:/E:/workspace/Roomies/src/functionality/NewUserRegister.java</file>
+            <file>file:/E:/workspace/Roomies/src/gui/RegisterChoiceGUI.java</file>
         </group>
     </open-files>
 </project-private>
