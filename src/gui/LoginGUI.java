@@ -57,27 +57,8 @@ public class LoginGUI extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 userNameTextFocusGained(evt);
             }
-        });
-        userNameText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                userNameTextMouseClicked(evt);
-            }
-        });
-        userNameText.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                userNameTextInputMethodTextChanged(evt);
-            }
-        });
-        userNameText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameTextActionPerformed(evt);
-            }
-        });
-        userNameText.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                userNameTextKeyPressed(evt);
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                userNameTextFocusLost(evt);
             }
         });
 
@@ -85,18 +66,17 @@ public class LoginGUI extends javax.swing.JFrame {
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logoLabel.setText("Roomies");
 
-        passWordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 24)); // NOI18N
+        passWordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         passWordText.setForeground(new java.awt.Color(204, 204, 255));
+        passWordText.setEchoChar((char) 0); 
         passWordText.setText("Password");
         passWordText.setAutoscrolls(false);
         passWordText.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passWordTextFocusGained(evt);
             }
-        });
-        passWordText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passWordTextActionPerformed(evt);
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passWordTextFocusLost(evt);
             }
         });
         passWordText.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -193,42 +173,25 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_outButtonActionPerformed
 
     private void userNameTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTextFocusGained
-        // TODO add your handling code here:
-       // userNameText.setText(null);
+          if (userNameText.getForeground()!=Color.black)
+        {
+            userNameText.setText(null);
+            userNameText.setForeground(Color.black);
+        }
     }//GEN-LAST:event_userNameTextFocusGained
-
-    private void passWordTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passWordTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passWordTextActionPerformed
 
     private void passWordTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passWordTextFocusGained
         // TODO add your handling code here:
+    	passWordText.setEchoChar('*');
         passWordText.setText(null);
          passWordText.setForeground(new java.awt.Color(0,0,0));
     }//GEN-LAST:event_passWordTextFocusGained
-
-    private void userNameTextInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_userNameTextInputMethodTextChanged
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_userNameTextInputMethodTextChanged
-
-    private void userNameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextActionPerformed
-        // TODO add your handling code here:
-   
-    }//GEN-LAST:event_userNameTextActionPerformed
-
-    private void userNameTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userNameTextMouseClicked
-        // TODO add your handling code here:
-        if(!userNameText.getBackground().equals(Color.black)){
-             userNameText.setText(null);
-             userNameText.setForeground(Color.black);
-        }
-             
-             
-    }//GEN-LAST:event_userNameTextMouseClicked
 // dealing with shortcut: press enter instead of clicking "in" button.
     private void passWordTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passWordTextKeyPressed
         int key = evt.getKeyCode(); 
+        if(Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK))
+    	logoLabel.setForeground(Color.red);
+    else logoLabel.setForeground(Color.black);
         if (key == KeyEvent.VK_ENTER)
         {
         	String inputusn = userNameText.getText().toLowerCase();
@@ -248,15 +211,6 @@ public class LoginGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_passWordTextKeyPressed
 
-    private void userNameTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userNameTextKeyPressed
-        // TODO add your handling code here:
-        if (userNameText.getForeground()!=Color.black)
-        {
-            userNameText.setText(null);
-            userNameText.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_userNameTextKeyPressed
-
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -266,8 +220,24 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void registerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerMouseClicked
         // TODO add your handling code here:
-        System.out.println("aaaa");
     }//GEN-LAST:event_registerMouseClicked
+
+    private void userNameTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTextFocusLost
+    	  if(userNameText.getText().equals("")){
+              userNameText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); 
+              userNameText.setForeground(new java.awt.Color(204, 204, 255));
+              userNameText.setText("Username");
+          }
+    }//GEN-LAST:event_userNameTextFocusLost
+
+    private void passWordTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passWordTextFocusLost
+    	 if(String.valueOf(passWordText.getPassword()).equals("")){
+             passWordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); 
+             passWordText.setForeground(new java.awt.Color(204, 204, 255));
+             passWordText.setEchoChar((char) 0);
+             passWordText.setText("Password");
+         }
+    }//GEN-LAST:event_passWordTextFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

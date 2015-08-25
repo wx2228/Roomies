@@ -9,8 +9,6 @@ import java.sql.*;
 public class NewUserRegister {
 	User newUser;
 	
-	
-	
 	public void register(User u){
 		String url = "jdbc:mysql://localhost:3306/"; 
 		String dbName = "roomies_user";
@@ -27,20 +25,16 @@ public class NewUserRegister {
 			Statement st = conn.createStatement();
 			int val = st.executeUpdate("INSERT INTO roomies_user.user (`username`, `password`,`userID`) VALUES ('"+registerUsername+"', '"+registerPassword+"','"+registerUserID+"');");
 			if(val == 1){
-                            
-                            NewUserRegisterSucceed n = new NewUserRegisterSucceed();
-                            n.setVisible(true);
-                            
-                        
-                        }
+				NewUserRegisterSucceed n = new NewUserRegisterSucceed();
+                n.setVisible(true);
+                }
 				
 			ResultSet res = st.executeQuery("SELECT * FROM roomies_user.user"); 
 			while (res.next()) {
 				String id = res.getString("userID"); 
 				String usn = res.getString("username"); 
 				String pwd = res.getString("password");
-				System.out.println(id + "\t" + usn+"\t"+pwd); 
-				
+				System.out.println(id + "\t" + usn+"\t"+pwd);
 				}
 			conn.close();
 			} 

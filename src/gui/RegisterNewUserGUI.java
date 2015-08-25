@@ -6,6 +6,7 @@
 package gui;
 
 import functionality.NewUserRegister;
+import functionality.UserAuthenticator;
 
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -76,7 +77,8 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
 
         passwordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         passwordText.setForeground(new java.awt.Color(204, 204, 255));
-        passwordText.setText("dddddddd");
+        passwordText.setText("Password");
+        passwordText.setEchoChar((char) 0);
         passwordText.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passwordTextFocusGained(evt);
@@ -103,7 +105,8 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
 
         confirmPasswordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         confirmPasswordText.setForeground(new java.awt.Color(204, 204, 255));
-        confirmPasswordText.setText("Password");
+        confirmPasswordText.setText("Confirm password");
+        confirmPasswordText.setEchoChar((char) 0);
         confirmPasswordText.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 confirmPasswordTextFocusGained(evt);
@@ -218,6 +221,7 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
     private void passwordTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordTextFocusGained
         // TODO add your handling code here:
         if(!passwordText.getForeground().equals(Color.black)){
+        	passwordText.setEchoChar('*');
         	passwordText.setText(null);
         	passwordText.setForeground(Color.black);
         }
@@ -236,6 +240,7 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
     private void confirmPasswordTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_confirmPasswordTextFocusGained
         // TODO add your handling code here:
     	if(!confirmPasswordText.getForeground().equals(Color.black)){
+    		confirmPasswordText.setEchoChar('*');
     	     confirmPasswordText.setText(null);
     	     confirmPasswordText.setForeground(Color.black);
         }
@@ -244,7 +249,8 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
     private void confirmPasswordTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmPasswordTextActionPerformed
         // TODO add your handling code here:
         if(!confirmPasswordText.getForeground().equals(Color.black)){
-             confirmPasswordText.setText(null);
+        	confirmPasswordText.setEchoChar('*');
+            confirmPasswordText.setText(null);
              confirmPasswordText.setForeground(Color.black);
         }
     }//GEN-LAST:event_confirmPasswordTextActionPerformed
@@ -258,17 +264,54 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
 
     private void RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterActionPerformed
         // TODO add your handling code here:
+    	if(this.usernameInputIsEmpty()){
+    		this.userNameText.setForeground(new java.awt.Color(204, 204, 255));
+        	this.userNameText.setText("Username");
+        	WrongPopup differentInput = new WrongPopup("empty username");
+         	differentInput.setVisible(true);
+         	return;
+    	}
+    	if(this.userAlreadyExists()){
+    		this.userNameText.setForeground(new java.awt.Color(204, 204, 255));
+        	this.userNameText.setText("Username");
+        	WrongPopup differentInput = new WrongPopup("username already taken");
+         	differentInput.setVisible(true);
+         	return;
+    	}
+    	if(this.passwordDoesNotMatch()){
+    		this.passwordText.setEchoChar((char) 0);
+         	this.confirmPasswordText.setEchoChar((char) 0);
+         	 passwordText.setForeground(new java.awt.Color(204, 204, 255));
+         	 confirmPasswordText.setForeground(new java.awt.Color(204, 204, 255));
+         	this.passwordText.setText("Password");
+         	this.confirmPasswordText.setText("Confirm password");
+         	WrongPopup differentInput = new WrongPopup("you typed different passwords");
+         	differentInput.setVisible(true);
+    		return;
+    	}
         NewUserRegister n = new NewUserRegister();
-        User newUser = new User(userNameText.getText().toLowerCase(), String.valueOf(passwordText.getPassword()));
+    	User newUser = new User(userNameText.getText().toLowerCase(), String.valueOf(passwordText.getPassword()));
         n.register(newUser);
         this.dispose();
-        
-
     }//GEN-LAST:event_RegisterActionPerformed
 
-    private void confirmPasswordTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmPasswordTextMouseClicked
+    private boolean usernameInputIsEmpty() {
+    	return  !this.userNameText.getForeground().equals(Color.black) ||this.userNameText.getText().trim().isEmpty();
+	}
+
+	private boolean userAlreadyExists() {
+		UserAuthenticator userExistsCheck  = new UserAuthenticator(this.userNameText.getText(), null);
+		return userExistsCheck.authenticate();
+	}
+
+	private boolean passwordDoesNotMatch() {
+		return !String.valueOf(this.passwordText.getPassword()).equals(String.valueOf(this.confirmPasswordText.getPassword()));
+	}
+
+	private void confirmPasswordTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmPasswordTextMouseClicked
         // TODO add your handling code here:
         if(!confirmPasswordText.getForeground().equals(Color.black)){
+        	confirmPasswordText.setEchoChar('*');
     		confirmPasswordText.setText(null);
     		confirmPasswordText.setForeground(Color.black);
         }
@@ -277,6 +320,7 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
     private void passwordTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordTextMouseClicked
         // TODO add your handling code here:
         if(!passwordText.getForeground().equals(Color.black)){
+        	passwordText.setEchoChar('*');
         	passwordText.setText(null);
         	passwordText.setForeground(Color.black);
         }
@@ -296,7 +340,8 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
         if(String.valueOf(confirmPasswordText.getPassword()).equals("")){
             confirmPasswordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); 
             confirmPasswordText.setForeground(new java.awt.Color(204, 204, 255));
-            confirmPasswordText.setText("Username");
+            confirmPasswordText.setEchoChar((char) 0);
+            confirmPasswordText.setText("Confirm password");
         }
     }//GEN-LAST:event_confirmPasswordTextFocusLost
 
@@ -305,7 +350,8 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
         if(String.valueOf(passwordText.getPassword()).equals("")){
             passwordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); 
             passwordText.setForeground(new java.awt.Color(204, 204, 255));
-            passwordText.setText("Username");
+            passwordText.setEchoChar((char) 0);
+            passwordText.setText("Password");
         }
     }//GEN-LAST:event_passwordTextFocusLost
 

@@ -25,7 +25,13 @@ public class UserAuthenticator {
 			Class.forName(driver).newInstance(); 
 			Connection conn = DriverManager.getConnection(url+dbName,databaseUSN,databasePWD); 
 			Statement st = conn.createStatement();  
-			ResultSet check = st.executeQuery("SELECT * FROM roomies_user.user WHERE username = '"+usernameInput+"' AND password = '"+ passwordInput+"'"); 
+			ResultSet check;
+			if(this.passwordInput ==null){
+				 check = st.executeQuery("SELECT * FROM roomies_user.user WHERE username = '"+usernameInput+"'"); 
+			}
+			else{
+				 check = st.executeQuery("SELECT * FROM roomies_user.user WHERE username = '"+usernameInput+"' AND password = '"+ passwordInput+"'"); 
+			}
 			
 			if(check.absolute(1)){
 				conn.close();
