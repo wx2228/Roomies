@@ -261,6 +261,7 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
         NewUserRegister n = new NewUserRegister();
         User newUser = new User(userNameText.getText().toLowerCase(), String.valueOf(passwordText.getPassword()));
         n.register(newUser);
+        this.dispose();
         
 
     }//GEN-LAST:event_RegisterActionPerformed

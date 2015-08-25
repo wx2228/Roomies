@@ -1,6 +1,8 @@
 package functionality;
 
 import database.User;
+import gui.NewUserRegisterSucceed;
+import gui.WrongPopup;
 
 import java.sql.*;
 
@@ -24,8 +26,14 @@ public class NewUserRegister {
 			Connection conn = DriverManager.getConnection(url+dbName,userName,password); 
 			Statement st = conn.createStatement();
 			int val = st.executeUpdate("INSERT INTO roomies_user.user (`username`, `password`,`userID`) VALUES ('"+registerUsername+"', '"+registerPassword+"','"+registerUserID+"');");
-			if(val == 1)
-				System.out.println("insert success");
+			if(val == 1){
+                            
+                            NewUserRegisterSucceed n = new NewUserRegisterSucceed();
+                            n.setVisible(true);
+                            
+                        
+                        }
+				
 			ResultSet res = st.executeQuery("SELECT * FROM roomies_user.user"); 
 			while (res.next()) {
 				String id = res.getString("userID"); 
