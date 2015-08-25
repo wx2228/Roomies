@@ -37,7 +37,7 @@ public class EditBillGUI extends javax.swing.JFrame {
         editBillButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         descriptionComboBox = new javax.swing.JComboBox();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        descriptionScrollPane = new javax.swing.JScrollPane();
         descriptionText = new javax.swing.JTextArea();
         amountText = new javax.swing.JTextField();
         roommate2Label = new javax.swing.JCheckBox();
@@ -64,7 +64,7 @@ public class EditBillGUI extends javax.swing.JFrame {
             }
         });
 
-        descriptionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"Other", "Cable", "Electricity", "Food ", "Gas", "Internet", "Rent", "Water" }));
+        descriptionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         descriptionComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 descriptionComboBoxActionPerformed(evt);
@@ -74,7 +74,7 @@ public class EditBillGUI extends javax.swing.JFrame {
         descriptionText.setColumns(20);
         descriptionText.setRows(5);
         descriptionText.setText("Description");
-        jScrollPane1.setViewportView(descriptionText);
+        descriptionScrollPane.setViewportView(descriptionText);
 
         amountText.setText("Amount");
 
@@ -124,7 +124,7 @@ public class EditBillGUI extends javax.swing.JFrame {
                                 .addGap(8, 8, 8))
                             .addComponent(descriptionComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(yearComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane1))
+                    .addComponent(descriptionScrollPane))
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(editBillButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -152,10 +152,11 @@ public class EditBillGUI extends javax.swing.JFrame {
                     .addComponent(amountText)
                     .addComponent(descriptionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
+                .addComponent(descriptionScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void editBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBillButtonActionPerformed
@@ -282,11 +283,11 @@ public class EditBillGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField amountText;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JComboBox descriptionComboBox;
     private javax.swing.JComboBox dayComboBox;
+    private javax.swing.JComboBox descriptionComboBox;
+    private javax.swing.JScrollPane descriptionScrollPane;
     private javax.swing.JTextArea descriptionText;
     private javax.swing.JButton editBillButton;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox monthComboBox;
     private javax.swing.JCheckBox roommate1Label;
     private javax.swing.JCheckBox roommate2Label;

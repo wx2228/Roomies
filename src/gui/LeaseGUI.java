@@ -56,7 +56,7 @@ public class LeaseGUI extends javax.swing.JFrame {
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Lease");
 
-        editButton.setText("Edit");
+        editButton.setText("edit");
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -80,7 +80,7 @@ public class LeaseGUI extends javax.swing.JFrame {
         deleteButton.setText("Delete");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
+            	try {
 					deleteButtonActionPerformed(evt);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -122,6 +122,7 @@ public class LeaseGUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_editButtonActionPerformed

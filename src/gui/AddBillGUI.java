@@ -119,7 +119,7 @@ public class AddBillGUI extends javax.swing.JFrame {
         descriptionText.setText("Type description here");
         descriptionText.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                DescriptionTextFocusGained(evt);
+                descriptionTextFocusGained(evt);
             }
         });
         jScrollPane1.setViewportView(descriptionText);
@@ -179,6 +179,7 @@ public class AddBillGUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void roommate2LabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roommate2LabelActionPerformed
@@ -305,7 +306,7 @@ public class AddBillGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_amountTextFocusGained
 
-    private void DescriptionTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DescriptionTextFocusGained
+    private void descriptionTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_descriptionTextFocusGained
         // TODO add your handling code here:
          if(descriptionText.getText().equals("Type description here"))
         {
@@ -313,7 +314,7 @@ public class AddBillGUI extends javax.swing.JFrame {
             descriptionText.setFont(new Font("Tahoma",Font.ITALIC,24));
             descriptionText.setForeground(Color.black);
         }
-    }//GEN-LAST:event_DescriptionTextFocusGained
+    }//GEN-LAST:event_descriptionTextFocusGained
 
     /**
      * @param args the command line arguments
@@ -353,12 +354,12 @@ public class AddBillGUI extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea descriptionText;
     private javax.swing.JButton addBillButton;
     private javax.swing.JTextField amountText;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox dayComboBox;
     private javax.swing.JComboBox descriptionComboBox;
+    private javax.swing.JTextArea descriptionText;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox monthComboBox;
     private javax.swing.JCheckBox roommate1Label;
