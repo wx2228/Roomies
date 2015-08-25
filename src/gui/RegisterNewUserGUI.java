@@ -45,7 +45,6 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
-        setUndecorated(true);
         setResizable(false);
 
         userNameText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
@@ -130,7 +129,6 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
         });
 
         Register.setText("Register");
-        Register.setBorder(null);
         Register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegisterActionPerformed(evt);
@@ -138,7 +136,11 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
         });
 
         cancel.setText("cancel");
-        cancel.setBorder(null);
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
 
         logoLabel.setFont(new java.awt.Font("Trebuchet MS", 0, 48)); // NOI18N
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -256,7 +258,7 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
     private void RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterActionPerformed
         // TODO add your handling code here:
         NewUserRegister n = new NewUserRegister();
-        User newUser = new User(userNameText.getText().toLowerCase(), passwordText.getText());
+        User newUser = new User(userNameText.getText().toLowerCase(), String.valueOf(passwordText.getPassword()));
         n.register(newUser);
         
 
@@ -289,7 +291,7 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
 
     private void confirmPasswordTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_confirmPasswordTextFocusLost
         // TODO add your handling code here:
-        if(confirmPasswordText.getText().equals("")){
+        if(String.valueOf(confirmPasswordText.getPassword()).equals("")){
             confirmPasswordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); 
             confirmPasswordText.setForeground(new java.awt.Color(204, 204, 255));
             confirmPasswordText.setText("Username");
@@ -298,12 +300,19 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
 
     private void passwordTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordTextFocusLost
         // TODO add your handling code here:        
-        if(passwordText.getText().equals("")){
+        if(String.valueOf(passwordText.getPassword()).equals("")){
             passwordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); 
             passwordText.setForeground(new java.awt.Color(204, 204, 255));
             passwordText.setText("Username");
         }
     }//GEN-LAST:event_passwordTextFocusLost
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        // TODO add your handling code here:
+         RegisterChoiceGUI r = new RegisterChoiceGUI();
+         this.dispose();
+         r.setVisible(true);
+    }//GEN-LAST:event_cancelActionPerformed
 
     /**
      * @param args the command line arguments

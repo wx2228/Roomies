@@ -47,7 +47,6 @@ public class LoginGUI extends javax.swing.JFrame {
         register = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         setResizable(false);
 
         userNameText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
@@ -174,7 +173,7 @@ public class LoginGUI extends javax.swing.JFrame {
     private void inButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inButtonActionPerformed
         // TODO add your handling code here:
     	String inputusn = userNameText.getText().toLowerCase();
-    	String inputpwd = passWordText.getText();
+    	String inputpwd = String.valueOf(passWordText.getPassword());
     	UserAuthenticator uA = new UserAuthenticator(inputusn, inputpwd);
         if(uA.authenticate()) // if successfully log in, remove the login GUI, show the main GUI.
         {
@@ -232,7 +231,8 @@ public class LoginGUI extends javax.swing.JFrame {
         if (key == KeyEvent.VK_ENTER)
         {
         	String inputusn = userNameText.getText().toLowerCase();
-        	String inputpwd = passWordText.getText();
+        	String inputpwd = passWordText.getPassword().toString(); 
+        	
         	UserAuthenticator uA = new UserAuthenticator(inputusn, inputpwd);
             if(uA.authenticate()) // if successfully log in, remove the login GUI, show the main GUI.
             {
