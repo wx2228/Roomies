@@ -8,7 +8,7 @@ You can leave a message in it, other users in your property can see your message
 * Info Center
 You can find your roommates' and landlord contact information, your lease, your roommates' agreement.
 
-This is my first java project, I will continue working on this, as learning new tech at the same time. 
+I will continue working on this, as learning new tech at the same time. 
 
 ##To Do List
 
