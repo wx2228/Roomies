@@ -15,17 +15,17 @@ import functionality.PropertySearcher;
  *
  * @author Hang Xu
  */
-public class NewProperty extends javax.swing.JFrame {
+public class NewPropertyGUI extends javax.swing.JFrame {
 	static int MODE = 0; // when mode is 0, it means the GUI is in searching mode, when 1, means adding mode.
 
     /**
      * Creates new form NewProperty
      */
-    public NewProperty() {
+    public NewPropertyGUI() {
         initComponents();
     }
     
-    public NewProperty(Property p){
+    public NewPropertyGUI(Property p){
     	initComponents();
     	this.streetLine1.setText(p.propertyAddress.streetLine1);
     	this.streetLine2.setText(p.propertyAddress.streetLine2);
@@ -85,30 +85,93 @@ public class NewProperty extends javax.swing.JFrame {
         streetLine1.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         streetLine1.setForeground(new java.awt.Color(204, 204, 255));
         streetLine1.setText("Street Line 1");
+        streetLine1.setAutoscrolls(false);
+        streetLine1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                streetLine1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                streetLine1FocusLost(evt);
+            }
+        });
 
         streetLine2.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         streetLine2.setForeground(new java.awt.Color(204, 204, 255));
         streetLine2.setText("Street Line 2");
+        streetLine2.setAutoscrolls(false);
+        streetLine2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                streetLine2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                streetLine2FocusLost(evt);
+            }
+        });
 
         aptNumber.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         aptNumber.setForeground(new java.awt.Color(204, 204, 255));
         aptNumber.setText("Apt Number");
+        aptNumber.setAutoscrolls(false);
+        aptNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                aptNumberFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                aptNumberFocusLost(evt);
+            }
+        });
 
         city.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         city.setForeground(new java.awt.Color(204, 204, 255));
         city.setText("City");
+        city.setAutoscrolls(false);
+        city.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cityFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cityFocusLost(evt);
+            }
+        });
 
         state.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         state.setForeground(new java.awt.Color(204, 204, 255));
         state.setText("State");
+        state.setAutoscrolls(false);
+        state.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                stateFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                stateFocusLost(evt);
+            }
+        });
 
         country.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         country.setForeground(new java.awt.Color(204, 204, 255));
         country.setText("Country");
+        country.setAutoscrolls(false);
+        country.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                countryFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                countryFocusLost(evt);
+            }
+        });
 
         zipcode.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         zipcode.setForeground(new java.awt.Color(204, 204, 255));
         zipcode.setText("Zipcode");
+        zipcode.setAutoscrolls(false);
+        zipcode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                zipcodeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                zipcodeFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,6 +258,105 @@ public class NewProperty extends javax.swing.JFrame {
           }
     }//GEN-LAST:event_searchAndAddMouseClicked
 
+    private void streetLine1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_streetLine1FocusGained
+        if(!streetLine1.getForeground().equals(Color.black)){
+        	streetLine1.setForeground(Color.black);
+        	streetLine1.setText(null);
+        }
+        
+    }//GEN-LAST:event_streetLine1FocusGained
+
+    private void streetLine2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_streetLine2FocusGained
+    	if(!streetLine2.getForeground().equals(Color.black)){
+        	streetLine2.setForeground(Color.black);
+        	streetLine2.setText(null);
+        }
+    }//GEN-LAST:event_streetLine2FocusGained
+
+    private void aptNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_aptNumberFocusGained
+    	if(!aptNumber.getForeground().equals(Color.black)){
+    		aptNumber.setForeground(Color.black);
+    		aptNumber.setText(null);
+        }
+    }//GEN-LAST:event_aptNumberFocusGained
+
+    private void cityFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cityFocusGained
+    	if(!city.getForeground().equals(Color.black)){
+    		city.setForeground(Color.black);
+    		city.setText(null);
+        }
+    }//GEN-LAST:event_cityFocusGained
+
+    private void streetLine1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_streetLine1FocusLost
+        if(streetLine1.getText().trim().equals("")){
+        	streetLine1.setText("Street Line 1");
+        	 streetLine1.setForeground(new java.awt.Color(204, 204, 255));
+        }
+    }//GEN-LAST:event_streetLine1FocusLost
+
+    private void streetLine2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_streetLine2FocusLost
+        if(streetLine2.getText().trim().equals("")){
+        	streetLine2.setText("Street Line 2");
+        	 streetLine2.setForeground(new java.awt.Color(204, 204, 255));
+        }
+    }//GEN-LAST:event_streetLine2FocusLost
+
+    private void aptNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_aptNumberFocusLost
+        if(aptNumber.getText().trim().equals("")){
+        	aptNumber.setText("Apt Number");
+        	 aptNumber.setForeground(new java.awt.Color(204, 204, 255));
+        }
+    }//GEN-LAST:event_aptNumberFocusLost
+
+    private void cityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cityFocusLost
+        if(city.getText().trim().equals("")){
+        	city.setText("City");
+        	 city.setForeground(new java.awt.Color(204, 204, 255));
+        }
+    }//GEN-LAST:event_cityFocusLost
+
+    private void stateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stateFocusGained
+    	if(!state.getForeground().equals(Color.black)){
+    		state.setForeground(Color.black);
+    		state.setText(null);
+        }
+    }//GEN-LAST:event_stateFocusGained
+
+    private void stateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stateFocusLost
+        if(state.getText().trim().equals("")){
+        	state.setText("State");
+        	 state.setForeground(new java.awt.Color(204, 204, 255));
+        }
+    }//GEN-LAST:event_stateFocusLost
+
+    private void countryFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_countryFocusGained
+    	if(!country.getForeground().equals(Color.black)){
+    		country.setForeground(Color.black);
+    		country.setText(null);
+        }
+    }//GEN-LAST:event_countryFocusGained
+
+    private void countryFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_countryFocusLost
+        if(country.getText().trim().equals("")){
+        	country.setText("Country");
+        	 country.setForeground(new java.awt.Color(204, 204, 255));
+        }
+    }//GEN-LAST:event_countryFocusLost
+
+    private void zipcodeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_zipcodeFocusGained
+    	if(!zipcode.getForeground().equals(Color.black)){
+    		zipcode.setForeground(Color.black);
+    		zipcode.setText(null);
+        }
+    }//GEN-LAST:event_zipcodeFocusGained
+
+    private void zipcodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_zipcodeFocusLost
+        if(zipcode.getText().trim().equals("")){
+        	zipcode.setText("Zipcode");
+        	 zipcode.setForeground(new java.awt.Color(204, 204, 255));
+        }
+    }//GEN-LAST:event_zipcodeFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -212,20 +374,21 @@ public class NewProperty extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewProperty.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewPropertyGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewProperty.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewPropertyGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewProperty.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewPropertyGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewProperty.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewPropertyGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewProperty().setVisible(true);
+                new NewPropertyGUI().setVisible(true);
             }
         });
     }

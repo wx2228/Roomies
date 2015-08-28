@@ -39,7 +39,7 @@ Property newProperty;
 			int val = st.executeUpdate("INSERT INTO roomies_property.property "+
                                                     " (`PropertyID`,`Street Line 1`,`Street Line 2`,`Apt Number`,`City`,`State`,`Country`,`Zipcode`)  "+
 					                                "  VALUES    "+
-                                                     "('1111','"+streetLine1+"','"+streetLine2+"','"+aptNumber+"','"+city+"','"+state+"','"+country+"','"+zipcode+"');");
+                                                     "('"+propertyID+"','"+streetLine1+"','"+streetLine2+"','"+aptNumber+"','"+city+"','"+state+"','"+country+"','"+zipcode+"');");
 		System.out.println(val);	
 		conn.close();
 		} 

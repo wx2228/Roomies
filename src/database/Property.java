@@ -17,6 +17,8 @@ public class Property {
 			this.propertyID = java.util.UUID.randomUUID(); // searched online, UUID can generate unique userID
 		else
 			this.propertyID = id;
+		
+		System.out.println(this.propertyID.toString());
 	}
 
 }

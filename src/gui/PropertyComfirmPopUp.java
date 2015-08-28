@@ -101,7 +101,7 @@ public class PropertyComfirmPopUp extends javax.swing.JFrame {
     }//GEN-LAST:event_yesButtonMouseClicked
 
     private void noButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noButtonMouseClicked
-        NewProperty n = new NewProperty(this.tempSave);
+        NewPropertyGUI n = new NewPropertyGUI(this.tempSave);
         this.dispose();
         n.setVisible(true);
     }//GEN-LAST:event_noButtonMouseClicked

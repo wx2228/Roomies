@@ -104,7 +104,7 @@ public class RegisterChoiceGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void newPropertyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newPropertyMouseClicked
-       NewProperty p = new NewProperty();
+       NewPropertyGUI p = new NewPropertyGUI();
        p.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_newPropertyMouseClicked
