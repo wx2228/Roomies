@@ -7,11 +7,16 @@ package gui;
 
 import java.awt.Color;
 
+import database.Address;
+import database.Property;
+import functionality.PropertySearcher;
+
 /**
  *
  * @author Hang Xu
  */
 public class NewProperty extends javax.swing.JFrame {
+	static int MODE = 0; // when mode is 0, it means the GUI is in searching mode, when 1, means adding mode.
 
     /**
      * Creates new form NewProperty
@@ -45,12 +50,22 @@ public class NewProperty extends javax.swing.JFrame {
         setResizable(false);
 
         searchAndAdd.setText("Search");
+        searchAndAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchAndAddMouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Please type");
 
         back.setText("back");
+        back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backMouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -128,6 +143,7 @@ public class NewProperty extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
                         .addComponent(searchAndAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -136,6 +152,38 @@ public class NewProperty extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private boolean PropertySearching(Property a) {
+		PropertySearcher p = new PropertySearcher(a);
+		return p.PropertyExists();
+	}
+
+	private Property ProertyInformationCollector() {
+		Property userInputTemp = new Property(this.streetLine1.getText(),this.streetLine2.getText(),this.aptNumber.getText(),this.city.getText(),this.state.getText(),this.country.getText(),this.zipcode.getText(), null, null);
+		return userInputTemp;
+	}
+
+	private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
+       this.dispose();
+    }//GEN-LAST:event_backMouseClicked
+
+    private void searchAndAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchAndAddMouseClicked
+    	 if(MODE == 0){// in searching mode
+       	  Property userInputAddress = ProertyInformationCollector(); 
+       	  boolean propertyExists = PropertySearching(userInputAddress);
+       	  if(propertyExists){
+       		  PropertyComfirmPopUp PropertyFound = new PropertyComfirmPopUp("Property found, is this your place?", MODE, userInputAddress);
+       		  PropertyFound.setVisible(true);
+       	  }
+       	  else{
+       		  MODE = 1;
+       		  PropertyComfirmPopUp PropertyNotFound = new PropertyComfirmPopUp("Property not found, wanna create a new one?", MODE,userInputAddress);
+       		  PropertyNotFound.setVisible(true); 
+       		  
+       	  }
+   		  this.dispose();
+          }
+    }//GEN-LAST:event_searchAndAddMouseClicked
 
     /**
      * @param args the command line arguments
