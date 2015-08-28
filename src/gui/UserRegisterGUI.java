@@ -18,12 +18,12 @@ import database.User;
  *
  * @author Hang Xu
  */
-public class RegisterNewUserGUI extends javax.swing.JFrame {
+public class UserRegisterGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form RegisterNewUserGUI
      */
-    public RegisterNewUserGUI() {
+    public UserRegisterGUI() {
         initComponents();
        
     }
@@ -77,8 +77,7 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
 
         passwordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         passwordText.setForeground(new java.awt.Color(204, 204, 255));
-        passwordText.setText("Password");
-        passwordText.setEchoChar((char) 0);
+        passwordText.setText("dddddddd");
         passwordText.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passwordTextFocusGained(evt);
@@ -105,8 +104,7 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
 
         confirmPasswordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         confirmPasswordText.setForeground(new java.awt.Color(204, 204, 255));
-        confirmPasswordText.setText("Confirm password");
-        confirmPasswordText.setEchoChar((char) 0);
+        confirmPasswordText.setText("Password");
         confirmPasswordText.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 confirmPasswordTextFocusGained(evt);
@@ -379,20 +377,21 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegisterNewUserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegisterNewUserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegisterNewUserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegisterNewUserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegisterNewUserGUI().setVisible(true);
+                new UserRegisterGUI().setVisible(true);
             }
         });
     }

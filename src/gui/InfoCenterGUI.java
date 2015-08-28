@@ -140,7 +140,7 @@ public class InfoCenterGUI extends javax.swing.JFrame {
 
     private void contactButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactButtonActionPerformed
         // TODO add your handling code here:
-        ContactGUI contactGUI = new ContactGUI();
+        ContactChooseGUI contactGUI = new ContactChooseGUI();
         contactGUI.setVisible(true);
         this.dispose();
         

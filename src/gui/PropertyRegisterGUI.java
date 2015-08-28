@@ -15,17 +15,17 @@ import functionality.PropertySearcher;
  *
  * @author Hang Xu
  */
-public class NewPropertyGUI extends javax.swing.JFrame {
+public class PropertyRegisterGUI extends javax.swing.JFrame {
 	static int MODE = 0; // when mode is 0, it means the GUI is in searching mode, when 1, means adding mode.
 
     /**
      * Creates new form NewProperty
      */
-    public NewPropertyGUI() {
+    public PropertyRegisterGUI() {
         initComponents();
     }
     
-    public NewPropertyGUI(Property p){
+    public PropertyRegisterGUI(Property p){
     	initComponents();
     	this.streetLine1.setText(p.propertyAddress.streetLine1);
     	this.streetLine2.setText(p.propertyAddress.streetLine2);
@@ -247,11 +247,11 @@ public class NewPropertyGUI extends javax.swing.JFrame {
        	  boolean propertyExists = PropertySearching(userInputAddress);
        	  if(propertyExists){       
        		  MODE = 1;
-       		  PropertyComfirmPopUp PropertyFound = new PropertyComfirmPopUp(MODE, userInputAddress);
+       		  PropertyConfirmPopUp PropertyFound = new PropertyConfirmPopUp(MODE, userInputAddress);
        		  PropertyFound.setVisible(true);
        	  }
        	  else{
-       		  PropertyComfirmPopUp PropertyNotFound = new PropertyComfirmPopUp(MODE,userInputAddress);
+       		  PropertyConfirmPopUp PropertyNotFound = new PropertyConfirmPopUp(MODE,userInputAddress);
        		  PropertyNotFound.setVisible(true);   
        	  }
    		  this.dispose();
@@ -374,21 +374,23 @@ public class NewPropertyGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewPropertyGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PropertyRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewPropertyGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PropertyRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewPropertyGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PropertyRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewPropertyGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PropertyRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewPropertyGUI().setVisible(true);
+                new PropertyRegisterGUI().setVisible(true);
             }
         });
     }

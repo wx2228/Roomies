@@ -35,7 +35,7 @@ public class WrongPopup extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        wrongMessageLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        wrongMessageLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         wrongMessageLabel.setForeground(new java.awt.Color(51, 204, 255));
         wrongMessageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         wrongMessageLabel.setText("jLabel1");
@@ -62,13 +62,13 @@ public class WrongPopup extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(OKButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(wrongMessageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+            .addComponent(wrongMessageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(wrongMessageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(wrongMessageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(OKButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 

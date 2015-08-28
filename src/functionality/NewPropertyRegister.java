@@ -1,6 +1,6 @@
 package functionality;
 
-import gui.NewUserRegisterSucceed;
+import gui.UserRegisterSucceedPopUp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

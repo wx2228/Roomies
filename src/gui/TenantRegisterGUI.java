@@ -5,65 +5,19 @@
  */
 package gui;
 
-import functionality.CurrentUser;
-
 /**
  *
  * @author Hang Xu
  */
-public class ContactInfoGUI extends javax.swing.JFrame {
+public class TenantRegisterGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form ContactInfoGUI
+     * Creates new form NewTenant
      */
-    public ContactInfoGUI() {
+    public TenantRegisterGUI() {
         initComponents();
     }
-    static int infoChangeFlag =0;
 
-    public void setTedInfo()
-    {
-        PicLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/roomies/GUI/Ted_Mosby.jpg")));
-        firstNameText.setText("Ted Mosby");
-        sexComboBox.setSelectedIndex(0);
-        dayComboBox.setSelectedIndex(24);
-        monthComboBox.setSelectedIndex(3);
-        yearComboBox.setSelectedIndex(78);
-        telephoneText.setText("917-456-789");
-        emailText.setText("tedmosby@gmail.com");
-    }
-    
-       public void setMarshallInfo()
-    {
-        PicLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/roomies/GUI/Marshall_Eriksen.jpg")));
-        firstNameText.setText("Marshall Eriksen");
-        sexComboBox.setSelectedIndex(0);
-        dayComboBox.setSelectedIndex(26);
-        monthComboBox.setSelectedIndex(7);
-        yearComboBox.setSelectedIndex(78);
-        telephoneText.setText("917-456-731");
-        emailText.setText("marshalleriksen@gmail.com");
-    }
-       
-          public void setLilyInfo()
-    {
-        PicLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/roomies/GUI/Lily_Aldrin.jpg")));
-        firstNameText.setText("Lily Aldrin");
-        sexComboBox.setSelectedIndex(1);
-        dayComboBox.setSelectedIndex(2);
-        monthComboBox.setSelectedIndex(11);
-        yearComboBox.setSelectedIndex(78);
-        telephoneText.setText("917-456-873");
-        emailText.setText("lilyaldrin@gmail.com");
-    }
-          public static void infoChanged()
-          {
-              infoChangeFlag =1;
-          }
-          public boolean infoChangedCheck()
-          {
-              return (infoChangeFlag==1);
-          }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,15 +62,28 @@ public class ContactInfoGUI extends javax.swing.JFrame {
         nameLabel.setText("Name:");
 
         saveButton.setText("Save");
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
+        saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                saveButtonMouseClicked(evt);
             }
         });
 
-        backButton.setText("Back");
+        backButton.setText("Cancel");
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backButtonMouseClicked(evt);
+            }
+        });
 
         firstNameText.setText("First Name");
+        firstNameText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                firstNameTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                firstNameTextFocusLost(evt);
+            }
+        });
 
         monthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", " " }));
         monthComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -130,12 +97,44 @@ public class ContactInfoGUI extends javax.swing.JFrame {
         yearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1900", "1901", "1902", "1903", "1904", "1905", "1906", "1907", "1908", "1909", "1910", "1911", "1912", "1913", "1914", "1915", "1916", "1917", "1918", "1919", "1920", "1921", "1922", "1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", " " }));
 
         emailText.setText("Email");
+        emailText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                emailTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                emailTextFocusLost(evt);
+            }
+        });
 
         telephoneText.setText("Telephone");
+        telephoneText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                telephoneTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                telephoneTextFocusLost(evt);
+            }
+        });
 
         lastNameText.setText("Last Name");
+        lastNameText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                lastNameTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                lastNameTextFocusLost(evt);
+            }
+        });
 
         middleNameText.setText("Middle Name");
+        middleNameText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                middleNameTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                middleNameTextFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -201,7 +200,7 @@ public class ContactInfoGUI extends javax.swing.JFrame {
                             .addComponent(emailText))
                         .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                            .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                             .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(PicLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
@@ -215,11 +214,55 @@ public class ContactInfoGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_monthComboBoxActionPerformed
 
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+    private void firstNameTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameTextFocusGained
         // TODO add your handling code here:
-    
-        
-    }//GEN-LAST:event_saveButtonActionPerformed
+    }//GEN-LAST:event_firstNameTextFocusGained
+
+    private void firstNameTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameTextFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstNameTextFocusLost
+
+    private void middleNameTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_middleNameTextFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_middleNameTextFocusGained
+
+    private void middleNameTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_middleNameTextFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_middleNameTextFocusLost
+
+    private void lastNameTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameTextFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lastNameTextFocusGained
+
+    private void lastNameTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameTextFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lastNameTextFocusLost
+
+    private void telephoneTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telephoneTextFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telephoneTextFocusGained
+
+    private void telephoneTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telephoneTextFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telephoneTextFocusLost
+
+    private void emailTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTextFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailTextFocusGained
+
+    private void emailTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTextFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailTextFocusLost
+
+    private void saveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseClicked
+        TenantRegisterSucceedPopUp TRSPU = new TenantRegisterSucceedPopUp();
+        this.dispose();
+        TRSPU.setVisible(true);
+    }//GEN-LAST:event_saveButtonMouseClicked
+
+    private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -238,20 +281,23 @@ public class ContactInfoGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ContactInfoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TenantRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ContactInfoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TenantRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ContactInfoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TenantRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ContactInfoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TenantRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ContactInfoGUI().setVisible(true);
+                new TenantRegisterGUI().setVisible(true);
             }
         });
     }

@@ -12,7 +12,7 @@ import functionality.NewPropertyRegister;
  *
  * @author Hang Xu
  */
-public class PropertyComfirmPopUp extends javax.swing.JFrame {
+public class PropertyConfirmPopUp extends javax.swing.JFrame {
 	int MODE;
 	Property tempSave;
 
@@ -22,7 +22,7 @@ public class PropertyComfirmPopUp extends javax.swing.JFrame {
      * @param MODE 
      * @param string 
      */
-    public PropertyComfirmPopUp(int MODE, Property userInputAddress) {
+    public PropertyConfirmPopUp(int MODE, Property userInputAddress) {
         initComponents();
         if(MODE == 1)
         	this.messageLabel.setText("Property found, is this your place?");
@@ -74,8 +74,7 @@ public class PropertyComfirmPopUp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(yesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(noButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(noButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,13 +82,12 @@ public class PropertyComfirmPopUp extends javax.swing.JFrame {
                 .addComponent(messageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(yesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(noButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(noButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void yesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_yesButtonMouseClicked
@@ -101,7 +99,7 @@ public class PropertyComfirmPopUp extends javax.swing.JFrame {
     }//GEN-LAST:event_yesButtonMouseClicked
 
     private void noButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noButtonMouseClicked
-        NewPropertyGUI n = new NewPropertyGUI(this.tempSave);
+        PropertyRegisterGUI n = new PropertyRegisterGUI(this.tempSave);
         this.dispose();
         n.setVisible(true);
     }//GEN-LAST:event_noButtonMouseClicked

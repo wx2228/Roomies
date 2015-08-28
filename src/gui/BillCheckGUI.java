@@ -252,14 +252,14 @@ public class BillCheckGUI extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-        AddBillGUI addBillGUI = new AddBillGUI();
+        BillAddingGUI addBillGUI = new BillAddingGUI();
         addBillGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         if(this.selectedRowCheck()){
-        EditBillGUI editBillGUI = new EditBillGUI();
+        BillEdittingGUI editBillGUI = new BillEdittingGUI();
         editBillGUI.loading(this.getSelectedBill(),displayTable.getSelectedRow());
         editBillGUI.setVisible(true);
         this.dispose();}
