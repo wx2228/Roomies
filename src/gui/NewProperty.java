@@ -24,6 +24,17 @@ public class NewProperty extends javax.swing.JFrame {
     public NewProperty() {
         initComponents();
     }
+    
+    public NewProperty(Property p){
+    	initComponents();
+    	this.streetLine1.setText(p.propertyAddress.streetLine1);
+    	this.streetLine2.setText(p.propertyAddress.streetLine2);
+    	this.aptNumber.setText(p.propertyAddress.aptNumber);
+    	this.city.setText(p.propertyAddress.city);
+    	this.state.setText(p.propertyAddress.state);
+    	this.country.setText(p.propertyAddress.country);
+    	this.zipcode.setText(p.propertyAddress.zipcode);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -171,15 +182,14 @@ public class NewProperty extends javax.swing.JFrame {
     	 if(MODE == 0){// in searching mode
        	  Property userInputAddress = ProertyInformationCollector(); 
        	  boolean propertyExists = PropertySearching(userInputAddress);
-       	  if(propertyExists){
-       		  PropertyComfirmPopUp PropertyFound = new PropertyComfirmPopUp("Property found, is this your place?", MODE, userInputAddress);
+       	  if(propertyExists){       
+       		  MODE = 1;
+       		  PropertyComfirmPopUp PropertyFound = new PropertyComfirmPopUp(MODE, userInputAddress);
        		  PropertyFound.setVisible(true);
        	  }
        	  else{
-       		  MODE = 1;
-       		  PropertyComfirmPopUp PropertyNotFound = new PropertyComfirmPopUp("Property not found, wanna create a new one?", MODE,userInputAddress);
-       		  PropertyNotFound.setVisible(true); 
-       		  
+       		  PropertyComfirmPopUp PropertyNotFound = new PropertyComfirmPopUp(MODE,userInputAddress);
+       		  PropertyNotFound.setVisible(true);   
        	  }
    		  this.dispose();
           }

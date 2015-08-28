@@ -43,6 +43,11 @@ public class RegisterChoiceGUI extends javax.swing.JFrame {
         });
 
         newProperty.setText("New Property");
+        newProperty.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                newPropertyMouseClicked(evt);
+            }
+        });
 
         newTenant.setText("New Tenant");
 
@@ -97,6 +102,12 @@ public class RegisterChoiceGUI extends javax.swing.JFrame {
          this.dispose();
          l.setVisible(true);
     }//GEN-LAST:event_backActionPerformed
+
+    private void newPropertyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newPropertyMouseClicked
+       NewProperty p = new NewProperty();
+       p.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_newPropertyMouseClicked
 
     /**
      * @param args the command line arguments

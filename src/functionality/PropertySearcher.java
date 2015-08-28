@@ -36,7 +36,7 @@ public class PropertySearcher {
 			Connection conn = DriverManager.getConnection(url+dbName,databaseUSN,databasePWD); 
 			Statement st = conn.createStatement();  
 			ResultSet check;
-			check = st.executeQuery("SELECT * FROM roomies_property.property WHERE `Street Line 1` = "+streetLine1+" `Street Line 2` = "+streetLine2+" `Apt Number` = "+aptNumber+" `City` = "+city+" `State` = "+state+" `Country` = "+country+" `Zipcode` = "+zipcode); 		
+			check = st.executeQuery("SELECT * FROM roomies_property.property WHERE `Street Line 1` = '"+streetLine1+"' AND `Street Line 2` = '"+streetLine2+"' AND `Apt Number` = '"+aptNumber+"' AND `City` = '"+city+"' AND `State` = '"+state+"' AND `Country` = '"+country+"' AND `Zipcode` = '"+zipcode+"';"); 		
 			if(check.absolute(1)){
 				conn.close();
 				return true;

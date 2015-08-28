@@ -48,7 +48,15 @@ public class InfoCenterGUI extends javax.swing.JFrame {
         leaseButton.setText("Lease");
         leaseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leaseButtonActionPerformed(evt);
+                try {
+					leaseButtonActionPerformed(evt);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 

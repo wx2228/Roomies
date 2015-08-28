@@ -5,17 +5,31 @@
  */
 package gui;
 
+import database.Property;
+import functionality.NewPropertyRegister;
+
 /**
  *
  * @author Hang Xu
  */
 public class PropertyComfirmPopUp extends javax.swing.JFrame {
+	int MODE;
+	Property tempSave;
 
     /**
      * Creates new form PropertyComfirmPopUp
+     * @param userInputAddress 
+     * @param MODE 
+     * @param string 
      */
-    public PropertyComfirmPopUp() {
+    public PropertyComfirmPopUp(int MODE, Property userInputAddress) {
         initComponents();
+        if(MODE == 1)
+        	this.messageLabel.setText("Property found, is this your place?");
+        else
+        	this.messageLabel.setText("Property not found, wanna create a new one?");
+        this.MODE=MODE;
+        this.tempSave= userInputAddress;
     }
 
     /**
@@ -79,11 +93,17 @@ public class PropertyComfirmPopUp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void yesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_yesButtonMouseClicked
-        // TODO add your handling code here:
+    	if(MODE == 0){// that means it didn't found any match in the database
+        	NewPropertyRegister NPR = new NewPropertyRegister(this.tempSave);
+        	NPR.register();
+        	this.dispose();
+        }
     }//GEN-LAST:event_yesButtonMouseClicked
 
     private void noButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noButtonMouseClicked
-        // TODO add your handling code here:
+        NewProperty n = new NewProperty(this.tempSave);
+        this.dispose();
+        n.setVisible(true);
     }//GEN-LAST:event_noButtonMouseClicked
 
     /**
