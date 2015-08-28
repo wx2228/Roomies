@@ -25,7 +25,7 @@ public class UserRegisterGUI extends javax.swing.JFrame {
      */
     public UserRegisterGUI() {
         initComponents();
-       
+       this.passwordText.setEchoChar((char) 0);
     }
 
     /**
@@ -45,7 +45,6 @@ public class UserRegisterGUI extends javax.swing.JFrame {
         logoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAutoRequestFocus(false);
         setResizable(false);
 
         userNameText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
@@ -57,11 +56,6 @@ public class UserRegisterGUI extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 userNameTextFocusLost(evt);
-            }
-        });
-        userNameText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                userNameTextMouseClicked(evt);
             }
         });
         userNameText.addActionListener(new java.awt.event.ActionListener() {
@@ -185,22 +179,6 @@ public class UserRegisterGUI extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void userNameTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTextFocusGained
-        // TODO add your handling code here:
-        if(!userNameText.getForeground().equals(Color.black)){
-            userNameText.setText(null);
-            userNameText.setForeground(Color.black);
-        }  
-    }//GEN-LAST:event_userNameTextFocusGained
-
-    private void userNameTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userNameTextMouseClicked
-        // TODO add your handling code here:
-        if(!userNameText.getForeground().equals(Color.black)){
-            userNameText.setText(null);
-            userNameText.setForeground(Color.black);
-        }       
-    }//GEN-LAST:event_userNameTextMouseClicked
 
     private void userNameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextActionPerformed
         // TODO add your handling code here:
@@ -359,6 +337,12 @@ public class UserRegisterGUI extends javax.swing.JFrame {
          this.dispose();
          r.setVisible(true);
     }//GEN-LAST:event_cancelActionPerformed
+
+    private void userNameTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTextFocusGained
+       if(!this.userNameText.getForeground().equals(Color.black)){
+        this.userNameText.setCaretPosition(0);
+       }
+    }//GEN-LAST:event_userNameTextFocusGained
 
     /**
      * @param args the command line arguments
