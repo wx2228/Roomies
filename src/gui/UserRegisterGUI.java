@@ -18,14 +18,14 @@ import database.User;
  *
  * @author Hang Xu
  */
-public class RegisterNewUserGUI extends javax.swing.JFrame {
+public class UserRegisterGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form RegisterNewUserGUI
      */
-    public RegisterNewUserGUI() {
+    public UserRegisterGUI() {
         initComponents();
-       
+       this.passwordText.setEchoChar((char) 0);
     }
 
     /**
@@ -45,7 +45,6 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
         logoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAutoRequestFocus(false);
         setResizable(false);
 
         userNameText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
@@ -57,11 +56,6 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 userNameTextFocusLost(evt);
-            }
-        });
-        userNameText.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                userNameTextMouseClicked(evt);
             }
         });
         userNameText.addActionListener(new java.awt.event.ActionListener() {
@@ -77,8 +71,7 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
 
         passwordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         passwordText.setForeground(new java.awt.Color(204, 204, 255));
-        passwordText.setText("Password");
-        passwordText.setEchoChar((char) 0);
+        passwordText.setText("dddddddd");
         passwordText.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passwordTextFocusGained(evt);
@@ -105,8 +98,7 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
 
         confirmPasswordText.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         confirmPasswordText.setForeground(new java.awt.Color(204, 204, 255));
-        confirmPasswordText.setText("Confirm password");
-        confirmPasswordText.setEchoChar((char) 0);
+        confirmPasswordText.setText("Password");
         confirmPasswordText.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 confirmPasswordTextFocusGained(evt);
@@ -187,22 +179,6 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void userNameTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTextFocusGained
-        // TODO add your handling code here:
-        if(!userNameText.getForeground().equals(Color.black)){
-            userNameText.setText(null);
-            userNameText.setForeground(Color.black);
-        }  
-    }//GEN-LAST:event_userNameTextFocusGained
-
-    private void userNameTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userNameTextMouseClicked
-        // TODO add your handling code here:
-        if(!userNameText.getForeground().equals(Color.black)){
-            userNameText.setText(null);
-            userNameText.setForeground(Color.black);
-        }       
-    }//GEN-LAST:event_userNameTextMouseClicked
 
     private void userNameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextActionPerformed
         // TODO add your handling code here:
@@ -362,6 +338,12 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
          r.setVisible(true);
     }//GEN-LAST:event_cancelActionPerformed
 
+    private void userNameTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTextFocusGained
+       if(!this.userNameText.getForeground().equals(Color.black)){
+        this.userNameText.setCaretPosition(0);
+       }
+    }//GEN-LAST:event_userNameTextFocusGained
+
     /**
      * @param args the command line arguments
      */
@@ -379,20 +361,21 @@ public class RegisterNewUserGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegisterNewUserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegisterNewUserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegisterNewUserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegisterNewUserGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserRegisterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegisterNewUserGUI().setVisible(true);
+                new UserRegisterGUI().setVisible(true);
             }
         });
     }

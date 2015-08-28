@@ -43,6 +43,11 @@ public class RegisterChoiceGUI extends javax.swing.JFrame {
         });
 
         newProperty.setText("New Property");
+        newProperty.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                newPropertyMouseClicked(evt);
+            }
+        });
 
         newTenant.setText("New Tenant");
 
@@ -87,7 +92,7 @@ public class RegisterChoiceGUI extends javax.swing.JFrame {
     private void newUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        RegisterNewUserGUI registerNewUserGUI = new RegisterNewUserGUI();
+        UserRegisterGUI registerNewUserGUI = new UserRegisterGUI();
         registerNewUserGUI.setVisible(true);
     }//GEN-LAST:event_newUserActionPerformed
 
@@ -97,6 +102,12 @@ public class RegisterChoiceGUI extends javax.swing.JFrame {
          this.dispose();
          l.setVisible(true);
     }//GEN-LAST:event_backActionPerformed
+
+    private void newPropertyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newPropertyMouseClicked
+       PropertyRegisterGUI p = new PropertyRegisterGUI();
+       p.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_newPropertyMouseClicked
 
     /**
      * @param args the command line arguments

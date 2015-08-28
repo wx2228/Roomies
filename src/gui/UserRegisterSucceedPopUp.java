@@ -9,12 +9,12 @@ package gui;
  *
  * @author Hang Xu
  */
-public class NewTenant extends javax.swing.JFrame {
+public class UserRegisterSucceedPopUp extends javax.swing.JFrame {
 
     /**
-     * Creates new form NewTenant
+     * Creates new form NewUserRegisterSucceed
      */
-    public NewTenant() {
+    public UserRegisterSucceedPopUp() {
         initComponents();
     }
 
@@ -27,23 +27,51 @@ public class NewTenant extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        OKButton = new javax.swing.JButton();
+        textLabel = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+
+        OKButton.setText("OK");
+        OKButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                OKButtonMouseClicked(evt);
+            }
+        });
+
+        textLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        textLabel.setForeground(new java.awt.Color(51, 204, 255));
+        textLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        textLabel.setText("User register succed, now the tenant");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 875, Short.MAX_VALUE)
+            .addComponent(OKButton, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(textLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 454, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(textLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(OKButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void OKButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OKButtonMouseClicked
+        TenantRegisterGUI NTG = new TenantRegisterGUI();
+        this.dispose();
+        NTG.setVisible(true);
+    }//GEN-LAST:event_OKButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -62,24 +90,27 @@ public class NewTenant extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewTenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserRegisterSucceedPopUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewTenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserRegisterSucceedPopUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewTenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserRegisterSucceedPopUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewTenant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserRegisterSucceedPopUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewTenant().setVisible(true);
+                new UserRegisterSucceedPopUp().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton OKButton;
+    private javax.swing.JLabel textLabel;
     // End of variables declaration//GEN-END:variables
 }

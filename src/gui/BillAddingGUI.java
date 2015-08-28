@@ -14,14 +14,14 @@ import functionality.*;
  *
  * @author Hang Xu
  */
-public class AddBillGUI extends javax.swing.JFrame {
+public class BillAddingGUI extends javax.swing.JFrame {
 
     
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = -2807506173109458916L;
-	public AddBillGUI() {
+	public BillAddingGUI() {
         initComponents();
           Calendar c = Calendar.getInstance();
         int yearNow = c.get(Calendar.YEAR); 
@@ -333,21 +333,23 @@ public class AddBillGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddBillGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BillAddingGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddBillGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BillAddingGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddBillGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BillAddingGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddBillGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BillAddingGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddBillGUI().setVisible(true);
+                new BillAddingGUI().setVisible(true);
             }
         });
     }

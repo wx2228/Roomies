@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="resizable" type="boolean" value="false"/>
@@ -29,17 +29,17 @@
               <Component id="PicLabel" min="-2" pref="359" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="telephoneLabel" alignment="0" pref="132" max="32767" attributes="0"/>
                           <Component id="birthDateLabel" alignment="0" max="32767" attributes="0"/>
                           <Component id="nameLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="emailLabel" max="32767" attributes="0"/>
+                          <Component id="emailLabel" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="emailText" max="32767" attributes="0"/>
-                          <Component id="telephoneText" max="32767" attributes="0"/>
+                          <Component id="emailText" alignment="0" max="32767" attributes="0"/>
+                          <Component id="telephoneText" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="monthComboBox" min="-2" pref="114" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -47,16 +47,16 @@
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Component id="yearComboBox" min="-2" pref="116" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="firstNameText" min="-2" pref="186" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Component id="middleNameText" max="32767" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lastNameText" max="32767" attributes="0"/>
+                          <Component id="lastNameText" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="saveButton" min="-2" pref="237" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="backButton" max="32767" attributes="0"/>
@@ -67,14 +67,14 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="nameLabel" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Component id="nameLabel" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="firstNameText" min="-2" pref="56" max="-2" attributes="0"/>
+                                  <Component id="firstNameText" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                                   <Component id="middleNameText" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -83,24 +83,24 @@
                       <Component id="lastNameText" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="monthComboBox" max="32767" attributes="0"/>
-                          <Component id="birthDateLabel" pref="56" max="32767" attributes="0"/>
-                          <Component id="dayComboBox" max="32767" attributes="0"/>
-                          <Component id="yearComboBox" max="32767" attributes="0"/>
+                          <Component id="monthComboBox" alignment="0" max="32767" attributes="0"/>
+                          <Component id="birthDateLabel" alignment="0" pref="56" max="32767" attributes="0"/>
+                          <Component id="dayComboBox" alignment="0" max="32767" attributes="0"/>
+                          <Component id="yearComboBox" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="telephoneLabel" pref="56" max="32767" attributes="0"/>
-                          <Component id="telephoneText" max="32767" attributes="0"/>
+                          <Component id="telephoneLabel" alignment="0" pref="56" max="32767" attributes="0"/>
+                          <Component id="telephoneText" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="emailLabel" pref="56" max="32767" attributes="0"/>
-                          <Component id="emailText" max="32767" attributes="0"/>
+                          <Component id="emailLabel" alignment="0" pref="56" max="32767" attributes="0"/>
+                          <Component id="emailText" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="saveButton" pref="168" max="32767" attributes="0"/>
-                          <Component id="backButton" max="32767" attributes="0"/>
+                          <Component id="saveButton" alignment="0" pref="174" max="32767" attributes="0"/>
+                          <Component id="backButton" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="PicLabel" alignment="0" max="32767" attributes="0"/>
@@ -154,18 +154,25 @@
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="saveButtonMouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="backButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Back"/>
+        <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backButtonMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="firstNameText">
       <Properties>
         <Property name="text" type="java.lang.String" value="First Name"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="firstNameTextFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="firstNameTextFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="monthComboBox">
       <Properties>
@@ -360,21 +367,37 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Email"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="emailTextFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="emailTextFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="telephoneText">
       <Properties>
         <Property name="text" type="java.lang.String" value="Telephone"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="telephoneTextFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="telephoneTextFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="lastNameText">
       <Properties>
         <Property name="text" type="java.lang.String" value="Last Name"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="lastNameTextFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="lastNameTextFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="middleNameText">
       <Properties>
         <Property name="text" type="java.lang.String" value="Middle Name"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="middleNameTextFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="middleNameTextFocusLost"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

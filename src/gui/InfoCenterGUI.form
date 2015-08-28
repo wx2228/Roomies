@@ -24,34 +24,38 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="contactButton" min="-2" pref="408" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="contactButton" min="-2" pref="209" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="leaseButton" min="-2" pref="218" max="-2" attributes="0"/>
+              <Component id="leaseButton" min="-2" pref="208" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="agreementButton" min="-2" pref="208" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="agreementButton" pref="249" max="32767" attributes="0"/>
                   <Component id="backButton" max="32767" attributes="0"/>
+                  <Component id="propertyButton" min="-2" pref="250" max="-2" attributes="0"/>
               </Group>
           </Group>
-          <Component id="titleLabel" alignment="0" max="32767" attributes="0"/>
+          <Component id="titleLabel" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Component id="titleLabel" min="-2" pref="46" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="contactButton" pref="408" max="32767" attributes="0"/>
-                  <Component id="leaseButton" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="agreementButton" min="-2" pref="244" max="-2" attributes="0"/>
+                      <Component id="contactButton" min="-2" pref="408" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="leaseButton" alignment="1" min="-2" pref="408" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="propertyButton" min="-2" pref="246" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="backButton" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="agreementButton" min="-2" pref="408" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -93,6 +97,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="propertyButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Property"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="propertyButtonMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>

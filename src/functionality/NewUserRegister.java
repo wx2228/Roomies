@@ -1,7 +1,7 @@
 package functionality;
 
 import database.User;
-import gui.NewUserRegisterSucceed;
+import gui.UserRegisterSucceedPopUp;
 import gui.WrongPopup;
 
 import java.sql.*;
@@ -25,7 +25,7 @@ public class NewUserRegister {
 			Statement st = conn.createStatement();
 			int val = st.executeUpdate("INSERT INTO roomies_user.user (`username`, `password`,`userID`) VALUES ('"+registerUsername+"', '"+registerPassword+"','"+registerUserID+"');");
 			if(val == 1){
-				NewUserRegisterSucceed n = new NewUserRegisterSucceed();
+				UserRegisterSucceedPopUp n = new UserRegisterSucceedPopUp();
                 n.setVisible(true);
                 }
 				

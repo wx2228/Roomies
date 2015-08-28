@@ -158,7 +158,7 @@ public class LoginGUI extends javax.swing.JFrame {
     	UserAuthenticator uA = new UserAuthenticator(inputusn, inputpwd);
         if(uA.authenticate()) // if successfully log in, remove the login GUI, show the main GUI.
         {
-            MainGUI mainGUI = new MainGUI();     
+            MainGUI mainGUI = new MainGUI();      
             mainGUI.setVisible(true);
             this.dispose();
         }
