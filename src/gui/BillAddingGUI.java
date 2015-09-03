@@ -9,6 +9,10 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import database.Bill;
+import database.Date;
+import database.ExistingBill;
+import database.NameList;
 import functionality.*;
 /**
  *

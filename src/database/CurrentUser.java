@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package functionality;
+package database;
 
 import java.util.UUID;
 
@@ -12,15 +12,15 @@ import java.util.UUID;
  * @author Hang Xu
  */
 public  class  CurrentUser {
-    private static  UUID currentUUID;
+    private static  String currentUUID;
     
-     public static UUID getID()
+     public static String getID()
     {   
         return currentUUID;
     }
    
-    public static void setID(UUID aUUID)
+    public static void setID(String string)
     {
-        CurrentUser.currentUUID=aUUID;
+        CurrentUser.currentUUID=string;
     }
 }

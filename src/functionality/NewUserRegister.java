@@ -1,5 +1,6 @@
 package functionality;
 
+import database.CurrentUser;
 import database.User;
 import gui.UserRegisterSucceedPopUp;
 import gui.WrongPopup;
@@ -27,6 +28,7 @@ public class NewUserRegister {
 			if(val == 1){
 				UserRegisterSucceedPopUp n = new UserRegisterSucceedPopUp();
                 n.setVisible(true);
+                CurrentUser.setID(u.getUUID());
                 }
 				
 			ResultSet res = st.executeQuery("SELECT * FROM roomies_user.user"); 

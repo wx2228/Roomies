@@ -10,7 +10,7 @@ import java.awt.Font;
 
 import javax.swing.text.*;
 
-import functionality.CurrentUser;
+import database.CurrentUser;
 import functionality.MessageOnFridge;
 
 /**

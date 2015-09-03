@@ -5,6 +5,10 @@
  */
 package gui;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+
 /**
  *
  * @author Hang Xu
@@ -16,6 +20,9 @@ public class ContactChooseGUI extends javax.swing.JFrame {
      */
     public ContactChooseGUI() {
         initComponents();
+        jComboBox1.setModel(
+        		new javax.swing.DefaultComboBoxModel(new String[] { "a", "Item 2", "Item 3", "Item 4" }));
+ 
     }
 
     /**
@@ -27,25 +34,17 @@ public class ContactChooseGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         titleLabel = new javax.swing.JLabel();
-        roommate1Contact = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        roommate2Contact = new javax.swing.JButton();
-        roommate3Contact = new javax.swing.JButton();
-        landlordContact = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Contact");
-
-        roommate1Contact.setText("Ted Mosby");
-        roommate1Contact.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roommate1ContactActionPerformed(evt);
-            }
-        });
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -54,21 +53,14 @@ public class ContactChooseGUI extends javax.swing.JFrame {
             }
         });
 
-        roommate2Contact.setText("Marshall Eriksen");
-        roommate2Contact.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roommate2ContactActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-
-        roommate3Contact.setText("Lily Aldrin");
-        roommate3Contact.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roommate3ContactActionPerformed(evt);
-            }
-        });
-
-        landlordContact.setText("Landlord");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,62 +68,29 @@ public class ContactChooseGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(roommate1Contact, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(roommate2Contact, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(roommate3Contact, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(landlordContact, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
-                .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
+                .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {landlordContact, roommate1Contact, roommate2Contact, roommate3Contact});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(roommate1Contact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(0, 0, 0)
-                        .addComponent(roommate2Contact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(roommate3Contact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0)
-                        .addComponent(landlordContact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void roommate3ContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roommate3ContactActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        ContactInfoGUI lilyInfo = new ContactInfoGUI();
-        lilyInfo.setLilyInfo();
-        lilyInfo.setVisible(true);
-    }//GEN-LAST:event_roommate3ContactActionPerformed
-
-    private void roommate2ContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roommate2ContactActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        ContactInfoGUI marshallInfo = new ContactInfoGUI();
-        marshallInfo.setMarshallInfo();
-        marshallInfo.setVisible(true);
-    }//GEN-LAST:event_roommate2ContactActionPerformed
-
-    private void roommate1ContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roommate1ContactActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        ContactInfoGUI tedInfo = new ContactInfoGUI();
-        tedInfo.setTedInfo();
-        tedInfo.setVisible(true);
-    }//GEN-LAST:event_roommate1ContactActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
@@ -139,6 +98,10 @@ public class ContactChooseGUI extends javax.swing.JFrame {
         infoGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,10 +141,9 @@ public class ContactChooseGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JButton landlordContact;
-    private javax.swing.JButton roommate1Contact;
-    private javax.swing.JButton roommate2Contact;
-    private javax.swing.JButton roommate3Contact;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

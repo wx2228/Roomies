@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import database.CurrentProperty;
+import database.CurrentUser;
 import database.Property;
 import database.User;
 
@@ -36,11 +38,20 @@ Property newProperty;
 			Class.forName(driver).newInstance(); 
 			Connection conn = DriverManager.getConnection(url+dbName,userName,password); 
 			Statement st = conn.createStatement();
-			int val = st.executeUpdate("INSERT INTO roomies_property.property "+
+			int addNewProperty = st.executeUpdate("INSERT INTO roomies_property.property "+
                                                     " (`PropertyID`,`Street Line 1`,`Street Line 2`,`Apt Number`,`City`,`State`,`Country`,`Zipcode`)  "+
 					                                "  VALUES    "+
-                                                     "('"+propertyID+"','"+streetLine1+"','"+streetLine2+"','"+aptNumber+"','"+city+"','"+state+"','"+country+"','"+zipcode+"');");
-		System.out.println(val);	
+                                                     "('"+propertyID+"','"+streetLine1+"','"+
+					                                streetLine2+"','"+aptNumber+"','"+city+"','"+state+"','"+country+"','"+zipcode+"');");
+		   String command = "INSERT INTO roomies_property.property_user_mapping "
+					+ "(`propertyID`,`userID`) "
+					+ "VALUES "
+					+ "('"+propertyID+"','"+CurrentUser.getID()+"');";
+		   System.out.println("commandmmm:" + command);
+			int addNewBinding = st.executeUpdate(command);
+			System.out.println(addNewProperty);	
+			System.out.println("property flag"+addNewBinding);
+			CurrentProperty.setID(propertyID);
 		conn.close();
 		} 
 		catch (Exception e) { 

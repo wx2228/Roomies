@@ -52,4 +52,38 @@ public class PropertySearcher {
 		return false; 
 	}
 
+	
+	public String getPropertyID(){
+		String url = "jdbc:mysql://localhost:3306/"; 
+		String dbName = "roomies_user";
+		String driver = "com.mysql.jdbc.Driver"; 
+		String databaseUSN = "root";
+		String databasePWD = "Xuhang202";
+		 String streetLine1 = this.inputProperty.propertyAddress.streetLine1.trim().toLowerCase();
+		 String streetLine2 = this.inputProperty.propertyAddress.streetLine2.trim().toLowerCase();
+		 String aptNumber = this.inputProperty.propertyAddress.aptNumber.trim().toLowerCase();
+		 String city = this.inputProperty.propertyAddress.city.trim().toLowerCase();
+		 String state = this.inputProperty.propertyAddress.state.trim().toLowerCase();
+		 String country = this.inputProperty.propertyAddress.country.trim().toLowerCase();
+		 String zipcode = this.inputProperty.propertyAddress.zipcode.trim().toLowerCase();
+	
+		try {
+			Class.forName(driver).newInstance(); 
+			Connection conn = DriverManager.getConnection(url+dbName,databaseUSN,databasePWD); 
+			Statement st = conn.createStatement();  
+			ResultSet check = st.executeQuery("SELECT propertyID FROM roomies_property.property WHERE `Street Line 1` = '"+streetLine1+"' AND `Street Line 2` = '"+streetLine2+"' AND `Apt Number` = '"+aptNumber+"' AND `City` = '"+city+"' AND `State` = '"+state+"' AND `Country` = '"+country+"' AND `Zipcode` = '"+zipcode+"';"); 		
+			String result ="";
+			while(check.next()){
+				 result = check.getString("PropertyID");
+				System.out.println("the property id is "+result);
+			}
+			
+			return result;
+			} 
+		catch (Exception e) { 
+			e.printStackTrace(); 
+		}
+		return "";
+
+	}
 }

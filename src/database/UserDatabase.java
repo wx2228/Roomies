@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Hashtable;
 
-import functionality.CurrentUser;
-
 public class UserDatabase {
 	//use hashtable to store user login info, key is the username, use value in the hastable to store User object
 	private static  Hashtable<String, User> user = new Hashtable<String, User>();  

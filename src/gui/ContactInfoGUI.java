@@ -5,7 +5,7 @@
  */
 package gui;
 
-import functionality.CurrentUser;
+import database.CurrentUser;
 
 /**
  *

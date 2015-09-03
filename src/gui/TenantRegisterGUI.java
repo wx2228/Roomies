@@ -5,6 +5,10 @@
  */
 package gui;
 
+import database.Contact;
+import database.CurrentUser;
+import functionality.NewTenantRegister;
+
 /**
  *
  * @author Hang Xu
@@ -255,6 +259,9 @@ public class TenantRegisterGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_emailTextFocusLost
 
     private void saveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseClicked
+        Contact toBeRegister = new Contact(this.firstNameText.getText(), this.middleNameText.getText(), this.lastNameText.getText() , this.telephoneText.getText(), this.emailText.getText(), CurrentUser.getID());
+    	NewTenantRegister NTR = new NewTenantRegister();
+    	NTR.register(toBeRegister);
         TenantRegisterSucceedPopUp TRSPU = new TenantRegisterSucceedPopUp();
         this.dispose();
         TRSPU.setVisible(true);

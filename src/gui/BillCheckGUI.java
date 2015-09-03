@@ -7,6 +7,8 @@ package gui;
 import javax.swing.table.*;
 import javax.swing.*;
 
+import database.Bill;
+import database.ExistingBill;
 import functionality.*;
 
 import java.util.ArrayList;

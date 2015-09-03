@@ -5,7 +5,7 @@
  */
 package gui;
 
-import functionality.ExistingBill;
+import database.ExistingBill;
 
 /**
  *

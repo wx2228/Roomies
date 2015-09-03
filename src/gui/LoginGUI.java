@@ -8,8 +8,9 @@ import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import database.CurrentProperty;
+import database.CurrentUser;
 import database.UserDatabase;
-import functionality.CurrentUser;
 import functionality.UserAuthenticator;
 
 /**
@@ -27,6 +28,8 @@ public class LoginGUI extends javax.swing.JFrame {
      */
     public LoginGUI() {
         initComponents();
+        System.out.println("Current user is "+CurrentUser.getID());
+        System.out.println("Current property is "+CurrentProperty.getID());
        
     }
 
@@ -158,6 +161,8 @@ public class LoginGUI extends javax.swing.JFrame {
     	UserAuthenticator uA = new UserAuthenticator(inputusn, inputpwd);
         if(uA.authenticate()) // if successfully log in, remove the login GUI, show the main GUI.
         {
+        	CurrentUser.setID(uA.getUserID());
+        	CurrentProperty.setID(uA.getPropertyID());
             MainGUI mainGUI = new MainGUI();      
             mainGUI.setVisible(true);
             this.dispose();

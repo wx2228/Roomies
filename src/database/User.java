@@ -1,14 +1,12 @@
 package database;
 
-import java.util.UUID;
-
 public class User {
-	private UUID userID;
+	private String userID;
 	private String username;
 	private String password;
 	
 	public User(String aUsername, String aPassword){
-		this.userID = java.util.UUID.randomUUID(); // searched online, UUID can generate unique userID
+		this.userID = java.util.UUID.randomUUID().toString(); // searched online, UUID can generate unique userID
 		this.username = aUsername;
 		this.password = aPassword;
 	}
@@ -17,7 +15,7 @@ public class User {
 		return this.password;
 	}
 	
-	public UUID getUUID(){
+	public String getUUID(){
 		return this.userID;
 	}
 	

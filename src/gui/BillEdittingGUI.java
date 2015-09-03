@@ -9,10 +9,10 @@ import java.awt.Font;
 
 import javax.swing.*;
 
-import functionality.Bill;
-import functionality.Date;
-import functionality.ExistingBill;
-import functionality.NameList;
+import database.Bill;
+import database.Date;
+import database.ExistingBill;
+import database.NameList;
 /**
  *
  * @author Hang Xu

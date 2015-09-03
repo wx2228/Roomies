@@ -1,4 +1,4 @@
-package functionality;
+package database;
 
 import java.util.ArrayList;
 

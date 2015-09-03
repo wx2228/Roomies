@@ -5,6 +5,9 @@
  */
 package gui;
 
+import database.CurrentProperty;
+import database.CurrentUser;
+
 /**
  *
  * @author Hang Xu
@@ -16,6 +19,8 @@ public class MainGUI extends javax.swing.JFrame {
      */
     public MainGUI() {
         initComponents();
+        System.out.println("Current user is "+CurrentUser.getID());
+        System.out.println("Current property is "+CurrentProperty.getID());
     }
 
     /**
@@ -121,6 +126,8 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void outButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outButtonActionPerformed
         // TODO add your handling code here:
+    	CurrentUser.setID(null);
+    	CurrentProperty.setID(null);
         LoginGUI loginGUI = new LoginGUI();
         loginGUI.setVisible(true);
         this.dispose();

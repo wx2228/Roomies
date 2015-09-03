@@ -227,13 +227,11 @@ public class PropertyRegisterGUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private boolean PropertySearching(Property a) {
-		PropertySearcher p = new PropertySearcher(a);
-		return p.PropertyExists();
-	}
 
 	private Property ProertyInformationCollector() {
-		Property userInputTemp = new Property(this.streetLine1.getText(),this.streetLine2.getText(),this.aptNumber.getText(),this.city.getText(),this.state.getText(),this.country.getText(),this.zipcode.getText(), null, null);
+		Property userInputTemp = new Property(this.streetLine1.getText(),this.streetLine2.getText(),
+				this.aptNumber.getText(),this.city.getText(),this.state.getText(),this.country.getText(),
+				this.zipcode.getText(), null);
 		return userInputTemp;
 	}
 
@@ -244,15 +242,19 @@ public class PropertyRegisterGUI extends javax.swing.JFrame {
     private void searchAndAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchAndAddMouseClicked
     	 if(MODE == 0){// in searching mode
        	  Property userInputAddress = ProertyInformationCollector(); 
-       	  boolean propertyExists = PropertySearching(userInputAddress);
+       	  PropertySearcher p = new PropertySearcher(userInputAddress);
+       	  boolean propertyExists = p.PropertyExists();
        	  if(propertyExists){       
-       		  MODE = 1;
+       		  MODE = 1; // property exists
+       		  userInputAddress.propertyID=p.getPropertyID();
        		  PropertyConfirmPopUp PropertyFound = new PropertyConfirmPopUp(MODE, userInputAddress);
        		  PropertyFound.setVisible(true);
        	  }
-       	  else{
-       		  PropertyConfirmPopUp PropertyNotFound = new PropertyConfirmPopUp(MODE,userInputAddress);
-       		  PropertyNotFound.setVisible(true);   
+       	  else{ // no property found
+       		  if(userInputAddress.generatePropertyID()){
+           		  PropertyConfirmPopUp PropertyNotFound = new PropertyConfirmPopUp(MODE,userInputAddress);
+           		  PropertyNotFound.setVisible(true);   
+       		  }
        	  }
    		  this.dispose();
           }

@@ -7,6 +7,7 @@ package gui;
 
 import database.Property;
 import functionality.NewPropertyRegister;
+import functionality.PropertyUserConnector;
 
 /**
  *
@@ -96,8 +97,17 @@ public class PropertyConfirmPopUp extends javax.swing.JFrame {
     	if(MODE == 0){// that means it didn't found any match in the database
         	NewPropertyRegister NPR = new NewPropertyRegister(this.tempSave);
         	NPR.register();
+        	MainGUI MG = new MainGUI();
+        	MG.setVisible(true);
         	this.dispose();
         }
+    	else{// that means property found
+    		PropertyUserConnector PUC = new PropertyUserConnector();
+    		PUC.connect(this.tempSave); // update the user-property table
+    		MainGUI MG = new MainGUI();
+    		MG.setVisible(true);
+    		this.dispose();
+    	}
     }//GEN-LAST:event_yesButtonMouseClicked
 
     private void noButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noButtonMouseClicked
