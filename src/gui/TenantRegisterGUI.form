@@ -51,7 +51,6 @@
                               <Component id="firstNameText" min="-2" pref="186" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Component id="middleNameText" max="32767" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           </Group>
                           <Component id="lastNameText" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -72,13 +71,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="nameLabel" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="firstNameText" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
-                                  <Component id="middleNameText" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="firstNameText" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="middleNameText" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                       </Group>
                       <Component id="lastNameText" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -160,6 +154,7 @@
     <Component class="javax.swing.JButton" name="backButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backButtonMouseClicked"/>

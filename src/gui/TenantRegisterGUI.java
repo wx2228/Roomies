@@ -73,6 +73,7 @@ public class TenantRegisterGUI extends javax.swing.JFrame {
         });
 
         backButton.setText("Cancel");
+        backButton.setEnabled(false);
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 backButtonMouseClicked(evt);
@@ -168,8 +169,7 @@ public class TenantRegisterGUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(middleNameText)
-                                .addGap(0, 0, 0))
+                                .addComponent(middleNameText))
                             .addComponent(lastNameText)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,11 +183,8 @@ public class TenantRegisterGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(middleNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, 0)))
+                            .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(middleNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(lastNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -262,9 +259,7 @@ public class TenantRegisterGUI extends javax.swing.JFrame {
         Contact toBeRegister = new Contact(this.firstNameText.getText(), this.middleNameText.getText(), this.lastNameText.getText() , this.telephoneText.getText(), this.emailText.getText(), CurrentUser.getID());
     	NewTenantRegister NTR = new NewTenantRegister();
     	NTR.register(toBeRegister);
-        TenantRegisterSucceedPopUp TRSPU = new TenantRegisterSucceedPopUp();
         this.dispose();
-        TRSPU.setVisible(true);
     }//GEN-LAST:event_saveButtonMouseClicked
 
     private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked

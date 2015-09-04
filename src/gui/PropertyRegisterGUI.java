@@ -46,9 +46,9 @@ public class PropertyRegisterGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         searchAndAdd = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        back = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        inforText1 = new javax.swing.JLabel();
+        cancelButton = new javax.swing.JButton();
+        infoText2 = new javax.swing.JLabel();
         streetLine1 = new javax.swing.JTextField();
         streetLine2 = new javax.swing.JTextField();
         aptNumber = new javax.swing.JTextField();
@@ -67,20 +67,21 @@ public class PropertyRegisterGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Please type");
+        inforText1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        inforText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        inforText1.setText("Please type");
 
-        back.setText("back");
-        back.addMouseListener(new java.awt.event.MouseAdapter() {
+        cancelButton.setText("cancel");
+        cancelButton.setEnabled(false);
+        cancelButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backMouseClicked(evt);
+                cancelButtonMouseClicked(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("property address");
+        infoText2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        infoText2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        infoText2.setText("property address");
 
         streetLine1.setFont(new java.awt.Font("Franklin Gothic Book", 2, 36)); // NOI18N
         streetLine1.setForeground(new java.awt.Color(204, 204, 255));
@@ -189,10 +190,10 @@ public class PropertyRegisterGUI extends javax.swing.JFrame {
                     .addComponent(zipcode, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inforText1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(searchAndAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)))
+                    .addComponent(infoText2, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,13 +215,13 @@ public class PropertyRegisterGUI extends javax.swing.JFrame {
                         .addGap(0, 0, 0)
                         .addComponent(zipcode, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inforText1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(infoText2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(searchAndAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
@@ -235,29 +236,32 @@ public class PropertyRegisterGUI extends javax.swing.JFrame {
 		return userInputTemp;
 	}
 
-	private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
+	private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseClicked
        this.dispose();
-    }//GEN-LAST:event_backMouseClicked
+    }//GEN-LAST:event_cancelButtonMouseClicked
 
     private void searchAndAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchAndAddMouseClicked
-    	 if(MODE == 0){// in searching mode
-       	  Property userInputAddress = ProertyInformationCollector(); 
-       	  PropertySearcher p = new PropertySearcher(userInputAddress);
-       	  boolean propertyExists = p.PropertyExists();
-       	  if(propertyExists){       
-       		  MODE = 1; // property exists
-       		  userInputAddress.propertyID=p.getPropertyID();
-       		  PropertyConfirmPopUp PropertyFound = new PropertyConfirmPopUp(MODE, userInputAddress);
-       		  PropertyFound.setVisible(true);
-       	  }
-       	  else{ // no property found
-       		  if(userInputAddress.generatePropertyID()){
-           		  PropertyConfirmPopUp PropertyNotFound = new PropertyConfirmPopUp(MODE,userInputAddress);
-           		  PropertyNotFound.setVisible(true);   
-       		  }
-       	  }
-   		  this.dispose();
-          }
+    	 Property userInputAddress = ProertyInformationCollector(); 
+      	  PropertySearcher p = new PropertySearcher(userInputAddress);
+      	  boolean propertyExists = p.PropertyExists();
+      	  if(propertyExists){       
+      		  MODE = 1; // property exists
+      		  userInputAddress.propertyID=p.getPropertyID();
+      		  PropertyConfirmPopUp PropertyFound = new PropertyConfirmPopUp(MODE, userInputAddress);
+      		  PropertyFound.setVisible(true);
+          	System.out.println("MODE IS "+MODE); 
+      	  }
+      	  else{ // no property found
+      		  MODE = 0;
+      		  if(userInputAddress.generatePropertyID()){
+          		  PropertyConfirmPopUp PropertyNotFound = new PropertyConfirmPopUp(MODE,userInputAddress);
+          		  PropertyNotFound.setVisible(true);   
+              	System.out.println("MODE IS "+MODE); 
+      		  }
+      	  }
+  		  this.dispose();
+       	 
+     
     }//GEN-LAST:event_searchAndAddMouseClicked
 
     private void streetLine1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_streetLine1FocusGained
@@ -399,11 +403,11 @@ public class PropertyRegisterGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField aptNumber;
-    private javax.swing.JButton back;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JTextField city;
     private javax.swing.JTextField country;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel infoText2;
+    private javax.swing.JLabel inforText1;
     private javax.swing.JButton searchAndAdd;
     private javax.swing.JTextField state;
     private javax.swing.JTextField streetLine1;
