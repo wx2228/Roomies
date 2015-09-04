@@ -13,28 +13,28 @@ I will continue working on this, as learning new tech at the same time.
 ##To Do List
 
 ### Info Center
-* add the same functionality in roommates' agreement part
-* add support of PDF file in info center
-* add encryption of file in info center
-* support importing file in info center
-* add system log in info center
+* add the same functionality in roommates' agreement part-------in progress
+* add support of PDF file in info center------------------------in progress
+* add encryption of file in info center-------------------------in progress
+* support importing file in info center-------------------------in progress
+* add system log in info center---------------------------------in progress
 * add editing file with permission in info center
-* fix the crush in contact
+* fix the crush in contact--------------------------------------checked
 * add support for adding,editing,deleting contact.
 * add database for information in the Info Center
 
 ### Check
-* clean the classes
-* add database for bill
+* clean the classes---------------------------------------------checked
+* add database for bill-----------------------------------------in progress
 
 ### Message On Fridge
-* add database for messages
+* add database for messages-------------------------------------in progress
 
 ### Overall system
-* adding support for apartment/house information
-* adding support for registering new user
-* adding support for registering new property
-* adding support for binding property and users.
+* adding support for apartment/house information----------------checked
+* adding support for registering new user-----------------------checked
+* adding support for registering new property-------------------checked
+* adding support for binding property and users.----------------checked
 
 ## Class Description 
 
