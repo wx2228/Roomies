@@ -5,6 +5,7 @@
  */
 package gui;
 
+import database.CurrentContacts;
 import database.CurrentProperty;
 import database.CurrentUser;
 
@@ -21,6 +22,7 @@ public class MainGUI extends javax.swing.JFrame {
         initComponents();
         System.out.println("Current user is "+CurrentUser.getID());
         System.out.println("Current property is "+CurrentProperty.getID());
+        CurrentContacts.initialize();
     }
 
     /**
@@ -128,6 +130,7 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     	CurrentUser.setID(null);
     	CurrentProperty.setID(null);
+    	CurrentContacts.reset();
         LoginGUI loginGUI = new LoginGUI();
         loginGUI.setVisible(true);
         this.dispose();

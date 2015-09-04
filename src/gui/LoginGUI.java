@@ -11,6 +11,7 @@ import java.awt.event.*;
 import database.CurrentProperty;
 import database.CurrentUser;
 import database.UserDatabase;
+import functionality.ContactLoader;
 import functionality.UserAuthenticator;
 
 /**

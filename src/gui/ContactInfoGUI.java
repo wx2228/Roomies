@@ -5,6 +5,8 @@
  */
 package gui;
 
+import database.Contact;
+import database.CurrentContacts;
 import database.CurrentUser;
 
 /**
@@ -12,58 +14,28 @@ import database.CurrentUser;
  * @author Hang Xu
  */
 public class ContactInfoGUI extends javax.swing.JFrame {
-
+     Contact contact;
     /**
      * Creates new form ContactInfoGUI
      */
-    public ContactInfoGUI() {
+    public ContactInfoGUI(String id) {
         initComponents();
+        for(Contact c: CurrentContacts.getContacts()){
+        	if(c.userID == id){
+        		this.firstNameText.setText(c.firstName);
+        		this.middleNameText.setText(c.middleName);
+        		this.lastNameText.setText(c.lastName);
+        		this.telephoneText.setText(c.phoneNumber);
+        		this.emailText.setText(c.emailAddress);
+        	}
+        }
     }
-    static int infoChangeFlag =0;
+   
 
-    public void setTedInfo()
-    {
-        PicLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/roomies/GUI/Ted_Mosby.jpg")));
-        firstNameText.setText("Ted Mosby");
-        sexComboBox.setSelectedIndex(0);
-        dayComboBox.setSelectedIndex(24);
-        monthComboBox.setSelectedIndex(3);
-        yearComboBox.setSelectedIndex(78);
-        telephoneText.setText("917-456-789");
-        emailText.setText("tedmosby@gmail.com");
-    }
-    
-       public void setMarshallInfo()
-    {
-        PicLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/roomies/GUI/Marshall_Eriksen.jpg")));
-        firstNameText.setText("Marshall Eriksen");
-        sexComboBox.setSelectedIndex(0);
-        dayComboBox.setSelectedIndex(26);
-        monthComboBox.setSelectedIndex(7);
-        yearComboBox.setSelectedIndex(78);
-        telephoneText.setText("917-456-731");
-        emailText.setText("marshalleriksen@gmail.com");
-    }
-       
-          public void setLilyInfo()
-    {
-        PicLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/roomies/GUI/Lily_Aldrin.jpg")));
-        firstNameText.setText("Lily Aldrin");
-        sexComboBox.setSelectedIndex(1);
-        dayComboBox.setSelectedIndex(2);
-        monthComboBox.setSelectedIndex(11);
-        yearComboBox.setSelectedIndex(78);
-        telephoneText.setText("917-456-873");
-        emailText.setText("lilyaldrin@gmail.com");
-    }
-          public static void infoChanged()
-          {
-              infoChangeFlag =1;
-          }
-          public boolean infoChangedCheck()
-          {
-              return (infoChangeFlag==1);
-          }
+   
+      
+        
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -115,6 +87,11 @@ public class ContactInfoGUI extends javax.swing.JFrame {
         });
 
         backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         firstNameText.setText("First Name");
 
@@ -165,8 +142,7 @@ public class ContactInfoGUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(middleNameText)
-                                .addGap(0, 0, 0))
+                                .addComponent(middleNameText))
                             .addComponent(lastNameText)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,11 +156,8 @@ public class ContactInfoGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(middleNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, 0)))
+                            .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(middleNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(lastNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -221,6 +194,12 @@ public class ContactInfoGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        this.dispose();
+        ContactChooseGUI CCG = new ContactChooseGUI();
+        CCG.setVisible(true);
+    }//GEN-LAST:event_backButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -249,11 +228,11 @@ public class ContactInfoGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ContactInfoGUI().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ContactInfoGUI().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
