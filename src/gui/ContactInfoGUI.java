@@ -8,6 +8,7 @@ package gui;
 import database.Contact;
 import database.CurrentContacts;
 import database.CurrentUser;
+import functionality.ContactUpdater;
 
 /**
  *
@@ -15,11 +16,14 @@ import database.CurrentUser;
  */
 public class ContactInfoGUI extends javax.swing.JFrame {
      Contact contact;
+     String currentID;
+     static int MODE = 0;// when mode is 0, in non-edit mode. 
     /**
      * Creates new form ContactInfoGUI
      */
     public ContactInfoGUI(String id) {
         initComponents();
+        currentID = id;
         for(Contact c: CurrentContacts.getContacts()){
         	if(c.userID == id){
         		this.firstNameText.setText(c.firstName);
@@ -29,6 +33,13 @@ public class ContactInfoGUI extends javax.swing.JFrame {
         		this.emailText.setText(c.emailAddress);
         	}
         }
+        this.setEditable(false);
+        System.out.println(CurrentUser.getID());
+        System.out.println(currentID);
+        if(!CurrentUser.getID().equals(currentID)){
+        	this.saveButton.setEnabled(false);
+        }
+        this.saveButton.setText("Edit");
     }
    
 
@@ -189,13 +200,37 @@ public class ContactInfoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_monthComboBoxActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        // TODO add your handling code here:
+        if(ContactInfoGUI.MODE == 0){
+        	if(CurrentUser.getID().equals(currentID)){// so the user is checking his/her own contact, giving his right to edit his own contacts.
+        		ContactInfoGUI.MODE=1;
+        		this.setEditable(true);
+        		this.saveButton.setText("Save");
+        	}
+        }
+        else{//in editting mode, save the changes to database.
+        	// first collect the data in the textfield
+        	Contact collectedContact = new Contact();
+        	collectedContact.firstName=this.firstNameText.getText();
+        	collectedContact.middleName=this.middleNameText.getText();
+        	collectedContact.lastName=this.lastNameText.getText();
+        	collectedContact.phoneNumber=this.telephoneText.getText();
+        	collectedContact.emailAddress=this.emailText.getText();
+        	ContactUpdater CU = new ContactUpdater(collectedContact);
+        	if(CU.update()){
+        		System.out.println("Update success");
+        		this.setEditable(false);
+        		this.saveButton.setText("Edit");
+        		ContactInfoGUI.MODE=0;
+        	}
+        	
+        }
     
         
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.dispose();
+        CurrentContacts.reset();
         ContactChooseGUI CCG = new ContactChooseGUI();
         CCG.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
@@ -233,8 +268,16 @@ public class ContactInfoGUI extends javax.swing.JFrame {
 //                new ContactInfoGUI().setVisible(true);
 //            }
 //        });
-    }
+        
 
+    }
+    private void setEditable(boolean b){
+        this.firstNameText.setEditable(b);
+        this.middleNameText.setEditable(b);
+        this.lastNameText.setEditable(b);
+        this.emailText.setEditable(b);
+        this.telephoneText.setEditable(b);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PicLabel;
     private javax.swing.JButton backButton;
