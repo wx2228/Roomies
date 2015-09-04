@@ -12,19 +12,27 @@ import java.util.Hashtable;
  *
  * @author Hang Xu
  */
-public class ExistingBill {
+public class CurrentBills {
   
    private static ArrayList<Bill> existingBills =new ArrayList<Bill>();
    final static String TODAY = "today";
    final static String THISMONTH = "thismonth";
 //   private static Hashtable<String, Double> splitTable;
    
+   public static void clear(){
+	   existingBills.clear();
+   }
+   
    public static void add(Bill bill){
 	   existingBills.add(bill);
    }
   
-   public static void edit(Bill bill,int i){
-       existingBills.set(i, bill);
+   public static void edit(Bill bill,String billID){
+      for(Bill b: existingBills){
+    	  if(b.getBillID().equals(billID)){
+    		  existingBills.set(existingBills.indexOf(b), bill);
+    	  }
+      }
    }
    
    public static void delete(int toBeDeletedIndex){
@@ -58,7 +66,7 @@ public class ExistingBill {
    }
    
    private static void split(int billIndex,Hashtable<String, Double> splitTable){
-	   Bill bill = ExistingBill.getBill(billIndex); 
+	   Bill bill = CurrentBills.getBill(billIndex); 
 	   double totalAmount = bill.getAmount();
 	   NameList names = bill.getNames();
 	   int numberOfPerson = names.size();
@@ -75,19 +83,19 @@ public class ExistingBill {
    
    public static double[] split(String rules){
 	   ArrayList<Integer> billIndex = new ArrayList<Integer>();
-	   int allBillSize = ExistingBill.getSize();
+	   int allBillSize = CurrentBills.getSize();
 	   if (rules == TODAY){
 		   for(int i = 0; i <allBillSize; i ++ ){
-		       	if(ExistingBill.getBill(i).getDate().isToday())
+		       	if(CurrentBills.getBill(i).getDate().isToday())
 		       		billIndex.add(i);	
 		       }	   
 	   }
 	   if(rules == THISMONTH){
 		   for(int i = 0; i <allBillSize; i ++ ){
-		       	if(ExistingBill.getBill(i).getDate().isThisMonth())
+		       	if(CurrentBills.getBill(i).getDate().isThisMonth())
 		       		billIndex.add(i);	
 		       }
 	   }
-       return ExistingBill.split(billIndex);
+       return CurrentBills.split(billIndex);
    }
 }

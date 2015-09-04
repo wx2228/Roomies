@@ -11,14 +11,14 @@ import javax.swing.*;
 
 import database.Bill;
 import database.Date;
-import database.ExistingBill;
+import database.CurrentBills;
 import database.NameList;
 /**
  *
  * @author Hang Xu
  */
 public class BillEdittingGUI extends javax.swing.JFrame {
-	static int selectedEditedIndex;
+	static String billID;
     /**
      * Creates new form EditBillGUI
      */
@@ -160,22 +160,12 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void editBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBillButtonActionPerformed
-//         int peopleIndex=0;
-//        if(roommate1Label.isSelected())
-//            peopleIndex=peopleIndex+4;
-//        if(roommate2Label.isSelected())
-//            peopleIndex=peopleIndex+2;
-//        if(roommate3Label.isSelected())
-//            peopleIndex=peopleIndex+1;  
-//        Bill editedBill = new Bill(monthComboBox.getSelectedIndex()+1,dayComboBox.getSelectedIndex()+1,yearComboBox.getSelectedIndex()+2000,peopleIndex,amountText.getText(),descriptionText.getText()); 
-    	Bill  editedBill = this.generateBill();
-    	ExistingBill.edit(editedBill, selectedEditedIndex);
+        Bill  editedBill = this.generateUpdatedBill();
+    	CurrentBills.edit(editedBill);
         BillCheckGUI billGUI = new BillCheckGUI();
-        billGUI.billLoading();
         billGUI.setVisible(true);
         this.dispose();
-        
-       
+ 
     }//GEN-LAST:event_editBillButtonActionPerformed
 
     private void descriptionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currencyComboBoxActionPerformed
@@ -194,17 +184,16 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_currencyComboBoxActionPerformed
 
     private void roommate2LabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roommate2LabelActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_roommate2LabelActionPerformed
 
     private void monthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthComboBoxActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_monthComboBoxActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        // TODO add your handling code here:
+
           BillCheckGUI billGUI = new BillCheckGUI();
-        billGUI.billLoading();
         billGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
@@ -246,7 +235,7 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     }
 
     
-    private Bill generateBill() {
+    private Bill generateUpdatedBill() {
 		Date newDate = this.getDate();
 		double newAmount = this.getAmount();
 		NameList newNames = this.getNames();
@@ -258,7 +247,7 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     	int year = yearComboBox.getSelectedIndex() + 2000;
     	int month = monthComboBox.getSelectedIndex() + 1;
     	int day = dayComboBox.getSelectedIndex() + 1;
-    	return new Date(year, month, day);
+    	return new Date(month, day, year);
     }
     private double getAmount(){
     	String s = amountText.getText();
@@ -295,8 +284,7 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox roommate3Label;
     private javax.swing.JComboBox yearComboBox;
     // End of variables declaration//GEN-END:variables
-	public void loading(Bill bill, int selectedRow) {
-		BillEdittingGUI.setBillIndex(selectedRow);
+	public void loading(Bill bill) {
 		this.setDate(bill);
 		this.setAmount(bill);
 		this.setNames(bill);
@@ -326,12 +314,5 @@ public class BillEdittingGUI extends javax.swing.JFrame {
 		this.monthComboBox.setSelectedIndex(bill.getDate().month -1);
 		this.yearComboBox.setSelectedIndex(bill.getDate().year - 2000);
 	}
-	static private void setBillIndex(int i)
-	{
-	    selectedEditedIndex =i;
-	}
-	static public int getIndex()
-	{
-	    return selectedEditedIndex;
-	}
+
 }

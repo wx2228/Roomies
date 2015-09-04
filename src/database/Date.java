@@ -6,8 +6,14 @@ public class Date {
 	public int year;
 	public int month;
 	public int day;
-	
-	public Date(int Year, int Month, int Day){
+	static public Date StringtoDate(String s){
+		String[] dateString = s.split(",");
+		int year = Integer.parseInt(dateString[2]);
+		int month = Integer.parseInt(dateString[0]);
+		int day = Integer.parseInt(dateString[1]);
+		return new Date(month,day,year);
+	}
+	public Date(int Month, int Day, int Year){
 		this.year = Year;
 		this.month = Month;
 		this.day = Day;

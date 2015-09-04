@@ -5,7 +5,7 @@
  */
 package gui;
 
-import database.ExistingBill;
+import database.CurrentBills;
 
 /**
  *
@@ -89,9 +89,8 @@ static public int getIndex()
 
     private void OKButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKButton2ActionPerformed
         // TODO add your handling code here:
-        ExistingBill.delete(selectedDeletedIndex);
+        CurrentBills.delete(selectedDeletedIndex);
         BillCheckGUI billGUI = new BillCheckGUI();
-        billGUI.billLoading();
         billGUI.setVisible(true);
         this.dispose();
 

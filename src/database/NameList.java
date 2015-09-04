@@ -7,7 +7,7 @@ public class NameList extends ArrayList<String> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	public String toString(){
 		int size = this.size();
 		String s = "";

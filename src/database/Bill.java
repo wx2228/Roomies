@@ -16,14 +16,16 @@ public class Bill {
 	private double amout;
 	private NameList names;
 	private String desc;
-	private UUID billID;
-	private UUID propertyID;
+	private String billID;
+	private String propertyID;
 
-    public Bill(Date date, double amount, NameList names, String desc) {
+    public Bill(Date date, double amount, NameList names, String desc,String billID,String propertyID) {
         this.date = date;
         this.amout = amount;
         this.names = names;
         this.desc = desc;
+        this.billID=billID;
+        this.propertyID=propertyID;
     }
     
     public Date getDate(){
@@ -40,6 +42,10 @@ public class Bill {
     
     public String getDesc(){
     	return this.desc;
+    }
+    
+    public String getBillID(){
+    	return this.billID;
     }
 
 }

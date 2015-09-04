@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import database.Bill;
+import database.CurrentProperty;
 import database.Date;
-import database.ExistingBill;
+import database.CurrentBills;
 import database.NameList;
 import functionality.*;
 /**
@@ -34,7 +35,7 @@ public class BillAddingGUI extends javax.swing.JFrame {
         dayComboBox.setSelectedIndex(dateNow-1);
         monthComboBox.setSelectedIndex(monthNow-1);
         yearComboBox.setSelectedIndex(yearNow-2000);
-        
+
     }
     
    
@@ -213,10 +214,10 @@ public class BillAddingGUI extends javax.swing.JFrame {
     private void addBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBillButtonActionPerformed
     	
     	this.userInputCheck();
-    	Bill billToBeAdded = this.loadingNewBill();
-        ExistingBill.add(billToBeAdded);
+    	Bill billToBeAdded = this.generateNewBill();
+        BillUpdater BU = new BillUpdater();
+        BU.addNewBill(billToBeAdded);
         BillCheckGUI totalBillGUI = new BillCheckGUI();
-        totalBillGUI.billLoading();
         totalBillGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addBillButtonActionPerformed
@@ -255,19 +256,20 @@ public class BillAddingGUI extends javax.swing.JFrame {
             }
         }
     }
-    private Bill loadingNewBill() {
+    private Bill generateNewBill() { // generate a new bill according to the user input
 		Date newDate = this.getDate();
 		double newAmount = this.getAmount();
 		NameList newNames = this.getNames();
 		String newDesc = this.getDesc();
-		return new Bill(newDate, newAmount, newNames, newDesc);
+		String newBillID = java.util.UUID.randomUUID().toString(); 
+		return new Bill(newDate, newAmount, newNames, newDesc,newBillID,CurrentProperty.getID());
 	}
 
     private Date getDate(){
     	int year = yearComboBox.getSelectedIndex() + 2000;
     	int month = monthComboBox.getSelectedIndex() + 1;
     	int day = dayComboBox.getSelectedIndex() + 1;
-    	return new Date(year, month, day);
+    	return new Date(month, day, year);
     }
     private double getAmount(){
     	String s = amountText.getText();
@@ -295,7 +297,6 @@ public class BillAddingGUI extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         BillCheckGUI billGUI = new BillCheckGUI();
-        billGUI.billLoading();
         billGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed

@@ -8,7 +8,8 @@ import javax.swing.table.*;
 import javax.swing.*;
 
 import database.Bill;
-import database.ExistingBill;
+import database.CurrentBills;
+import database.CurrentProperty;
 import functionality.*;
 
 import java.util.ArrayList;
@@ -36,17 +37,21 @@ public class BillCheckGUI extends javax.swing.JFrame {
        displayTable.getColumn("People").setCellRenderer(render);
        displayTable.getColumn("Amount").setCellRenderer(render);
        displayTable.getColumn("Description").setCellRenderer(render);
+       BillsLoader BL = new BillsLoader();
+       BL.loadingBillsToCurrentBills();
+       billLoadingfromExistingBill();
+       //System.out.println("when loading the check GUI, size is " + CurrentBills.getSize());
     }
-   public void billLoading()
+   private void billLoadingfromExistingBill()
     {    
-       String[][] rowData = new String[ExistingBill.getSize()][4];
-       for(int i=0;i<ExistingBill.getSize();i++)
+       String[][] rowData = new String[CurrentBills.getSize()][4];
+       for(int i=0;i<CurrentBills.getSize();i++)
        {
-    	   Bill currentBill = ExistingBill.getBill(i);
-           rowData[i][0]=currentBill.getDate().toString();
-           rowData[i][1]=currentBill.getNames().toString();
-           rowData[i][2]=Double.toString(currentBill.getAmount());
-           rowData[i][3]=currentBill.getDesc();
+    	   Bill b = CurrentBills.getBill(i);
+           rowData[i][0]=b.getDate().toString();
+           rowData[i][1]=b.getNames().toString();
+           rowData[i][2]=Double.toString(b.getAmount());
+           rowData[i][3]=b.getDesc();
            model=(DefaultTableModel)displayTable.getModel();
            model.insertRow(model.getRowCount(), rowData[i]);
        }
@@ -246,14 +251,12 @@ public class BillCheckGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
         MainGUI mainGUI = new MainGUI();
         mainGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
         BillAddingGUI addBillGUI = new BillAddingGUI();
         addBillGUI.setVisible(true);
         this.dispose();
@@ -286,7 +289,7 @@ public class BillCheckGUI extends javax.swing.JFrame {
 
     private Bill getSelectedBill(){
     	int selectedRowIndex = displayTable.getSelectedRow();
-    	return ExistingBill.getBill(selectedRowIndex);
+    	return CurrentBills.getBill(selectedRowIndex);
     }
     
     private void displayTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayTableMouseClicked
@@ -295,7 +298,7 @@ public class BillCheckGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_displayTableMouseClicked
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
+        
           if(displayTable.getSelectedRow()<0)
          {
              WrongPopup noSelected = new WrongPopup("Choose a bill first");
@@ -322,7 +325,7 @@ public class BillCheckGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void splitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_splitButtonActionPerformed
-        // TODO add your handling code here:
+        
 //           if(displayTable.getSelectedRow()<0)
 //         {
 //             WrongPopup noSelected = new WrongPopup("Choose a bill first");
@@ -330,20 +333,20 @@ public class BillCheckGUI extends javax.swing.JFrame {
 //             return;
 //         }
 //        int[] selectedIndexs = displayTable.getSelectedRows();
-        double[] billForEveryone = ExistingBill.split(getSelctedRowIndex());
+        double[] billForEveryone = CurrentBills.split(getSelctedRowIndex());
         showFinalResult(billForEveryone);
         
     }//GEN-LAST:event_splitButtonActionPerformed
 
     private void todayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todayButtonActionPerformed
-        // TODO add your handling code here:
-    	double[] billForEveryone = ExistingBill.split("today");
+        
+    	double[] billForEveryone = CurrentBills.split("today");
     	showFinalResult(billForEveryone);
         
     }//GEN-LAST:event_todayButtonActionPerformed
 
     private void thisMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thisMonthButtonActionPerformed
-    	double[] billForEveryone = ExistingBill.split("thismonth");
+    	double[] billForEveryone = CurrentBills.split("thismonth");
     	showFinalResult(billForEveryone);
     }//GEN-LAST:event_thisMonthButtonActionPerformed
     private ArrayList<Integer> getSelctedRowIndex(){

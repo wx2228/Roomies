@@ -36,8 +36,7 @@ public class ContactChooseGUI extends javax.swing.JFrame {
         int column = this.gridDecider(size)[1];// use grid decider to make the grid most likely to square. 
         buttonsPanel.setLayout(new GridLayout(row,column));
         for(Contact c: CurrentContacts.getContacts()){
-        	buttonsPanel.add(new ContactButton(c.firstName,c.userID));
-        	System.out.println(CurrentContacts.getContacts().get(CurrentContacts.getContacts().size()-1));
+        	buttonsPanel.add(new ContactButton(c.firstName+" "+c.lastName.toUpperCase().charAt(0),c.userID));
         }
 
         //buttonsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
