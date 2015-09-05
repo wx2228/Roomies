@@ -216,7 +216,7 @@ public class BillAddingGUI extends javax.swing.JFrame {
     	this.userInputCheck();
     	Bill billToBeAdded = this.generateNewBill();
         BillUpdater BU = new BillUpdater();
-        BU.addNewBill(billToBeAdded);
+        BU.add(billToBeAdded);
         BillGUI totalBillGUI = new BillGUI();
         totalBillGUI.setVisible(true);
         this.dispose();

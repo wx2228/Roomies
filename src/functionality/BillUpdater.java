@@ -13,7 +13,7 @@ import database.NameList;
 
 public class BillUpdater { // this will update the CurrentBill and the database at the same time.
 
-	public void addNewBill(Bill b) {
+	public void add(Bill b) {
 		  CurrentBills.add(b);// add the new bill the currentbills. 
 		  String url = "jdbc:mysql://localhost:3306/"; 
 			String dbName = "roomies_user";
@@ -42,7 +42,7 @@ public class BillUpdater { // this will update the CurrentBill and the database 
 		
 	}
 
-	public void editBill(Bill b){
+	public void edit(Bill b){
 		CurrentBills.edit(b,b.getBillID());
 		String url = "jdbc:mysql://localhost:3306/"; 
 		String dbName = "roomies_user";
@@ -95,4 +95,32 @@ public class BillUpdater { // this will update the CurrentBill and the database 
 		catch (Exception e) { e.printStackTrace(); 
 		}
 	}
+
+	public void delete(Bill b){
+		String billID = b.getBillID();//get the bill ID so we can delete it from database
+		CurrentBills.delete(b);//remove the bill from CurrentBills.
+		String url = "jdbc:mysql://localhost:3306/"; 
+		String dbName = "roomies_user";
+		String driver = "com.mysql.jdbc.Driver"; 
+		String userName = "root";
+		String password = "Xuhang202";
+
+		try { 
+			Class.forName(driver).newInstance(); 
+			Connection conn = DriverManager.getConnection(url+dbName,userName,password); 
+			Statement st = conn.createStatement();
+			String deleteMapping= "DELETE  FROM roomies_bill.bill_user_mapping "
+					+ "WHERE billID = '"+billID+"';";
+		    int deleteMappingResult = st.executeUpdate(deleteMapping);
+		    String deleteRecord = "DELETE FROM roomies_bill.bill WHERE billID = '"+billID+"';";
+		    int deleteRecordResult = st.executeUpdate(deleteRecord);
+
+			conn.close();
+			} 
+		catch (Exception e) { e.printStackTrace(); 
+		}
+	}
+
+
 }
+

@@ -27,6 +27,9 @@ public class CurrentBills {
 	   existingBills.add(bill);
    }
   
+   public static void delete(Bill b){
+	   existingBills.remove(b);
+   }
    public static void edit(Bill bill,String billID){
       for(Bill b: existingBills){
     	  if(b.getBillID().equals(billID)){

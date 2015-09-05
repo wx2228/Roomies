@@ -5,7 +5,11 @@
  */
 package gui;
 
+import javax.swing.JFrame;
+
+import database.Bill;
 import database.CurrentBills;
+import functionality.BillUpdater;
 
 /**
  *
@@ -13,6 +17,7 @@ import database.CurrentBills;
  */
 public class DeleteConfirmPopup extends javax.swing.JFrame {
 
+	JFrame parentGUI;
     /**
      * Creates new form DeleteWindow
      */
@@ -25,8 +30,9 @@ static public int getIndex()
 {
     return selectedDeletedIndex;
 }
-    public DeleteConfirmPopup() {
+    public DeleteConfirmPopup(JFrame gui) {
         initComponents();
+        parentGUI = gui;
     }
 
     /**
@@ -89,7 +95,10 @@ static public int getIndex()
 
     private void OKButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKButton2ActionPerformed
         // TODO add your handling code here:
-        CurrentBills.delete(selectedDeletedIndex);
+    	BillUpdater BU = new BillUpdater();
+    	Bill b = CurrentBills.getBill(selectedDeletedIndex);
+        BU.delete(b);
+    	parentGUI.dispose();
         BillGUI billGUI = new BillGUI();
         billGUI.setVisible(true);
         this.dispose();
@@ -128,12 +137,7 @@ static public int getIndex()
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DeleteConfirmPopup().setVisible(true);
-            }
-        });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -176,7 +176,7 @@ public class BillEdittingGUI extends javax.swing.JFrame {
        else{
     	   Bill editedBill = this.generateUpdatedBill();
            BillUpdater BU = new BillUpdater();
-           BU.editBill(editedBill);
+           BU.edit(editedBill);
            BillGUI billGUI = new BillGUI();
            billGUI.setVisible(true);
            this.dispose();

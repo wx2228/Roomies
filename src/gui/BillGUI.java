@@ -316,7 +316,7 @@ public class BillGUI extends javax.swing.JFrame {
             
         }
         else{
-        DeleteConfirmPopup del = new DeleteConfirmPopup();
+        DeleteConfirmPopup del = new DeleteConfirmPopup(this);
         DeleteConfirmPopup.setIndex(displayTable.getSelectedRow());
         del.setVisible(true);
        }
