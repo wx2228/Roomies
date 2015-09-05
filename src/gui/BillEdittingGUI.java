@@ -168,16 +168,27 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void editBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBillButtonActionPerformed
-        Bill  editedBill = this.generateUpdatedBill();
-        BillUpdater BU = new BillUpdater();
-        BU.editBill(editedBill);
-        BillGUI billGUI = new BillGUI();
-        billGUI.setVisible(true);
-        this.dispose();
+       if(!this.atLeastOneSelected()){
+    	 WrongPopup noPersonSelected = new WrongPopup("No pessrson selected");
+      	 noPersonSelected.setVisible(true);
+      	 noPersonSelected.requestFocus();
+       }
+       else{
+    	   Bill editedBill = this.generateUpdatedBill();
+           BillUpdater BU = new BillUpdater();
+           BU.editBill(editedBill);
+           BillGUI billGUI = new BillGUI();
+           billGUI.setVisible(true);
+           this.dispose();
+       }
+    	
  
     }//GEN-LAST:event_editBillButtonActionPerformed
 
-    private void descriptionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currencyComboBoxActionPerformed
+    private boolean atLeastOneSelected() {
+		return this.roommate1Label.isSelected()||this.roommate2Label.isSelected()||this.roommate3Label.isSelected();
+	}
+	private void descriptionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currencyComboBoxActionPerformed
         // TODO add your handling code here:
     	 if(descriptionComboBox.getSelectedIndex()!=0)
          {   
@@ -275,6 +286,7 @@ public class BillEdittingGUI extends javax.swing.JFrame {
         	 names.add(roommate2Label.getText());
          if(roommate3Label.isSelected())
         	 names.add(roommate3Label.getText());
+
          return names;
     }
     private String getDesc(){

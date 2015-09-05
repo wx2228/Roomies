@@ -62,20 +62,27 @@ public class BillUpdater { // this will update the CurrentBill and the database 
 			String findOriginalMapping= "SELECT name FROM roomies_bill.bill_user_mapping "
 					+ "WHERE billID = '"+b.getBillID()+"';";
 			ResultSet originalBillNames= st.executeQuery(findOriginalMapping);
-			NameList oNames = new NameList();
+			NameList oriNames = new NameList();
+			NameList newNames = b.getNames();
 			while(originalBillNames.next()){
-				oNames.add(originalBillNames.getString("name"));
+				oriNames.add(originalBillNames.getString("name"));
+				System.out.println("The Os are :"+originalBillNames.getString("name"));
 			}
-			for(String oName : oNames){// Delete the original map which doesn't exist in new bill
-				for(String s : b.getNames()){//try to find the name in new bill, if failed, delete the original mapping
-					if(s.equals(oName)){
-						b.getNames().remove(s);//if the name is found in original mapping, delete it in new mapping, reduce the time for finding mapping that doesn't exist before
-						break;
-					}
+			for(String oName : oriNames){
+				if(newNames.contains(oName)){//if the old name is in new list
+					newNames.remove(oName);
+				}
+				else{
 					st.execute("DELETE FROM roomies_bill.bill_user_mapping "
 							+ "WHERE billID = '"+b.getBillID()+"' AND name = '"+oName+"';");
+				   System.out.println("the difference has been deleted "+oName);
 				}
 			}
+		
+			for(String s : b.getNames()){
+				System.out.println("After deleting same name and removing old mapping, now there are:"+s);
+			}
+			
 			if(b.getNames().size()!=0){//if there are new mapping needed to be added to database
 				for(String s : b.getNames()){
 					st.executeUpdate("INSERT INTO roomies_bill.bill_user_mapping "

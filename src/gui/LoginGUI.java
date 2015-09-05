@@ -199,13 +199,15 @@ public class LoginGUI extends javax.swing.JFrame {
     	logoLabel.setForeground(Color.red);
     else logoLabel.setForeground(Color.black);
         if (key == KeyEvent.VK_ENTER)
-        {
+        {   
         	String inputusn = userNameText.getText().toLowerCase();
-        	String inputpwd = passWordText.getPassword().toString(); 
+        	String inputpwd = String.valueOf(passWordText.getPassword());
         	
         	UserAuthenticator uA = new UserAuthenticator(inputusn, inputpwd);
             if(uA.authenticate()) // if successfully log in, remove the login GUI, show the main GUI.
             {
+            	CurrentUser.setID(uA.getUserID());
+            	CurrentProperty.setID(uA.getPropertyID());
                 MainGUI mainGUI = new MainGUI();     
                 mainGUI.setVisible(true);
                 this.dispose();
