@@ -138,6 +138,9 @@
             <Property name="rows" type="int" value="5"/>
             <Property name="text" type="java.lang.String" value="Description"/>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="descriptionTextFocusGained"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

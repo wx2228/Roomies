@@ -107,7 +107,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void checkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkButtonActionPerformed
         // TODO add your handling code here:
-        BillCheckGUI billGUI = new BillCheckGUI();
+        BillGUI billGUI = new BillGUI();
         billGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_checkButtonActionPerformed

@@ -13,6 +13,7 @@ import database.Bill;
 import database.Date;
 import database.CurrentBills;
 import database.NameList;
+import functionality.BillUpdater;
 /**
  *
  * @author Hang Xu
@@ -22,8 +23,10 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     /**
      * Creates new form EditBillGUI
      */
-    public BillEdittingGUI() {
+    public BillEdittingGUI(Bill bill) {
         initComponents();       
+        loading(bill);
+        System.out.println("selected is "+this.descriptionComboBox.getSelectedIndex());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,7 +67,7 @@ public class BillEdittingGUI extends javax.swing.JFrame {
             }
         });
 
-        descriptionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        descriptionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Other", "Cable", "Electricity", "Food ", "Gas", "Internet", "Rent", "Water"  }));
         descriptionComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 descriptionComboBoxActionPerformed(evt);
@@ -74,6 +77,11 @@ public class BillEdittingGUI extends javax.swing.JFrame {
         descriptionText.setColumns(20);
         descriptionText.setRows(5);
         descriptionText.setText("Description");
+        descriptionText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                descriptionTextFocusGained(evt);
+            }
+        });
         descriptionScrollPane.setViewportView(descriptionText);
 
         amountText.setText("Amount");
@@ -161,8 +169,9 @@ public class BillEdittingGUI extends javax.swing.JFrame {
 
     private void editBillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBillButtonActionPerformed
         Bill  editedBill = this.generateUpdatedBill();
-    	CurrentBills.edit(editedBill);
-        BillCheckGUI billGUI = new BillCheckGUI();
+        BillUpdater BU = new BillUpdater();
+        BU.editBill(editedBill);
+        BillGUI billGUI = new BillGUI();
         billGUI.setVisible(true);
         this.dispose();
  
@@ -171,7 +180,8 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     private void descriptionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currencyComboBoxActionPerformed
         // TODO add your handling code here:
     	 if(descriptionComboBox.getSelectedIndex()!=0)
-         {
+         {   
+    		 descriptionText.setText(this.descriptionComboBox.getSelectedItem().toString());
              descriptionText.setFont(new Font("Tahoma",Font.ITALIC,24));
              descriptionText.setForeground(Color.black);
          }
@@ -180,7 +190,7 @@ public class BillEdittingGUI extends javax.swing.JFrame {
              descriptionText.setForeground(new Color(204,204,255));
              
          }
-         descriptionText.setText(descriptionComboBox.getSelectedItem().toString());
+        
     }//GEN-LAST:event_currencyComboBoxActionPerformed
 
     private void roommate2LabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roommate2LabelActionPerformed
@@ -192,11 +202,18 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_monthComboBoxActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-
-          BillCheckGUI billGUI = new BillCheckGUI();
+        BillEdittingGUI.billID=null;
+    	BillGUI billGUI = new BillGUI();
         billGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void descriptionTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_descriptionTextFocusGained
+        if(!this.descriptionText.getForeground().equals(Color.black)){
+        	this.descriptionText.setText("");
+        	this.descriptionText.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_descriptionTextFocusGained
 
     /**
      * @param args the command line arguments
@@ -227,11 +244,7 @@ public class BillEdittingGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new BillEdittingGUI().setVisible(true);
-            }
-        });
+
     }
 
     
@@ -240,7 +253,7 @@ public class BillEdittingGUI extends javax.swing.JFrame {
 		double newAmount = this.getAmount();
 		NameList newNames = this.getNames();
 		String newDesc = this.getDesc();
-		return new Bill(newDate, newAmount, newNames, newDesc);
+		return new Bill(newDate, newAmount, newNames, newDesc, billID, newDesc);
 	}
 
     private Date getDate(){
@@ -284,13 +297,28 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox roommate3Label;
     private javax.swing.JComboBox yearComboBox;
     // End of variables declaration//GEN-END:variables
-	public void loading(Bill bill) {
+	private void loading(Bill bill) {//loading the bill information to the GUI
+		int size = this.descriptionComboBox.getItemCount();
+		int i = 0;
 		this.setDate(bill);
 		this.setAmount(bill);
 		this.setNames(bill);
 		this.setDesc(bill);
+		for(; i < size; i++){
+			if(bill.getDesc().equals(this.descriptionComboBox.getItemAt(i).toString())){
+				this.descriptionComboBox.setSelectedIndex(i);
+				break;
+			}
+		}
+        System.out.println("In loading:"+this.descriptionComboBox.getSelectedIndex());
+		if (i == size){
+			 this.descriptionComboBox.setSelectedIndex(0);
+		}
+
+		BillEdittingGUI.billID=bill.getBillID();
 	}
 	private void setDesc(Bill bill){
+		System.out.println(bill.getDesc());
 		descriptionText.setText(bill.getDesc());
 	}
 	private void setNames(Bill bill) {
@@ -303,7 +331,6 @@ public class BillEdittingGUI extends javax.swing.JFrame {
 			}
 		}
 	
-		
 		
 	}
 	private void setAmount(Bill bill) {

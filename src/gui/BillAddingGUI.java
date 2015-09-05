@@ -217,7 +217,7 @@ public class BillAddingGUI extends javax.swing.JFrame {
     	Bill billToBeAdded = this.generateNewBill();
         BillUpdater BU = new BillUpdater();
         BU.addNewBill(billToBeAdded);
-        BillCheckGUI totalBillGUI = new BillCheckGUI();
+        BillGUI totalBillGUI = new BillGUI();
         totalBillGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addBillButtonActionPerformed
@@ -296,7 +296,7 @@ public class BillAddingGUI extends javax.swing.JFrame {
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        BillCheckGUI billGUI = new BillCheckGUI();
+        BillGUI billGUI = new BillGUI();
         billGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed

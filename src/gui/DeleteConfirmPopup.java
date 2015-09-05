@@ -90,7 +90,7 @@ static public int getIndex()
     private void OKButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKButton2ActionPerformed
         // TODO add your handling code here:
         CurrentBills.delete(selectedDeletedIndex);
-        BillCheckGUI billGUI = new BillCheckGUI();
+        BillGUI billGUI = new BillGUI();
         billGUI.setVisible(true);
         this.dispose();
 

@@ -22,13 +22,13 @@ import java.text.SimpleDateFormat;
  *
  * @author Hang Xu
  */
-public class BillCheckGUI extends javax.swing.JFrame {
+public class BillGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form BillCheckGUI
      */
   DefaultTableModel model;
-    public BillCheckGUI() {
+    public BillGUI() {
        
         initComponents();
         DefaultTableCellRenderer render = new DefaultTableCellRenderer();
@@ -264,8 +264,7 @@ public class BillCheckGUI extends javax.swing.JFrame {
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         if(this.selectedRowCheck()){
-        BillEdittingGUI editBillGUI = new BillEdittingGUI();
-        editBillGUI.loading(this.getSelectedBill(),displayTable.getSelectedRow());
+        BillEdittingGUI editBillGUI = new BillEdittingGUI(this.getSelectedBill());
         editBillGUI.setVisible(true);
         this.dispose();}
     }//GEN-LAST:event_editButtonActionPerformed
