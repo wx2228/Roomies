@@ -20,7 +20,7 @@ I will continue working on this, as learning new tech at the same time.
 * add system log in info center---------------------------------in progress
 * add editing file with permission in info center
 * fix the crush in contact--------------------------------------checked
-* add support for adding,editing,deleting contact.
+* add support for adding,editing--------------------------------checked
 * add database for information in the Info Center
 
 ### Check
