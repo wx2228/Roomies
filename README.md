@@ -25,7 +25,7 @@ I will continue working on this, as learning new tech at the same time.
 
 ### Check
 * clean the classes---------------------------------------------checked
-* add database for bill-----------------------------------------in progress
+* add database for bill-----------------------------------------checked
 
 ### Message On Fridge
 * add database for messages-------------------------------------in progress
