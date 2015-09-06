@@ -26,68 +26,53 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="amountText" alignment="1" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="monthComboBox" pref="187" max="32767" attributes="0"/>
-                                  <Component id="roommate1Label" pref="187" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="roommate2Label" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                                  <Component id="dayComboBox" min="-2" pref="170" max="-2" attributes="0"/>
-                              </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="amountText" min="-2" pref="328" max="-2" attributes="0"/>
+                          <Component id="descriptionComboBox" min="-2" pref="328" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="monthComboBox" min="-2" pref="164" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Component id="dayComboBox" min="-2" pref="164" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="yearComboBox" alignment="0" min="-2" pref="328" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="roommate3Label" pref="191" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="descriptionComboBox" max="32767" attributes="0"/>
-                          <Component id="yearComboBox" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="namePane" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="addBillButton" pref="319" max="32767" attributes="0"/>
-                  <Component id="cancelButton" max="32767" attributes="0"/>
+                  <Component id="addBillButton" min="-2" pref="319" max="-2" attributes="0"/>
+                  <Component id="cancelButton" min="-2" pref="319" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Component id="addBillButton" min="-2" pref="235" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="cancelButton" min="-2" pref="201" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="monthComboBox" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="dayComboBox" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="yearComboBox" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="addBillButton" alignment="1" min="-2" pref="253" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="monthComboBox" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                          <Component id="dayComboBox" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="yearComboBox" min="-2" pref="63" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="amountText" min="-2" pref="79" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Component id="descriptionComboBox" min="-2" pref="63" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="namePane" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="roommate2Label" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
-                  <Component id="roommate1Label" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
-                  <Component id="roommate3Label" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Component id="cancelButton" min="-2" pref="201" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="amountText" alignment="0" pref="56" max="32767" attributes="0"/>
-                  <Component id="descriptionComboBox" alignment="0" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -95,6 +80,9 @@
   <SubComponents>
     <Component class="javax.swing.JComboBox" name="monthComboBox">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="24" style="0"/>
+        </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="13">
             <StringItem index="0" value="1"/>
@@ -119,6 +107,9 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="dayComboBox">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="24" style="0"/>
+        </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="32">
             <StringItem index="0" value="1"/>
@@ -157,28 +148,10 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="roommate2Label">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Marshall Eriksen"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="roommate2LabelActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="roommate1Label">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ted Mosby"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="roommate3Label">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Lily Aldrin"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="amountText">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="24" style="2"/>
+          <Font name="Tahoma" size="36" style="2"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="cc" red="cc" type="rgb"/>
@@ -191,12 +164,15 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="descriptionComboBox">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="24" style="0"/>
+        </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="8">
             <StringItem index="0" value="Other"/>
             <StringItem index="1" value="Cable"/>
             <StringItem index="2" value="Electricity"/>
-            <StringItem index="3" value="Food "/>
+            <StringItem index="3" value="Food"/>
             <StringItem index="4" value="Gas"/>
             <StringItem index="5" value="Internet"/>
             <StringItem index="6" value="Rent"/>
@@ -210,6 +186,9 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="yearComboBox">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="24" style="0"/>
+        </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="101">
             <StringItem index="0" value="2000"/>
@@ -357,6 +336,29 @@
           </Events>
         </Component>
       </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="namePane">
+      <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[228, 253]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[228, 253]"/>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
     </Container>
   </SubComponents>
 </Form>

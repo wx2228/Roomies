@@ -11,7 +11,7 @@ import database.CurrentContacts;
 import database.CurrentProperty;
 
 public class ContactLoader {
-    public void contactLoading(){
+    public void load(){
     	String url = "jdbc:mysql://localhost:3306/"; 
 		String dbName = "roomies_user";
 		String driver = "com.mysql.jdbc.Driver"; 

@@ -8,6 +8,7 @@ package gui;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 /**
  *
@@ -15,7 +16,9 @@ import javax.swing.JButton;
  */
 public class ContactButton extends JButton{
 	String userID;
-    ContactButton(String text, String userID){
+	JFrame parent;
+    ContactButton(String text, String userID, JFrame j){
+    	parent = j;
         this.setText(text);
         this.userID= userID;
         this.addActionListener(new java.awt.event.ActionListener() {
@@ -26,6 +29,7 @@ public class ContactButton extends JButton{
     }
 
 	protected void ContactButtonActionPerformed(ActionEvent evt) {
+		parent.dispose();
 		ContactInfoGUI CIG = new ContactInfoGUI(userID);
 		CIG.setVisible(true);
 		

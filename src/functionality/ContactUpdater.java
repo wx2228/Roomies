@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import database.Contact;
+import database.CurrentContacts;
 import database.CurrentUser;
 
 public class ContactUpdater {
@@ -17,6 +18,7 @@ public class ContactUpdater {
 	}
 
 	public boolean update() {
+		
 		String url = "jdbc:mysql://localhost:3306/"; 
 		String dbName = "roomies_user";
 		String driver = "com.mysql.jdbc.Driver"; 
@@ -35,7 +37,12 @@ public class ContactUpdater {
 			System.out.println(command);
 			int val = st.executeUpdate(command);
 			conn.close();
-			if(val == 1) return true;
+			if(val == 1) {
+				ContactLoader CL = new  ContactLoader();
+				CurrentContacts.reset();
+				CL.load();
+				return true;
+			}
 			else return false;
 	
 			} 

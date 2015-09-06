@@ -6,6 +6,7 @@
 package database;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 /**
@@ -51,49 +52,35 @@ public class CurrentBills {
    }
    
     
-   public static double[] split(ArrayList<Integer> selectedBillIndexs){   
-	   Hashtable<String, Double> splitTable = new Hashtable<String, Double>();
-	   double[] result = new double[3];
-	   splitTable.put("Ted Mosby", 0.0);
-	   splitTable.put("Marshall Eriksen", 0.0);
-	   splitTable.put("Lily Aldrin", 0.0);
+   public static  HashMap<String, Double> split(ArrayList<Integer> selectedBillIndexs){   
+	   HashMap<String, Double> userPayment = new HashMap<String, Double>();//use a HashMap to record everyone's share	   
 	   int l = selectedBillIndexs.size();
 	   for(int i = 0; i < l; i ++){
-		   split(selectedBillIndexs.get(i),splitTable);
+		  NameList people = CurrentBills.getBill(selectedBillIndexs.get(i)).getNames(); // ge the names of people who should pay for this bill i
+		  int peopleNum = people.size();//for bill i, get the number of people who should pay for this bill i.
+		  double amount = CurrentBills.getBill(selectedBillIndexs.get(i)).getAmount();//get the amount for bill i
+		  double share = amount/peopleNum;//calculate everyone's share
+		  for(String s : people){//now put the share into the HashMap.
+			  if(userPayment.containsKey(s)){//if the name is already in HashMap, just add it to the original data
+				  double newShare = userPayment.get(s)+share;
+				  userPayment.put(s, newShare);
+			  }
+			  else userPayment.put(s, share);//if the name never appear before, then add the name to HashMap now.
+		  }
 	   }
-	   
-	   result[0] = splitTable.get("Ted Mosby");
-	   result[1] = splitTable.get("Marshall Eriksen");
-	   result[2] = splitTable.get("Lily Aldrin");
-	   return result;
+	   return userPayment;
    }
    
-   private static void split(int billIndex,Hashtable<String, Double> splitTable){
-	   Bill bill = CurrentBills.getBill(billIndex); 
-	   double totalAmount = bill.getAmount();
-	   NameList names = bill.getNames();
-	   int numberOfPerson = names.size();
-	   double perAmount = totalAmount / numberOfPerson;
-	   for(int i = 0; i < numberOfPerson; i ++){	   
-		   double originalAmount = splitTable.get(names.get(i));		   
-		   double updatedAmount = originalAmount + perAmount;	   
-		   splitTable.replace(names.get(i), updatedAmount);
-	   }
-	   
-   } 
-
-
-   
-   public static double[] split(String rules){
+   public static HashMap<String,Double> split(String rules){
 	   ArrayList<Integer> billIndex = new ArrayList<Integer>();
 	   int allBillSize = CurrentBills.getSize();
-	   if (rules == TODAY){
+	   if (rules == TODAY){//collect the index of the bill whose date is today.
 		   for(int i = 0; i <allBillSize; i ++ ){
 		       	if(CurrentBills.getBill(i).getDate().isToday())
 		       		billIndex.add(i);	
 		       }	   
 	   }
-	   if(rules == THISMONTH){
+	   if(rules == THISMONTH){//collect the index of the bill whose date is in this month.
 		   for(int i = 0; i <allBillSize; i ++ ){
 		       	if(CurrentBills.getBill(i).getDate().isThisMonth())
 		       		billIndex.add(i);	

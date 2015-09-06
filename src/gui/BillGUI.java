@@ -8,7 +8,9 @@ import javax.swing.table.*;
 import javax.swing.*;
 
 import database.Bill;
+import database.Contact;
 import database.CurrentBills;
+import database.CurrentContacts;
 import database.CurrentProperty;
 import functionality.*;
 
@@ -16,20 +18,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date; 
 import java.util.Calendar; 
+import java.util.HashMap;
+import java.awt.GridLayout;
 import java.text.SimpleDateFormat; 
-
+import javax.swing.SwingConstants;
 /**
  *
  * @author Hang Xu
  */
 public class BillGUI extends javax.swing.JFrame {
-
+	ArrayList<JLabel> finalResultLabels;
     /**
      * Creates new form BillCheckGUI
      */
   DefaultTableModel model;
     public BillGUI() {
-       
+        finalResultLabels = new ArrayList<JLabel>();
         initComponents();
         DefaultTableCellRenderer render = new DefaultTableCellRenderer();
         render.setHorizontalAlignment(SwingConstants.LEADING);
@@ -40,7 +44,16 @@ public class BillGUI extends javax.swing.JFrame {
        BillsLoader BL = new BillsLoader();
        BL.loadingBillsToCurrentBills();
        billLoadingfromExistingBill();
-       //System.out.println("when loading the check GUI, size is " + CurrentBills.getSize());
+       int size = CurrentContacts.getContacts().size();
+       finalResultPane.setLayout(new GridLayout(1,size));
+       for(Contact s : CurrentContacts.getContacts()){
+    	   JLabel l = new JLabel();
+    	   l.setVerticalTextPosition(SwingConstants.TOP);
+    	   l.setText(s.firstName+" "+s.lastName);
+    	   l.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+    	   finalResultLabels.add(l);
+    	   finalResultPane.add(l);
+       }
     }
    private void billLoadingfromExistingBill()
     {    
@@ -76,16 +89,11 @@ public class BillGUI extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         splitButton = new javax.swing.JButton();
-        user1SubstotalLabel = new javax.swing.JLabel();
-        user2SubstotalLabel = new javax.swing.JLabel();
-        use3rSubstotalLabel = new javax.swing.JLabel();
-        MarshallAmount = new javax.swing.JLabel();
-        LilyAmount = new javax.swing.JLabel();
-        TedAmount = new javax.swing.JLabel();
         thisMonthButton = new javax.swing.JButton();
         todayButton = new javax.swing.JButton();
         displayScrollPane = new javax.swing.JScrollPane();
         displayTable = new javax.swing.JTable();
+        finalResultPane = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -128,18 +136,6 @@ public class BillGUI extends javax.swing.JFrame {
             }
         });
 
-        user1SubstotalLabel.setText("Ted Mosby should pay:");
-
-        user2SubstotalLabel.setText("Marshall Eriksen should pay:");
-
-        use3rSubstotalLabel.setText("Lily Aldrin should pay:");
-
-        MarshallAmount.setText("0");
-
-        LilyAmount.setText("0");
-
-        TedAmount.setText("0");
-
         thisMonthButton.setText("This Month");
         thisMonthButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +173,21 @@ public class BillGUI extends javax.swing.JFrame {
         });
         displayScrollPane.setViewportView(displayTable);
 
+        finalResultPane.setMaximumSize(new java.awt.Dimension(436, 144));
+        finalResultPane.setMinimumSize(new java.awt.Dimension(436, 144));
+        finalResultPane.setPreferredSize(new java.awt.Dimension(436, 144));
+
+        javax.swing.GroupLayout finalResultPaneLayout = new javax.swing.GroupLayout(finalResultPane);
+        finalResultPane.setLayout(finalResultPaneLayout);
+        finalResultPaneLayout.setHorizontalGroup(
+            finalResultPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 436, Short.MAX_VALUE)
+        );
+        finalResultPaneLayout.setVerticalGroup(
+            finalResultPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 144, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,28 +195,20 @@ public class BillGUI extends javax.swing.JFrame {
             .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(displayScrollPane)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(use3rSubstotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(user1SubstotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(user2SubstotalLabel))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(MarshallAmount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(LilyAmount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TedAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addComponent(todayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(finalResultPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(thisMonthButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(todayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(thisMonthButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(displayScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(splitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(splitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,7 +216,7 @@ public class BillGUI extends javax.swing.JFrame {
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(splitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -223,28 +226,15 @@ public class BillGUI extends javax.swing.JFrame {
                         .addGap(0, 0, 0)
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(displayScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(displayScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(todayButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(thisMonthButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(user1SubstotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TedAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(user2SubstotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(MarshallAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(use3rSubstotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LilyAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(thisMonthButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(todayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(finalResultPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 0, 0))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {use3rSubstotalLabel, user1SubstotalLabel, user2SubstotalLabel});
 
         pack();
         setLocationRelativeTo(null);
@@ -324,28 +314,31 @@ public class BillGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void splitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_splitButtonActionPerformed
-        
-//           if(displayTable.getSelectedRow()<0)
-//         {
-//             WrongPopup noSelected = new WrongPopup("Choose a bill first");
-//             noSelected.setVisible(true);
-//             return;
-//         }
-//        int[] selectedIndexs = displayTable.getSelectedRows();
-        double[] billForEveryone = CurrentBills.split(getSelctedRowIndex());
+    	for(int i = 0; i < CurrentContacts.getContacts().size();i++){
+    		Contact c = CurrentContacts.getContacts().get(i);
+    		this.finalResultLabels.get(i).setText(c.firstName+" "+c.lastName);
+    	}
+    	HashMap<String,Double>billForEveryone = CurrentBills.split(getSelctedRowIndex());
         showFinalResult(billForEveryone);
         
     }//GEN-LAST:event_splitButtonActionPerformed
 
     private void todayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todayButtonActionPerformed
-        
-    	double[] billForEveryone = CurrentBills.split("today");
+    	for(int i = 0; i < CurrentContacts.getContacts().size();i++){
+    		Contact c = CurrentContacts.getContacts().get(i);
+    		this.finalResultLabels.get(i).setText(c.firstName+" "+c.lastName);
+    	}
+    	HashMap<String,Double> billForEveryone = CurrentBills.split("today");
     	showFinalResult(billForEveryone);
         
     }//GEN-LAST:event_todayButtonActionPerformed
 
     private void thisMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thisMonthButtonActionPerformed
-    	double[] billForEveryone = CurrentBills.split("thismonth");
+    	for(int i = 0; i < CurrentContacts.getContacts().size();i++){
+    		Contact c = CurrentContacts.getContacts().get(i);
+    		this.finalResultLabels.get(i).setText(c.firstName+" "+c.lastName);
+    	}
+    	HashMap<String,Double> billForEveryone = CurrentBills.split("thismonth");
     	showFinalResult(billForEveryone);
     }//GEN-LAST:event_thisMonthButtonActionPerformed
     private ArrayList<Integer> getSelctedRowIndex(){
@@ -362,28 +355,27 @@ public class BillGUI extends javax.swing.JFrame {
       }
       return selectedIndexs;
     }
-    private void showFinalResult(double[] finalResult){
-        TedAmount.setText(String.valueOf(finalResult[0]));
-        MarshallAmount.setText(String.valueOf(finalResult[1]));
-        LilyAmount.setText(String.valueOf(finalResult[2]));
+    private void showFinalResult(HashMap<String,Double> finalResult){
+        for(JLabel l : finalResultLabels){
+        	if(finalResult.containsKey(l.getText())){
+        		String name = l.getText();
+        		l.setText("<html><p>"+name+"</p><p>should pay</p><p>"+finalResult.get(name)+"</p></html>");
+        	}
+        	else 	l.setText("<html><p>"+l.getText()+"</p><p>should pay</p><p>"+0.0+"</p></html>");
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LilyAmount;
-    private javax.swing.JLabel MarshallAmount;
-    private javax.swing.JLabel TedAmount;
     private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JScrollPane displayScrollPane;
     private javax.swing.JTable displayTable;
     private javax.swing.JButton editButton;
+    private javax.swing.JPanel finalResultPane;
     private javax.swing.JButton splitButton;
     private javax.swing.JButton thisMonthButton;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JButton todayButton;
-    private javax.swing.JLabel use3rSubstotalLabel;
-    private javax.swing.JLabel user1SubstotalLabel;
-    private javax.swing.JLabel user2SubstotalLabel;
     // End of variables declaration//GEN-END:variables
 }

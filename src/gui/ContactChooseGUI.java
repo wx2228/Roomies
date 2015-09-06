@@ -29,14 +29,12 @@ public class ContactChooseGUI extends javax.swing.JFrame {
      */
     public ContactChooseGUI() {
         initComponents();
-        ContactLoader CL = new ContactLoader();
-        CL.contactLoading();
         int size = CurrentContacts.getContacts().size();
         int row =this.gridDecider(size)[0];
         int column = this.gridDecider(size)[1];// use grid decider to make the grid most likely to square. 
         buttonsPanel.setLayout(new GridLayout(row,column));
         for(Contact c: CurrentContacts.getContacts()){
-        	buttonsPanel.add(new ContactButton(c.firstName+" "+c.lastName.toUpperCase().charAt(0),c.userID));
+        	buttonsPanel.add(new ContactButton(c.firstName+" "+c.lastName.toUpperCase().charAt(0),c.userID,this));
         }
 
         //buttonsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

@@ -8,6 +8,7 @@ package gui;
 import database.CurrentContacts;
 import database.CurrentProperty;
 import database.CurrentUser;
+import functionality.ContactLoader;
 
 /**
  *
@@ -23,6 +24,8 @@ public class MainGUI extends javax.swing.JFrame {
         System.out.println("Current user is "+CurrentUser.getID());
         System.out.println("Current property is "+CurrentProperty.getID());
         CurrentContacts.initialize();
+        ContactLoader CL = new ContactLoader();
+        CL.load();
     }
 
     /**

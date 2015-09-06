@@ -230,7 +230,6 @@ public class ContactInfoGUI extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.dispose();
-        CurrentContacts.reset();
         ContactChooseGUI CCG = new ContactChooseGUI();
         CCG.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed

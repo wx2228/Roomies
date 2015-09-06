@@ -6,10 +6,12 @@
 package gui;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.*;
 
 import database.Bill;
+import database.CurrentContacts;
 import database.Date;
 import database.CurrentBills;
 import database.NameList;
@@ -20,13 +22,24 @@ import functionality.BillUpdater;
  */
 public class BillEdittingGUI extends javax.swing.JFrame {
 	static String billID;
+	JCheckBox[] nameCheckBox;
     /**
      * Creates new form EditBillGUI
      */
     public BillEdittingGUI(Bill bill) {
         initComponents();       
+        System.out.println("The loaded bill is "+bill.getBillID());
+        int size = CurrentContacts.getContacts().size();
+        nameCheckBox = new JCheckBox[size];
+        namePane.setLayout(new GridLayout(size,1));
+        for(int i = 0;i<nameCheckBox.length;i++){
+        	JCheckBox j = new JCheckBox();
+        	nameCheckBox[i] = j;
+        	nameCheckBox[i].setText(CurrentContacts.getContacts().get(i).firstName+" "
+        +CurrentContacts.getContacts().get(i).lastName);
+        	namePane.add(nameCheckBox[i]);
+        }
         loading(bill);
-        System.out.println("selected is "+this.descriptionComboBox.getSelectedIndex());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,14 +56,14 @@ public class BillEdittingGUI extends javax.swing.JFrame {
         descriptionScrollPane = new javax.swing.JScrollPane();
         descriptionText = new javax.swing.JTextArea();
         amountText = new javax.swing.JTextField();
-        roommate2Label = new javax.swing.JCheckBox();
-        roommate1Label = new javax.swing.JCheckBox();
-        roommate3Label = new javax.swing.JCheckBox();
         yearComboBox = new javax.swing.JComboBox();
         dayComboBox = new javax.swing.JComboBox();
         monthComboBox = new javax.swing.JComboBox();
+        namePane = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(875, 454));
+        setMinimumSize(new java.awt.Dimension(875, 454));
         setResizable(false);
 
         editBillButton.setText("Edit");
@@ -67,7 +80,8 @@ public class BillEdittingGUI extends javax.swing.JFrame {
             }
         });
 
-        descriptionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Other", "Cable", "Electricity", "Food ", "Gas", "Internet", "Rent", "Water"  }));
+        descriptionComboBox.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        descriptionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Other", "Cable", "Electricity", "Food", "Gas", "Internet", "Rent", "Water" }));
         descriptionComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 descriptionComboBoxActionPerformed(evt);
@@ -84,23 +98,17 @@ public class BillEdittingGUI extends javax.swing.JFrame {
         });
         descriptionScrollPane.setViewportView(descriptionText);
 
+        amountText.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        amountText.setForeground(new java.awt.Color(204, 204, 255));
         amountText.setText("Amount");
 
-        roommate2Label.setText("Marshall Eriksen");
-        roommate2Label.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roommate2LabelActionPerformed(evt);
-            }
-        });
-
-        roommate1Label.setText("Ted Mosby");
-
-        roommate3Label.setText("Lily Aldrin");
-
+        yearComboBox.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         yearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2047", "2048", "2049", "2050", "2051", "2052", "2053", "2054", "2055", "2056", "2057", "2058", "2059", "2060", "2061", "2062", "2063", "2064", "2065", "2066", "2067", "2068", "2069", "2070", "2071", "2072", "2073", "2074", "2075", "2076", "2077", "2078", "2079", "2080", "2081", "2082", "2083", "2084", "2085", "2086", "2087", "2088", "2089", "2090", "2091", "2092", "2093", "2094", "2095", "2096", "2097", "2098", "2099", " " }));
 
+        dayComboBox.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         dayComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", " " }));
 
+        monthComboBox.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         monthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", " " }));
         monthComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,59 +116,62 @@ public class BillEdittingGUI extends javax.swing.JFrame {
             }
         });
 
+        namePane.setMaximumSize(new java.awt.Dimension(228, 253));
+        namePane.setMinimumSize(new java.awt.Dimension(228, 253));
+        namePane.setName(""); // NOI18N
+
+        javax.swing.GroupLayout namePaneLayout = new javax.swing.GroupLayout(namePane);
+        namePane.setLayout(namePaneLayout);
+        namePaneLayout.setHorizontalGroup(
+            namePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 228, Short.MAX_VALUE)
+        );
+        namePaneLayout.setVerticalGroup(
+            namePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(descriptionScrollPane, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(amountText)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(monthComboBox, 0, 187, Short.MAX_VALUE)
-                                    .addComponent(roommate1Label, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(roommate2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(amountText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descriptionComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(yearComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(roommate3Label, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                                .addGap(8, 8, 8))
-                            .addComponent(descriptionComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(yearComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(descriptionScrollPane))
-                .addGap(0, 0, 0)
+                        .addComponent(namePane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(editBillButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editBillButton, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(editBillButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roommate2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(roommate1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(roommate3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(amountText)
-                    .addComponent(descriptionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addComponent(descriptionScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(monthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addComponent(yearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(amountText, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(descriptionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(namePane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editBillButton, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                    .addComponent(descriptionScrollPane)))
         );
 
         pack();
@@ -186,7 +197,11 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_editBillButtonActionPerformed
 
     private boolean atLeastOneSelected() {
-		return this.roommate1Label.isSelected()||this.roommate2Label.isSelected()||this.roommate3Label.isSelected();
+		boolean result = false;
+		for(JCheckBox c: nameCheckBox){
+			result = result || c.isSelected();
+		}
+		return result;
 	}
 	private void descriptionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currencyComboBoxActionPerformed
         // TODO add your handling code here:
@@ -203,10 +218,6 @@ public class BillEdittingGUI extends javax.swing.JFrame {
          }
         
     }//GEN-LAST:event_currencyComboBoxActionPerformed
-
-    private void roommate2LabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roommate2LabelActionPerformed
-
-    }//GEN-LAST:event_roommate2LabelActionPerformed
 
     private void monthComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthComboBoxActionPerformed
 
@@ -280,12 +291,11 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     }
     private NameList getNames(){
     	NameList names = new NameList();
-    	 if(roommate1Label.isSelected())
-             names.add(roommate1Label.getText());
-         if(roommate2Label.isSelected())
-        	 names.add(roommate2Label.getText());
-         if(roommate3Label.isSelected())
-        	 names.add(roommate3Label.getText());
+    	for(JCheckBox c: nameCheckBox){
+    		if(c.isSelected()){
+    			names.add(c.getText());
+    		}
+    	}
 
          return names;
     }
@@ -304,9 +314,7 @@ public class BillEdittingGUI extends javax.swing.JFrame {
     private javax.swing.JTextArea descriptionText;
     private javax.swing.JButton editBillButton;
     private javax.swing.JComboBox monthComboBox;
-    private javax.swing.JCheckBox roommate1Label;
-    private javax.swing.JCheckBox roommate2Label;
-    private javax.swing.JCheckBox roommate3Label;
+    private javax.swing.JPanel namePane;
     private javax.swing.JComboBox yearComboBox;
     // End of variables declaration//GEN-END:variables
 	private void loading(Bill bill) {//loading the bill information to the GUI
@@ -335,11 +343,14 @@ public class BillEdittingGUI extends javax.swing.JFrame {
 	}
 	private void setNames(Bill bill) {
 		NameList names = bill.getNames();
-		JCheckBox[] nameLabels = {roommate1Label,roommate2Label,roommate3Label};
-		int l = nameLabels.length;
-		for(int i = 0; i < l; i ++){
-			if(names.contains(nameLabels[i].getText())){
-				nameLabels[i].setSelected(true);
+		int size = nameCheckBox.length;
+		for(String s : names){
+			System.out.println(names);
+		}
+		for(int i = 0; i < size; i ++){
+			if(names.contains(nameCheckBox[i].getText())){
+				System.out.println("the index is "+i);
+				nameCheckBox[i].setSelected(true);
 			}
 		}
 	
