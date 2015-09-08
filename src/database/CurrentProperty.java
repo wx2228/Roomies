@@ -1,7 +1,7 @@
 package database;
 
 public class CurrentProperty {
-	static String currentPropertyID;
+	static private String currentPropertyID;
 	static public void setID(String ID){
 		currentPropertyID=ID;
 	}

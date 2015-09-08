@@ -1,14 +1,13 @@
 package database;
 
 public class Address {
-	public String streetLine1;
-	public String streetLine2;
-	public String aptNumber;
-	public String city;
-	public String state;
-	public String country;
-	public String zipcode;
-	
+	private String streetLine1;
+	private String streetLine2;
+	private String aptNumber;
+	private String city;
+	private String state;
+	private String country;
+	private String zipcode;
 	
 	public Address(String streetLine1,String streetLine2, String aptNumber, String city, String state, String country, String zipcode){
 		this.streetLine1= streetLine1;
@@ -20,4 +19,11 @@ public class Address {
 		this.zipcode = zipcode;
 	}
 
+	public String getStreetLine1(){return this.streetLine1;}
+	public String getStreetLine2(){return this.streetLine2;}
+	public String getAptNumber(){return this.aptNumber;}
+	public String getCity(){return this.city;}
+	public String getState(){return this.state;}
+	public String getCountry(){return this.country;}
+	public String getZipcode(){return this.zipcode;}
 }

@@ -7,7 +7,6 @@ package database;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 /**
  *
@@ -16,8 +15,9 @@ import java.util.Hashtable;
 public class CurrentBills {
   
    private static ArrayList<Bill> existingBills =new ArrayList<Bill>();
-   final static String TODAY = "today";
-   final static String THISMONTH = "thismonth";
+   public enum SplitRules{TODAY,THISMONTH}
+//   final static String TODAY = "today";
+//   final static String THISMONTH = "thismonth";
 //   private static Hashtable<String, Double> splitTable;
    
    public static void clear(){
@@ -71,16 +71,16 @@ public class CurrentBills {
 	   return userPayment;
    }
    
-   public static HashMap<String,Double> split(String rules){
+   public static HashMap<String,Double> split(SplitRules r){
 	   ArrayList<Integer> billIndex = new ArrayList<Integer>();
 	   int allBillSize = CurrentBills.getSize();
-	   if (rules == TODAY){//collect the index of the bill whose date is today.
+	   if (r == SplitRules.TODAY){//collect the index of the bill whose date is today.
 		   for(int i = 0; i <allBillSize; i ++ ){
 		       	if(CurrentBills.getBill(i).getDate().isToday())
 		       		billIndex.add(i);	
 		       }	   
 	   }
-	   if(rules == THISMONTH){//collect the index of the bill whose date is in this month.
+	   if(r == SplitRules.THISMONTH){//collect the index of the bill whose date is in this month.
 		   for(int i = 0; i <allBillSize; i ++ ){
 		       	if(CurrentBills.getBill(i).getDate().isThisMonth())
 		       		billIndex.add(i);	

@@ -10,6 +10,7 @@ import javax.swing.*;
 import database.Bill;
 import database.Contact;
 import database.CurrentBills;
+import database.CurrentBills.SplitRules;
 import database.CurrentContacts;
 import functionality.*;
 
@@ -49,7 +50,7 @@ public class BillGUI extends javax.swing.JFrame {
        for(Contact s : CurrentContacts.getContacts()){
     	   JLabel l = new JLabel();
     	   l.setVerticalTextPosition(SwingConstants.TOP);
-    	   l.setText(s.firstName+" "+s.lastName);
+    	   l.setText(s.getFirstName()+" "+s.getLastName());
     	   l.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
     	   finalResultLabels.add(l);
     	   finalResultPane.add(l);
@@ -322,7 +323,7 @@ public class BillGUI extends javax.swing.JFrame {
     private void splitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_splitButtonActionPerformed
     	for(int i = 0; i < CurrentContacts.getContacts().size();i++){
     		Contact c = CurrentContacts.getContacts().get(i);
-    		this.finalResultLabels.get(i).setText(c.firstName+" "+c.lastName);
+    		this.finalResultLabels.get(i).setText(c.getFirstName()+" "+c.getLastName());
     	}
     	HashMap<String,Double>billForEveryone = CurrentBills.split(getSelctedRowIndex());
         showFinalResult(billForEveryone);
@@ -332,9 +333,9 @@ public class BillGUI extends javax.swing.JFrame {
     private void todayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todayButtonActionPerformed
     	for(int i = 0; i < CurrentContacts.getContacts().size();i++){
     		Contact c = CurrentContacts.getContacts().get(i);
-    		this.finalResultLabels.get(i).setText(c.firstName+" "+c.lastName);
+    		this.finalResultLabels.get(i).setText(c.getFirstName()+" "+c.getLastName());
     	}
-    	HashMap<String,Double> billForEveryone = CurrentBills.split("today");
+    	HashMap<String,Double> billForEveryone = CurrentBills.split(SplitRules.TODAY);
     	showFinalResult(billForEveryone);
         
     }//GEN-LAST:event_todayButtonActionPerformed
@@ -342,9 +343,9 @@ public class BillGUI extends javax.swing.JFrame {
     private void thisMonthButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thisMonthButtonActionPerformed
     	for(int i = 0; i < CurrentContacts.getContacts().size();i++){
     		Contact c = CurrentContacts.getContacts().get(i);
-    		this.finalResultLabels.get(i).setText(c.firstName+" "+c.lastName);
+    		this.finalResultLabels.get(i).setText(c.getFirstName()+" "+c.getLastName());
     	}
-    	HashMap<String,Double> billForEveryone = CurrentBills.split("thismonth");
+    	HashMap<String,Double> billForEveryone = CurrentBills.split(SplitRules.THISMONTH);
     	showFinalResult(billForEveryone);
     }//GEN-LAST:event_thisMonthButtonActionPerformed
     private ArrayList<Integer> getSelctedRowIndex(){

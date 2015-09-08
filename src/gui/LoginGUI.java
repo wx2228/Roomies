@@ -10,7 +10,6 @@ import java.awt.event.*;
 
 import database.CurrentProperty;
 import database.CurrentUser;
-import database.UserDatabase;
 import functionality.ContactLoader;
 import functionality.UserAuthenticator;
 
@@ -104,11 +103,6 @@ public class LoginGUI extends javax.swing.JFrame {
         });
 
         register.setText("Register");
-        register.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                registerMouseClicked(evt);
-            }
-        });
         register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerActionPerformed(evt);
@@ -219,15 +213,11 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_passWordTextKeyPressed
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        RegisterChoiceGUI registerChoiceGUI = new RegisterChoiceGUI();
-        registerChoiceGUI.setVisible(true);
+    	this.dispose();
+        UserRegisterGUI registerNewUserGUI = new UserRegisterGUI();
+        registerNewUserGUI.setVisible(true);
     }//GEN-LAST:event_registerActionPerformed
 
-    private void registerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registerMouseClicked
 
     private void userNameTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTextFocusLost
     	  if(userNameText.getText().equals("")){

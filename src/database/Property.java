@@ -1,10 +1,8 @@
 package database;
 
-import java.util.UUID;
-
 public class Property {
-	public Address propertyAddress;
-	public String propertyID;
+	private Address propertyAddress;
+	private String propertyID;
 
 	
 	public Property(String st1, String st2, String apt, String city, 
@@ -22,4 +20,7 @@ public class Property {
 
 	}
 
+	public Address getPropertyAddress(){return this.propertyAddress;}
+	public String getPropertyID(){return this.propertyID;}
+	public void setPropertyID(String id){this.propertyID=id;}
 }

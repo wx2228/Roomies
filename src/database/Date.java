@@ -3,9 +3,14 @@ package database;
 import java.util.Calendar;
 
 public class Date {
-	public int year;
-	public int month;
-	public int day;
+	private int year;
+	private int month;
+	private int day;
+	
+	public int getYear(){return this.year;}
+	public int getMonth(){return this.month;}
+	public int getDay(){return this.day;}
+	
 	static public Date StringtoDate(String s){
 		String[] dateString = s.split(",");
 		int year = Integer.parseInt(dateString[2]);

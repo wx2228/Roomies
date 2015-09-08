@@ -4,9 +4,9 @@ import java.sql.Time;
 import java.util.UUID;
 
 public class Message {
-	Date date;
-	Time time;
-	UUID propertyID;
-	String nickName;
+  private Date date;
+  private Time time;
+  private UUID propertyID;
+  private String name;
 
 }

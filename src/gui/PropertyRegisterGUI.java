@@ -27,13 +27,13 @@ public class PropertyRegisterGUI extends javax.swing.JFrame {
     
     public PropertyRegisterGUI(Property p){
     	initComponents();
-    	this.streetLine1.setText(p.propertyAddress.streetLine1);
-    	this.streetLine2.setText(p.propertyAddress.streetLine2);
-    	this.aptNumber.setText(p.propertyAddress.aptNumber);
-    	this.city.setText(p.propertyAddress.city);
-    	this.state.setText(p.propertyAddress.state);
-    	this.country.setText(p.propertyAddress.country);
-    	this.zipcode.setText(p.propertyAddress.zipcode);
+    	this.streetLine1.setText(p.getPropertyAddress().getStreetLine1());
+    	this.streetLine2.setText(p.getPropertyAddress().getStreetLine2());
+    	this.aptNumber.setText(p.getPropertyAddress().getAptNumber());
+    	this.city.setText(p.getPropertyAddress().getCity());
+    	this.state.setText(p.getPropertyAddress().getState());
+    	this.country.setText(p.getPropertyAddress().getCountry());
+    	this.zipcode.setText(p.getPropertyAddress().getZipcode());
     }
 
     /**
@@ -246,7 +246,7 @@ public class PropertyRegisterGUI extends javax.swing.JFrame {
       	  boolean propertyExists = p.PropertyExists();
       	  if(propertyExists){       
       		  MODE = 1; // property exists
-      		  userInputAddress.propertyID=p.getPropertyID();
+      		  userInputAddress.setPropertyID(p.getPropertyID());
       		  PropertyConfirmPopUp PropertyFound = new PropertyConfirmPopUp(MODE, userInputAddress);
       		  PropertyFound.setVisible(true);
           	System.out.println("MODE IS "+MODE); 

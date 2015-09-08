@@ -11,9 +11,9 @@ public class NewTenantRegister extends DatabaseCommander{
 			try {
 				openConnection();
 				String command = "UPDATE roomies_user.user "
-						+ "SET first_name = '"+toBeRegister.firstName+"',middle_name='"+toBeRegister.middleName+""
-						+ "',last_name='"+toBeRegister.lastName+"',phone_number='"+toBeRegister.phoneNumber+""
-								+ "',email='"+toBeRegister.emailAddress+""
+						+ "SET first_name = '"+toBeRegister.getFirstName()+"',middle_name='"+toBeRegister.getMiddeleName()+""
+						+ "',last_name='"+toBeRegister.getLastName()+"',phone_number='"+toBeRegister.getPhoneNumber()+""
+								+ "',email='"+toBeRegister.getEmailAddress()+""
 										+ "' WHERE userID = '"+registerUserID+"';";
 				System.out.println(command);
 				int val = st.executeUpdate(command);

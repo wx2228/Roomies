@@ -5,8 +5,6 @@
  */
 package database;
 
-import java.util.UUID;
-
 /**
  *
  * @author Hang Xu

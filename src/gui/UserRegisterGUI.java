@@ -332,10 +332,9 @@ public class UserRegisterGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordTextFocusLost
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
-        // TODO add your handling code here:
-         RegisterChoiceGUI r = new RegisterChoiceGUI();
-         this.dispose();
-         r.setVisible(true);
+        LoginGUI l = new LoginGUI();
+        this.dispose();
+        l.setVisible(true);
     }//GEN-LAST:event_cancelActionPerformed
 
     private void userNameTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userNameTextFocusGained

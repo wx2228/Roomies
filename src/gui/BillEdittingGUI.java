@@ -38,8 +38,8 @@ public class BillEdittingGUI extends javax.swing.JFrame {
         for(int i = 0;i<nameCheckBox.length;i++){
         	JCheckBox j = new JCheckBox();
         	nameCheckBox[i] = j;
-        	nameCheckBox[i].setText(CurrentContacts.getContacts().get(i).firstName+" "
-        +CurrentContacts.getContacts().get(i).lastName);
+        	nameCheckBox[i].setText(CurrentContacts.getContacts().get(i).getFirstName()+" "
+        +CurrentContacts.getContacts().get(i).getLastName());
         	namePane.add(nameCheckBox[i]);
         }
         loading(bill);
@@ -359,9 +359,9 @@ public class BillEdittingGUI extends javax.swing.JFrame {
 		this.amountText.setText(Double.toString(bill.getAmount()));	
 	}
 	private void setDate(Bill bill) {
-		this.dayComboBox.setSelectedIndex(bill.getDate().day - 1);
-		this.monthComboBox.setSelectedIndex(bill.getDate().month -1);
-		this.yearComboBox.setSelectedIndex(bill.getDate().year - 2000);
+		this.dayComboBox.setSelectedIndex(bill.getDate().getDay() - 1);
+		this.monthComboBox.setSelectedIndex(bill.getDate().getMonth() -1);
+		this.yearComboBox.setSelectedIndex(bill.getDate().getYear() - 2000);
 	}
 
 }

@@ -5,26 +5,35 @@ import database.Property;
 
 public class PropertySearcher extends DatabaseCommander{
 	Property inputProperty;
-	
+	 String streetLine1;
+	 String streetLine2;
+	 String aptNumber;
+	 String city;
+	 String state;
+	 String country;
+	 String zipcode;
+	 
 	public PropertySearcher(Property p){
 		this.inputProperty = p; 
+	    streetLine1 = this.inputProperty.getPropertyAddress().getStreetLine1().trim().toLowerCase();
+		streetLine2 = this.inputProperty.getPropertyAddress().getStreetLine2().trim().toLowerCase();
+		aptNumber = this.inputProperty.getPropertyAddress().getAptNumber().trim().toLowerCase();
+	    city = this.inputProperty.getPropertyAddress().getCity().trim().toLowerCase();
+		state = this.inputProperty.getPropertyAddress().getState().trim().toLowerCase();
+		country = this.inputProperty.getPropertyAddress().getCountry().trim().toLowerCase();
+		zipcode = this.inputProperty.getPropertyAddress().getZipcode().trim().toLowerCase();
 	}
 	
 	
 	public boolean PropertyExists(){
-		 String streetLine1 = this.inputProperty.propertyAddress.streetLine1.trim().toLowerCase();
-		 String streetLine2 = this.inputProperty.propertyAddress.streetLine2.trim().toLowerCase();
-		 String aptNumber = this.inputProperty.propertyAddress.aptNumber.trim().toLowerCase();
-		 String city = this.inputProperty.propertyAddress.city.trim().toLowerCase();
-		 String state = this.inputProperty.propertyAddress.state.trim().toLowerCase();
-		 String country = this.inputProperty.propertyAddress.country.trim().toLowerCase();
-		 String zipcode = this.inputProperty.propertyAddress.zipcode.trim().toLowerCase();
-	
 		try{
 			try {
 				openConnection();
 				ResultSet check;
-				check = st.executeQuery("SELECT * FROM roomies_property.property WHERE `Street Line 1` = '"+streetLine1+"' AND `Street Line 2` = '"+streetLine2+"' AND `Apt Number` = '"+aptNumber+"' AND `City` = '"+city+"' AND `State` = '"+state+"' AND `Country` = '"+country+"' AND `Zipcode` = '"+zipcode+"';"); 		
+				check = st.executeQuery("SELECT * FROM roomies_property.property WHERE `Street Line 1` = '"
+				+streetLine1+"' AND `Street Line 2` = '"+streetLine2+"' AND `Apt Number` = '"
+				+aptNumber+"' AND `City` = '"+city+"' AND `State` = '"+state+"' AND `Country` = '"
+				+country+"' AND `Zipcode` = '"+zipcode+"';"); 		
 				if(check.absolute(1)){
 					return true;
 				}
@@ -44,13 +53,6 @@ public class PropertySearcher extends DatabaseCommander{
 
 	
 	public String getPropertyID(){
-		 String streetLine1 = this.inputProperty.propertyAddress.streetLine1.trim().toLowerCase();
-		 String streetLine2 = this.inputProperty.propertyAddress.streetLine2.trim().toLowerCase();
-		 String aptNumber = this.inputProperty.propertyAddress.aptNumber.trim().toLowerCase();
-		 String city = this.inputProperty.propertyAddress.city.trim().toLowerCase();
-		 String state = this.inputProperty.propertyAddress.state.trim().toLowerCase();
-		 String country = this.inputProperty.propertyAddress.country.trim().toLowerCase();
-		 String zipcode = this.inputProperty.propertyAddress.zipcode.trim().toLowerCase();
 		try{
 			try {  
 				openConnection();

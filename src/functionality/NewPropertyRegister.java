@@ -11,14 +11,14 @@ public class NewPropertyRegister extends DatabaseCommander{
 	this.newProperty = p;
 }
 	public boolean register(){
-		String streetLine1 = this.newProperty.propertyAddress.streetLine1.trim().toLowerCase();
-		String streetLine2 = this.newProperty.propertyAddress.streetLine2.trim().toLowerCase();
-		String aptNumber = this.newProperty.propertyAddress.aptNumber.trim().toLowerCase();
-		String city = this.newProperty.propertyAddress.city.trim().toLowerCase();
-		String state = this.newProperty.propertyAddress.state.trim().toLowerCase();
-		String country = this.newProperty.propertyAddress.country.trim().toLowerCase();
-		String zipcode = this.newProperty.propertyAddress.zipcode.trim().toLowerCase();
-		String propertyID = this.newProperty.propertyID.toString();
+		String streetLine1 = this.newProperty.getPropertyAddress().getStreetLine1().trim().toLowerCase();
+		String streetLine2 = this.newProperty.getPropertyAddress().getStreetLine2().trim().toLowerCase();
+		String aptNumber = this.newProperty.getPropertyAddress().getAptNumber().trim().toLowerCase();
+		String city = this.newProperty.getPropertyAddress().getCity().trim().toLowerCase();
+		String state = this.newProperty.getPropertyAddress().getState().trim().toLowerCase();
+		String country = this.newProperty.getPropertyAddress().getCountry().trim().toLowerCase();
+		String zipcode = this.newProperty.getPropertyAddress().getZipcode().trim().toLowerCase();
+		String propertyID = this.newProperty.getPropertyID().toString();
 	
 		 try{
 				try {

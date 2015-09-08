@@ -45,8 +45,8 @@ public class BillAddingGUI extends javax.swing.JFrame {
         	System.out.println("index is " + i);
         	JCheckBox j = new JCheckBox();
         	nameCheckBox[i] = j;
-        	nameCheckBox[i].setText(CurrentContacts.getContacts().get(i).firstName+" "
-        +CurrentContacts.getContacts().get(i).lastName);
+        	nameCheckBox[i].setText(CurrentContacts.getContacts().get(i).getFirstName()+" "
+        +CurrentContacts.getContacts().get(i).getLastName());
         	namePane.add(nameCheckBox[i]);
         	
         }

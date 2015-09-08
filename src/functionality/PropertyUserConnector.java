@@ -12,11 +12,11 @@ public class PropertyUserConnector extends DatabaseCommander{
 				openConnection();
 				String command = "INSERT INTO roomies_property.property_user_mapping"
 						+ " (`propertyID`,`userID`)"
-						+ " VALUES ('"+p.propertyID+"','"+CurrentUser.getID()+"');";
+						+ " VALUES ('"+p.getPropertyID()+"','"+CurrentUser.getID()+"');";
 				System.out.println(command);
 				int val = st.executeUpdate(command);
 				if(val == 1){
-	                CurrentProperty.setID(p.propertyID);
+	                CurrentProperty.setID(p.getPropertyID());
 					MainGUI MG = new MainGUI();
 					MG.setVisible(true);
 	                }

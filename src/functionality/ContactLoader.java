@@ -18,14 +18,9 @@ public class ContactLoader extends DatabaseCommander{
     					+ "where PropertyID='"+CurrentProperty.getID()+"';";
     			contacts = st.executeQuery(command); 
     			while(contacts.next()){
-    				Contact c = new Contact();
-    				c.firstName=contacts.getString("first_name");
-    				c.lastName=contacts.getString("last_name");
-    				c.middleName=contacts.getString("middle_name");
-    				c.phoneNumber = contacts.getString("phone_number");
-    				c.emailAddress=contacts.getString("email");
-    				c.userID=contacts.getString("userID");
-    				System.out.println("firstname:"+c.firstName);
+    				Contact c = new Contact(contacts.getString("first_name"),contacts.getString("middle_name"),
+    						contacts.getString("last_name"),contacts.getString("phone_number"),
+    						contacts.getString("email"),contacts.getString("userID"));
     				CurrentContacts.addContact(c);
     			}
     		} 

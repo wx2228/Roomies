@@ -16,9 +16,9 @@ public class ContactUpdater extends DatabaseCommander {
 			try { 
 				openConnection();
 				String command = "UPDATE roomies_user.user "
-						+ "SET first_name = '"+c.firstName+"', middle_name = '"+c.middleName+"',"
-								+ "last_name = '"+c.lastName+"',phone_number = '"+c.phoneNumber+"',"
-										+ "email = '"+c.emailAddress+"'"
+						+ "SET first_name = '"+c.getFirstName()+"', middle_name = '"+c.getMiddeleName()+"',"
+								+ "last_name = '"+c.getLastName()+"',phone_number = '"+c.getPhoneNumber()+"',"
+										+ "email = '"+c.getEmailAddress()+"'"
 						+ "WHERE userID = '"+CurrentUser.getID()+"';";
 				System.out.println(command);
 				int val = st.executeUpdate(command);

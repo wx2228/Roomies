@@ -1,14 +1,12 @@
 package database;
 
-import java.util.UUID;
-
 public class Contact {
-	public String firstName;
-	public String middleName;
-	public String lastName;
-	public String phoneNumber;
-	public String emailAddress;
-	public String userID;
+	private String firstName;
+	private String middleName;
+	private String lastName;
+	private String phoneNumber;
+	private String emailAddress;
+	private String userID;
 	
 	public Contact(){};
 	public Contact(	String firstName,
@@ -25,4 +23,10 @@ public class Contact {
 		this.userID = userID;
 	}
 
+	public String getFirstName(){return this.firstName;}
+	public String getMiddeleName(){return this.middleName;}
+	public String getLastName(){return this.lastName;}
+	public String getPhoneNumber(){return this.phoneNumber;}
+	public String getEmailAddress(){return this.emailAddress;}
+	public String getUserID(){return this.userID;}
 }

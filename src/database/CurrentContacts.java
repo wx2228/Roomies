@@ -3,7 +3,7 @@ package database;
 import java.util.ArrayList;
 
 public class CurrentContacts {
-      static ArrayList<Contact> contacts;
+      static private ArrayList<Contact> contacts;
       static public void setContacts(ArrayList<Contact> c){
     	  contacts = c;
       }
