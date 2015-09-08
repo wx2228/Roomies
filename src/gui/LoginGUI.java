@@ -156,7 +156,6 @@ public class LoginGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void inButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inButtonActionPerformed
-        // TODO add your handling code here:
     	String inputusn = userNameText.getText().toLowerCase();
     	String inputpwd = String.valueOf(passWordText.getPassword());
     	UserAuthenticator uA = new UserAuthenticator(inputusn, inputpwd);

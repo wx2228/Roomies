@@ -11,22 +11,22 @@ import database.Bill;
 import database.Contact;
 import database.CurrentBills;
 import database.CurrentContacts;
-import database.CurrentProperty;
 import functionality.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date; 
-import java.util.Calendar; 
 import java.util.HashMap;
 import java.awt.GridLayout;
-import java.text.SimpleDateFormat; 
+
 import javax.swing.SwingConstants;
 /**
  *
  * @author Hang Xu
  */
 public class BillGUI extends javax.swing.JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5103079923299795580L;
 	ArrayList<JLabel> finalResultLabels;
     /**
      * Creates new form BillCheckGUI
@@ -42,7 +42,7 @@ public class BillGUI extends javax.swing.JFrame {
        displayTable.getColumn("Amount").setCellRenderer(render);
        displayTable.getColumn("Description").setCellRenderer(render);
        BillsLoader BL = new BillsLoader();
-       BL.loadingBillsToCurrentBills();
+       BL.load();
        billLoadingfromExistingBill();
        int size = CurrentContacts.getContacts().size();
        finalResultPane.setLayout(new GridLayout(1,size));
@@ -158,11 +158,17 @@ public class BillGUI extends javax.swing.JFrame {
                 "Time", "People", "Amount", "Description"
             }
         ) {
-            Class[] types = new Class [] {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = -2520729546561062734L;
+			@SuppressWarnings("rawtypes")
+			Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Long.class, java.lang.String.class
             };
 
-            public Class getColumnClass(int columnIndex) {
+            @SuppressWarnings("rawtypes")
+			public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });

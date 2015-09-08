@@ -216,16 +216,11 @@ public class ContactInfoGUI extends javax.swing.JFrame {
         	collectedContact.phoneNumber=this.telephoneText.getText();
         	collectedContact.emailAddress=this.emailText.getText();
         	ContactUpdater CU = new ContactUpdater(collectedContact);
-        	if(CU.update()){
-        		System.out.println("Update success");
-        		this.setEditable(false);
-        		this.saveButton.setText("Edit");
-        		ContactInfoGUI.MODE=0;
-        	}
-        	
+        	CU.update();
+        	this.setEditable(false);
+        	this.saveButton.setText("Edit");
+        	ContactInfoGUI.MODE=0;
         }
-    
-        
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
