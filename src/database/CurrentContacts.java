@@ -20,6 +20,14 @@ public class CurrentContacts {
       }
 	public static void initialize() {
 		contacts = new ArrayList<Contact>();
-		
+	}
+	public static String getUserRealName(String userID){
+		System.out.println("the input userID is "+userID);
+		for(Contact c: contacts){
+			if(c.getUserID().equals(userID)){
+				return c.getFirstName()+" "+c.getLastName().substring(0,1).toUpperCase();
+			}
+		}
+		return null;
 	}
 }

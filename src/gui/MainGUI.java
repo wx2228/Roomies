@@ -5,6 +5,8 @@
  */
 package gui;
 
+import java.awt.Color;
+
 import database.CurrentContacts;
 import database.CurrentProperty;
 import database.CurrentUser;
@@ -26,6 +28,12 @@ public class MainGUI extends javax.swing.JFrame {
         CurrentContacts.initialize();
         ContactLoader CL = new ContactLoader();
         CL.load();
+        unreadNoteChecker UNC = new unreadNoteChecker();
+        int unread = UNC.getUnreadNotesNumber();
+        if(unread>0){
+        	mofButton.setText("<html><p>Note on Fridge</p><p>You have "+unread+" new notes");
+        	mofButton.setForeground(Color.red);
+        	}
     }
 
     /**
@@ -117,7 +125,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void mofButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mofButtonActionPerformed
         // TODO add your handling code here:
-        MessageOnFridgeGUI mofGUI = new MessageOnFridgeGUI();
+        NoteOnFridgeGUI mofGUI = new NoteOnFridgeGUI();
         mofGUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_mofButtonActionPerformed

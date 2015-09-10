@@ -5,26 +5,29 @@
  */
 package gui;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
 
-import javax.swing.text.*;
-
+import database.CurrentContacts;
 import database.CurrentUser;
-import functionality.MessageOnFridge;
+import database.Note;
+import functionality.NoteConnector;
 
 /**
  *
  * @author Hang Xu
  */
-public class MessageOnFridgeGUI extends javax.swing.JFrame {
+public class NoteOnFridgeGUI extends javax.swing.JFrame {
 
+	NoteConnector NC;
     /**
      * Creates new form MessageOnFirdegGUI
      */
-    public MessageOnFridgeGUI() {
+    public NoteOnFridgeGUI() {
         initComponents();
-        fridgeText.setText(MessageOnFridge.getMOF());
+        NC = new NoteConnector(this.fridgeText);
+        NC.load();
     }
 
     /**
@@ -37,12 +40,12 @@ public class MessageOnFridgeGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         titleLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        showPane = new javax.swing.JScrollPane();
         fridgeText = new javax.swing.JTextPane();
         backButton = new javax.swing.JButton();
         sendButton = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        noteText = new javax.swing.JTextArea();
+        notePane = new javax.swing.JScrollPane();
+        noteTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -50,7 +53,9 @@ public class MessageOnFridgeGUI extends javax.swing.JFrame {
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Message On Fridge");
 
-        jScrollPane1.setViewportView(fridgeText);
+        fridgeText.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        fridgeText.setFocusable(false);
+        showPane.setViewportView(fridgeText);
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -59,24 +64,18 @@ public class MessageOnFridgeGUI extends javax.swing.JFrame {
             }
         });
 
-        sendButton.setText("Send");
+        sendButton.setText("Add");
         sendButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendButtonActionPerformed(evt);
             }
         });
 
-        noteText.setColumns(20);
-        noteText.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
-        noteText.setForeground(new java.awt.Color(204, 204, 255));
-        noteText.setRows(5);
-        noteText.setText("Type note here");
-        noteText.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                noteTextFocusGained(evt);
-            }
-        });
-        jScrollPane2.setViewportView(noteText);
+        noteTextArea.setColumns(20);
+        noteTextArea.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        noteTextArea.setLineWrap(true);
+        noteTextArea.setRows(5);
+        notePane.setViewportView(noteTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,24 +83,25 @@ public class MessageOnFridgeGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(notePane, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
+                .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+            .addComponent(showPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addComponent(showPane, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                    .addComponent(sendButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(sendButton, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addComponent(notePane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
         );
 
         pack();
@@ -115,25 +115,12 @@ public class MessageOnFridgeGUI extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void noteTextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_noteTextFocusGained
-         if(noteText.getText().equals("Type note here"))
-        {
-            noteText.setText(null);
-            noteText.setFont(new Font("Tahoma",Font.ITALIC,24));
-            noteText.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_noteTextFocusGained
-
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-        // TODO add your handling code here:
-        fridgeText.setEditable(true);
-        String f = CurrentUser.getName()+" says:"+noteText.getText()+"\n";
-        MessageOnFridge.addMessage(f);
-        fridgeText.setText(MessageOnFridge.getMOF());
-        fridgeText.setEditable(false);
-        noteText.setText("Type note here");
-        noteText.setForeground(new Color(204,204,255));
-
+       LocalDate nowDate = LocalDate.now();
+       LocalTime nowTime = LocalTime.now();
+       Note newNote = new Note(nowDate, nowTime, this.noteTextArea.getText(), CurrentUser.getID());
+        NC.add(newNote);
+       // NC.refresh();
     }//GEN-LAST:event_sendButtonActionPerformed
 
     /**
@@ -153,21 +140,23 @@ public class MessageOnFridgeGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MessageOnFridgeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NoteOnFridgeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MessageOnFridgeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NoteOnFridgeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MessageOnFridgeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NoteOnFridgeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MessageOnFridgeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NoteOnFridgeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MessageOnFridgeGUI().setVisible(true);
+                new NoteOnFridgeGUI().setVisible(true);
             }
         });
     }
@@ -175,10 +164,10 @@ public class MessageOnFridgeGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JTextPane fridgeText;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea noteText;
+    private javax.swing.JScrollPane notePane;
+    private javax.swing.JTextArea noteTextArea;
     private javax.swing.JButton sendButton;
+    private javax.swing.JScrollPane showPane;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
