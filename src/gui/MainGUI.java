@@ -11,6 +11,7 @@ import database.CurrentContacts;
 import database.CurrentProperty;
 import database.CurrentUser;
 import functionality.ContactLoader;
+import functionality.unreadNoteChecker;
 
 /**
  *
